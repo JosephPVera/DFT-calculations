@@ -1,0 +1,133 @@
+# Written by Joseph P.Vera, 2024-02
+
+# Steps for VASP calculations using PBE and HSE06 pseudopotentials
+# For use the commands like vaspout, bandgap, toten, makekpoints, makepot, dosplot.py and 
+  bandplot.py is necessary use scripts (check /.../vasp/template/bin)
+
+#################################################################################################
+                                    PBE pseudopotential
+#################################################################################################
+
+#################################################################################################
+                                Convergence test (Energy Cutoff)
+#################################################################################################
+1. Create different files with mkdir {200..900..50}
+   - Introduce the same POSCAR and jobfile
+   - In INCAR file change the tag "ENCUT  = 500" following the name of the files {200..900..50}
+   - Create KPOINTS using command "makekpoints"
+   - Create POTCAR using comand "makepot . Pt", change the element according to your material. If
+     you have two elements in the material use "makepot . Pt Si"
+   
+2. Use command "sub" for run your work
+3. Use command "st" for check if your work is finished
+   
+4. If all works are finished, use commands "vaspout */OUTCAR", "bandgap */OUTCAR" or 
+   "toten */OUTCAR" for check your outcomes
+5. Save your outcomes in a file with differents extension like .ods, .dat, .xlsx or .txt using
+   command "bandgap *dos/OUTCAR > bandgap.dat"
+
+
+#################################################################################################
+                                Convergence test (K-density)
+#################################################################################################
+1. Create different files with mkdir {2..9..1} 
+   - Introduce the same POSCAR, POTCAR and jobfile
+   - It is possible to use the same INCAR from Convergence test (Energy Cutoff) section
+   - Create KPOINTS file changing the tag "k-density: 2.0", use the command "makekpoints -d 2",
+     change the last number for different k-density.
+2. Use command "sub" for run your work
+3. Use command "st" for check if your work is finished
+4. Repeat the steps 4 and 5 from Convergence test (Energy Cutoff) section
+
+
+#################################################################################################     
+                                         Relaxation
+#################################################################################################
+1. Create INCAR_relax file, I recommend use the standart value for the energy cutoff 
+   "ENCUT  = 500" for the next calculations
+2. Use the same POSCAR and jobfile from Convergence test section
+3. Create KPOINTS using command "makekpoints"
+4. Create POTCAR using comand "makepot . Pt", change the element according to your material
+5. Run your work with command "sub"
+6. Check your outcomes
+
+
+#################################################################################################
+                                    Density of states (DOS)
+#################################################################################################
+0. This is a self-consistent calculation
+1. Create INCAR_PBE_dos
+2. Use the CONTCAR file from Relaxation section and change the name to POSCAR
+3. Use the same jobfile, KPOINTS and POTCAR from Relaxation section
+4. Run your work
+5. Check your outcomes, using the command "bandgap OUTCAR" you can check the information about 
+   the bandgap
+6. Use the command "dosplot.py" for plot the DOS
+7. It is possible check the Local density of states (LDOS) using the command   
+   "dosplot.py --ldos 1", change the last number according to your material
+8. Check your images with "eog TDOS.png"
+
+
+#################################################################################################
+                                          Band structure
+#################################################################################################
+0. This is a non-self-consistent calculation
+1. Create INCAR_PBE_bs, include the new tag "ICHARG = 11", last tag indicates the 
+   non-self-consistent calculation
+2. Copy CHGCAR, POSCAR and jobfile from DOS section
+3. Create POTCAR with the command "makepot . Pt"
+4. Create KPOINTS file with the high symmetry points for the First Brillouin Zone (1BZ)
+5. Run your work
+6. Plot the band structure with command "bandplot.py"
+7. Check your images with "eog bandstruct.png"
+
+
+
+
+#################################################################################################
+                                    HSE06 pseudopotential
+#################################################################################################
+
+#################################################################################################
+                                    Density of states (DOS)
+#################################################################################################
+0. This is a self-consistent calculation
+1. Create the INCAR_HSE06_dos file
+2. Copy POSCAR, POTCAR, jobfile from Band structure_PBE section
+3. Create KPOINTS with command "makekpoints" or copy from DOS_PBE section
+3. Run your work
+4. Use the same steps 5, 6, 7 and 8 from DOS_PBE section
+
+
+#################################################################################################
+                                          Band structure
+#################################################################################################
+0. This is a non-self-consistent calculation
+1. Create INCAR_HSE06_bs, include the new tag "ICHARG = 11", last tag indicates the 
+   non-self-consistent calculation
+2. Copy CHGCAR, POSCAR and jobfile from DOS_HSE06 section
+3. Create POTCAR with the command "makepot . Pt"
+4. Create KPOINTS file
+   - Copy IBZKPT file from DOS_HSE06 section
+   - Copy information of OUTCAR file from Band structure_PBE section: inside OUTCAR look for the
+     "k-points in reciprocal lattice and weights: k-density:" section (it is information with 4
+     columns) and copy it (copy only the numbers)
+   - Here it is possible to use two methods:
+     * Create kdensity.dat file and paste the "k-points in reciprocal lattice and weights: 
+       k-density:" information, then concatenate with IBZKPT file using the command 
+       "cat IBZKPT kpoints.dat > KPOINTS"
+     * Manually add the "k-points in reciprocal lattice and weights: k-density:" information
+       at the final of IBZKPT file without leaving spaces, then change the name from IBZKPT to
+       KPOINTS
+   - Enter to KPOINTS and change the weights to zero (only in the pasted part), it is the 4th
+     column
+   - In KPOINTS change the number of points (second line), usually it is the number of lines in 
+     the file minus 3 (Ln - 3)
+   - Include the high symmetry points for the 1BZ, look for the points in pasted part and include
+     the name after the weights
+5. Run your work
+6. Plot the band structure with command "bandplot.py"
+7. Check your images with "eog bandstruct.png"
+
+################################### Enjoy your outcomes #########################################
+################################# Disfruta tus resultados #######################################
