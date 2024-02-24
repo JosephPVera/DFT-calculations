@@ -2,7 +2,6 @@
 
 # Steps for VASP calculations for phonons
 # Use phonopy, check https://phonopy.github.io/phonopy/
-# I recommend checking https://www.youtube.com/watch?v=FX7WjL074g4&t=26s
 
 #################################################################################################
                                             phonopy
