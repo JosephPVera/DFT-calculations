@@ -1,0 +1,99 @@
+# Written by Joseph P.Vera, 2024-02
+
+# Steps for VASP calculations for phonons
+# Use phonopy, check https://phonopy.github.io/phonopy/
+# I recommed checking https://www.youtube.com/watch?v=FX7WjL074g4&t=26s
+
+#################################################################################################
+                                            phonopy
+#################################################################################################
+
+#################################################################################################     
+                                          Activation
+#################################################################################################
+1. module spider phonopy
+2. module load phonopy/2.16.3-foss-2022a
+
+3. Create two files with "mkdir relax phonon"
+
+
+#################################################################################################     
+                                          Relaxation
+#################################################################################################
+1. Create INCAR_relax file
+2. Introduce the POSCAR and jobfile
+3. Create KPOINTS using command "makekpoints"
+4. Create POTCAR using comand "makepot . Pt"
+5. Use command "sub" for run your work
+6. Use command "st" for check if your work is finished
+
+
+#################################################################################################     
+                                            phonon
+#################################################################################################
+1. Create INCAR_phonon file
+2. Use the CONTCAR file from Relaxation section and change the name to POSCAR
+3. Copy KPOINTS and POTCAR from Relaxation section
+
+4. Use the command "phonopy -d --dim="2 2 2"" for apply the transformation and create 
+   different POSCAR with finite-difference (displaced atoms) in the lattice parameter
+   (Supercell method). It is possible to change the values "2 2 2" according to your material
+5. Now you will find POSCAR with different numbers: POSCAR-001, POSCAR-002
+6. Create files for each new POSCAR with "mkdir dis-001 dis-002"
+7. For each file, example "dis-001"
+   - Copy POSCAR-001 and change the name to POSCAR
+   - Copy INCAR_phonon, KPOINTS, POTCAR and jobfile
+   - Run your work 
+   - Repeat the same steps for the other cases
+8. In "phonon file" use the command "phonopy -f dis-001/vasprun.xml dis-002/vasprun.xml" for
+   create the FORCE_SETS file (this file is very important)
+   
+
+    #########################################################################################
+                                    Density of states (DOS)
+    #########################################################################################
+    0. Continue in the phonon file
+    1. Create a mesh.conf file with the command "touch mesh.conf"
+       - Include name of the atoms of your material with the tag "ATOM_NAME"
+       - Include the transformation applied with the tag "DIM"  
+       - Include the Monkhorst-Pack scheme with the tag "MP"
+    2. Use the command "phonopy -p -s mesh.conf" for plot the DOS
+    3. Check the outcome with "evince total_dos.pdf"
+
+
+    #########################################################################################
+                                      Thermal properties
+    #########################################################################################
+    0. Continue in the phonon file
+    1. Use the command "phonopy -p -s -t  mesh.conf" for plot the thermal properties
+    2. Check the outcome with "evince thermal_properties.pdf"
+
+
+    #########################################################################################
+                                  Partial Density of States (PDOS)
+    #########################################################################################
+    0. Continue in the phonon file
+    1. Create a pdos.conf file
+       - Include name of the atoms of your material with the tag "ATOM_NAME"
+       - Include the transformation applied with the tag "DIM"  
+       - Include the Monkhorst-Pack scheme with the tag "MP"
+       - Include the Projected DOS with the tag "PDOS"
+    2. Use the command "phonopy -p -s pdos.conf" for plot the PDOS
+    3. Check the outcome with "evince partial_dos.pdf"
+
+
+    #########################################################################################
+                                           Band structure
+    #########################################################################################
+    0. Continue in the phonon file
+    1. Create a band.conf file
+       - Include name of the atoms of your material with the tag "ATOM_NAME"
+       - Include the transformation applied with the tag "DIM"
+       - Include the high symmetry points with the tag "BAND"
+       - Include the labels for the high symmetry points with the tag "BAND_LABELS"
+    2. Use the command "phonopy -p -s band.conf" for plot the band structure
+    3. Check the outcome with "evince band.pdf"
+
+
+################################### Enjoy your outcomes #########################################
+################################# Disfruta tus resultados #######################################
