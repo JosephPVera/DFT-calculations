@@ -58,6 +58,7 @@
        - Include the Monkhorst-Pack scheme with the tag "MP"
     2. Use the command "phonopy -p -s mesh.conf" for plot the DOS
     3. Check the outcome with "evince total_dos.pdf"
+    4. Check information in "total_dos.dat" file
 
 
     #########################################################################################
@@ -66,6 +67,7 @@
     0. Continue in the phonon file
     1. Use the command "phonopy -p -s -t  mesh.conf" for plot the thermal properties
     2. Check the outcome with "evince thermal_properties.pdf"
+    3. Check informaction in "thermal_properties.yaml" file
 
 
     #########################################################################################
@@ -79,6 +81,7 @@
        - Include the Projected DOS with the tag "PDOS"
     2. Use the command "phonopy -p -s pdos.conf" for plot the PDOS
     3. Check the outcome with "evince partial_dos.pdf"
+    4. Check informaction in "projected_dos.dat" file
 
 
     #########################################################################################
@@ -92,6 +95,7 @@
        - Include the labels for the high symmetry points with the tag "BAND_LABELS"
     2. Use the command "phonopy -p -s band.conf" for plot the band structure
     3. Check the outcome with "evince band.pdf"
+    4. Check informaction in "band.yaml" file
 
 
 ################################### Enjoy your outcomes #########################################
