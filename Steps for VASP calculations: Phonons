@@ -2,6 +2,7 @@
 
 # Steps for VASP calculations for phonons
 # Use phonopy, check https://phonopy.github.io/phonopy/
+# I recommend checking https://www.youtube.com/watch?v=FX7WjL074g4&t=26s
 
 #################################################################################################
                                             phonopy
@@ -13,7 +14,7 @@
 1. module spider phonopy
 2. module load phonopy/2.16.3-foss-2022a
 
-3. Create two files with "mkdir relax phonon"
+3. Create two folders with "mkdir relax phonon"
 
 
 #################################################################################################     
@@ -38,21 +39,20 @@
    different POSCAR with finite-difference (displaced atoms) in the lattice parameter
    (Supercell method). It is possible to change the values "2 2 2" according to your material
 5. Now you will find POSCAR with different numbers: POSCAR-001, POSCAR-002
-6. Create files for each new POSCAR with "mkdir dis-001 dis-002"
-7. For each file, example "dis-001"
+6. Create folders for each new POSCAR with "mkdir dis-001 dis-002"
+7. For each folder, example "dis-001"
    - Copy POSCAR-001 and change the name to POSCAR
    - Copy INCAR_phonon, KPOINTS, POTCAR and jobfile
    - Run your work 
    - Repeat the same steps for the other cases
-8. In "phonon file" use the command "phonopy -f dis-001/vasprun.xml dis-002/vasprun.xml" for
+8. In "phonon folder" use the command "phonopy -f dis-001/vasprun.xml dis-002/vasprun.xml" for
    create the FORCE_SETS file (this file is very important)
    
-
+    IMPORTANT: NEXT CALCULATIONS PERFORM IN PHONON FOLDER
     #########################################################################################
                                     Density of states (DOS)
     #########################################################################################
-    0. Continue in the phonon file
-    1. Create a mesh.conf file with the command "touch mesh.conf"
+    1. Create mesh.conf file with the command "touch mesh.conf"
        - Include name of the atoms of your material with the tag "ATOM_NAME"
        - Include the transformation applied with the tag "DIM"  
        - Include the Monkhorst-Pack scheme with the tag "MP"
@@ -64,39 +64,57 @@
     #########################################################################################
                                       Thermal properties
     #########################################################################################
-    0. Continue in the phonon file
     1. Use the command "phonopy -p -s -t  mesh.conf" for plot the thermal properties
     2. Check the outcome with "evince thermal_properties.pdf"
-    3. Check informaction in "thermal_properties.yaml" file
+    3. Check information in "thermal_properties.yaml" file
 
 
     #########################################################################################
                                   Partial Density of States (PDOS)
     #########################################################################################
-    0. Continue in the phonon file
-    1. Create a pdos.conf file
+    1. Create pdos.conf file
        - Include name of the atoms of your material with the tag "ATOM_NAME"
        - Include the transformation applied with the tag "DIM"  
        - Include the Monkhorst-Pack scheme with the tag "MP"
        - Include the Projected DOS with the tag "PDOS"
     2. Use the command "phonopy -p -s pdos.conf" for plot the PDOS
     3. Check the outcome with "evince partial_dos.pdf"
-    4. Check informaction in "projected_dos.dat" file
+    4. Check information in "projected_dos.dat" file
 
 
     #########################################################################################
                                            Band structure
     #########################################################################################
-    0. Continue in the phonon file
-    1. Create a band.conf file
+    1. Create band.conf file
        - Include name of the atoms of your material with the tag "ATOM_NAME"
        - Include the transformation applied with the tag "DIM"
        - Include the high symmetry points with the tag "BAND"
        - Include the labels for the high symmetry points with the tag "BAND_LABELS"
     2. Use the command "phonopy -p -s band.conf" for plot the band structure
     3. Check the outcome with "evince band.pdf"
-    4. Check informaction in "band.yaml" file
-
-
+    4. Check information in "band.yaml" file
+    
+    
+    #########################################################################################
+                             Non-analytical term correction (NAC) 
+    #########################################################################################
+    0. Create a "nac" file
+    1. Create INCAR_nac
+    2. Copy POSCAR (primitice cell), KPOINTS, POTCAR and jobfile
+    3. Run your work
+    
+    4. Use the command "phonopy-vasp-born > BORN" for create the BORN file
+    5. Now copy BORN file to phonon folder
+    6. Repeat the above commands adding "--nac" for calculate with the term correction
+       - DOS:                "phonopy -p -s --nac mesh.conf"
+       - Thermal properties: "phonopy -p -s -t --nac mesh.conf"
+       - PDOS:               "phonopy -p -s --nac pdos.conf"
+       - Band Structure:     "phonopy -p -s --nac band.conf"
+    7. For plot DOS and Band Structure at once
+       - Create "band-dos.conf"
+       - Use the command "phonopy -p -s --nac band-pdos.conf" for plot 
+       - Check the outcome with "evince band_dos.pdf"
+    
+    
 ################################### Enjoy your outcomes #########################################
 ################################# Disfruta tus resultados #######################################
