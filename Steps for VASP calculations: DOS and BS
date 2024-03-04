@@ -88,13 +88,24 @@
                                     HSE06 pseudopotential
 #################################################################################################
 
+#################################################################################################     
+                                         Relaxation
+#################################################################################################
+1. Create INCAR_HSE06_relax file, include the tags for hybrid calculations
+2. Introduce POSCAR and jobfile
+3. Create KPOINTS using command "makekpoints"
+4. Create POTCAR using comand "makepot . Pt", change the element according to your material
+5. Run your work with command "sub"
+6. Check your outcomes
+
+
 #################################################################################################
                                     Density of states (DOS)
 #################################################################################################
 0. This is a self-consistent calculation
 1. Create the INCAR_HSE06_dos file
-2. Copy POSCAR, POTCAR, jobfile from Band structure_PBE section
-3. Create KPOINTS with command "makekpoints" or copy from DOS_PBE section
+2. Use the CONTCAR file from Relaxation_HSE06 section and change the name to POSCAR
+3. Copy KPOINTS, POTCAR, jobfile from Relaxation_HSE06 section
 3. Run your work
 4. Use the same steps 5, 6, 7 and 8 from DOS_PBE section
 
