@@ -13,6 +13,17 @@ from pydefect.defaults import defaults
 from pydefect.util.prepare_names import prettify_names
 from vise.util.matplotlib import float_to_int_formatter
 
+import json
+import pandas as pd
+def load_defect_energy_summary(json_file):
+    with open(json_file, 'r') as f:
+        data = json.load(f)
+    return data
+
+json_file = 'defect_energy_summary.json'  
+data = load_defect_energy_summary(json_file)
+cbm = data['cbm']
+
 
 class DefectEnergiesMplSettings:
     def __init__(self,
@@ -61,7 +72,7 @@ class DefectEnergyPlotter:
 #        self._title = defect_energy_summary.latexified_title
         self._supercell_vbm = defect_energy_summary.supercell_vbm
         self._supercell_cbm = defect_energy_summary.supercell_cbm
-        self._x_range = x_range or (0-4, defect_energy_summary.cbm+4) ################ set for check all the curves ######################
+        self._x_range = x_range or (0-4, defect_energy_summary.cbm+4) ##### set for check all the curves, modify the sum and sustrac #########
         defect_energy_summary.e_min = self._x_range[0]
         defect_energy_summary.e_max = self._x_range[1]
 
@@ -104,10 +115,6 @@ class DefectEnergyMplPlotter(DefectEnergyPlotter):
         self.plt = plt
         self._texts = []
 
-        # Define VBM and CBM values
-        self.E_VBM = 7.2945 ##############################################################################################################
-        self.E_CBM = 11.7449 #############################################################################################################
-
     def construct_plot(self):
         self._add_energies()
         self._add_band_edges()
@@ -120,7 +127,7 @@ class DefectEnergyMplPlotter(DefectEnergyPlotter):
         # Add the vertical lines and shaded areas for VBM and CBM
 #        self.plt.axvline(0, color='gray', alpha=1, linestyle='--')
 #        self.plt.axvline(self._supercell_cbm, color='gray', alpha=1, linestyle='--')
-        self.plt.axvspan(self.E_CBM - self.E_VBM, self.E_CBM - self.E_VBM + 1, color='lightblue', alpha=0.5, label='CBM') ################
+        self.plt.axvspan(cbm, cbm + 1, color='lightblue', alpha=0.5, label='CBM') ########################################################
         self.plt.axvspan(-1, 0, color='thistle', alpha=0.5, label='VBM') #################################################################
 
         if self._add_charges:
@@ -134,20 +141,19 @@ class DefectEnergyMplPlotter(DefectEnergyPlotter):
             ax = self.plt.gca()
             
         # Custom legend with specific labels
-        custom_legend_labels = [r"$V_B$", r"$V_N$", "CBM", "VBM"] ############# if you have more defect, add here ########################
+        "Introduce the colors in 'custom_legend_colors' following the order. \
+        Colors of the lines can be checked in pydefect/defaults.py \
+        xkcd:green, xkcd:red, xkcd:blue, xkcd:orange, xkcd:purple, xkcd:brown, xkcd:crimson,xkcd:gold, xkcd:magenta,\
+        xkcd:darkblue, xkcd:navy,  xkcd:olive, xkcd:black, xkcd:indigo" 
+        
+        custom_legend_labels = custom_legend_labels = custom_legend_labels = [r"$V_B$", r"$V_N$", "CBM", "VBM"] ########### if you have more defect, add here #########
         custom_legend_colors = ["xkcd:green", "xkcd:red", "lightblue", "thistle"] ###### add colors ######################################
 
-# Introduce the colors in "custom_legend_colors" following the order         
-# colors of the lines can be checked in pydefect/defaults.py
-#["xkcd:green", "xkcd:red", "xkcd:blue", "xkcd:orange", "xkcd:purple", "xkcd:brown", "xkcd:crimson","xkcd:gold", "xkcd:magenta", "xkcd:darkblue", "xkcd:navy",  "xkcd:olive", "xkcd:black", "xkcd:indigo"]
 
         handles = [plt.Line2D([0], [0], color=color, lw=2) for color in custom_legend_colors]
         ax.legend(handles, custom_legend_labels, loc='best')#, bbox_to_anchor=(0.85, 0.95)) ####### for move bbox_to_anchor=(x, y) #########
 
         self.plt.tight_layout()
-        
- #       plt.savefig("defect_energy_plot.png", dpi=100)#, bbox_inches='tight')  ######## Save the figure ####################################
- #       plt.close()  ############################################ Close the figure #######################################################
         
     def _add_energies(self):
         for name, cp in self._cross_points.items():
@@ -170,7 +176,7 @@ class DefectEnergyMplPlotter(DefectEnergyPlotter):
                                   linewidth=self._mpl_defaults.thin_line_width)
 
     def _set_x_range(self):
-        self.plt.xlim(-0.7, self.E_CBM - self.E_VBM + 0.7)
+        self.plt.xlim(-0.7, cbm + 0.7)
             
     def _set_y_range(self):
         if self._y_range:
