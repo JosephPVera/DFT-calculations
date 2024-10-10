@@ -1,3 +1,4 @@
+# The script belongs to Pydefect Package https://kumagai-group.github.io/pydefect/tutorial.html, here modifications were only made for academic uses.
 # -*- coding: utf-8 -*-
 #  Copyright (c) 2020 Kumagai group.
 from pathlib import Path
