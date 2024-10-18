@@ -1,6 +1,6 @@
 ---
 
-# Steps for VASP calculations for phonons
+# Steps for VASP calculations: Phonons
 Check [phonopy](https://phonopy.github.io/phonopy/).
 
 ## Folder Scheme
@@ -30,17 +30,21 @@ Check [phonopy](https://phonopy.github.io/phonopy/).
 2. Use the CONTCAR file from Relaxation section and change the name to POSCAR
 3. Copy KPOINTS and POTCAR from Relaxation section
 
-4. Use the command "phonopy -d --dim="2 2 2"" for apply the transformation and create 
+4. Use the command
+   ```bash
+   phonopy -d --dim="2 2 2
+   
+   for apply the transformation and create
    different POSCAR with finite-difference (displaced atoms) in the lattice parameter
    (Supercell method). It is possible to change the values "2 2 2" according to your material
-5. Now you will find POSCAR with different numbers: POSCAR-001, POSCAR-002
-6. Create folders for each new POSCAR with "mkdir dis-001 dis-002"
-7. For each folder, example "dis-001"
+6. Now you will find POSCAR with different numbers: POSCAR-001, POSCAR-002
+7. Create folders for each new POSCAR with "mkdir dis-001 dis-002"
+8. For each folder, example "dis-001"
    - Copy POSCAR-001 and change the name to POSCAR
    - Copy INCAR_phonon, KPOINTS, POTCAR and jobfile
    - Run your work 
    - Repeat the same steps for the other cases
-8. In "phonon folder" use the command "phonopy -f dis-001/vasprun.xml dis-002/vasprun.xml" for
+9. In "phonon folder" use the command "phonopy -f dis-001/vasprun.xml dis-002/vasprun.xml" for
    create the FORCE_SETS file (this file is very important)
 
 **IMPORTANT: NEXT CALCULATIONS PERFORM IN PHONON FOLDER**
