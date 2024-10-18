@@ -9,7 +9,7 @@ Check [phonopy](https://phonopy.github.io/phonopy/).
 # Web Application Name
 
 A brief description of the web application and its purpose.
-
+</div>
 ## Demo
 
 You can view a live demo of the application at [demo link](https://example.com).
