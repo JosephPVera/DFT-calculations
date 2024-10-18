@@ -36,9 +36,12 @@ Check [phonopy](https://phonopy.github.io/phonopy/).
    ```
    for apply the transformation and create
    different POSCAR with finite-difference (displaced atoms) in the lattice parameter
-   (Supercell method). It is possible to change the values "2 2 2" according to your material
-6. Now you will find POSCAR with different numbers: POSCAR-001, POSCAR-002
-7. Create folders for each new POSCAR with "mkdir dis-001 dis-002"
+   (Supercell method). It is possible to change the values "2 2 2" according to your material.
+5. Now you will find POSCAR with different numbers: POSCAR-001, POSCAR-002
+6. Create folders for each new POSCAR with 
+   ```bash
+   mkdir dis-001 dis-002
+   ```
 8. For each folder, example "dis-001"
    - Copy POSCAR-001 and change the name to POSCAR
    - Copy INCAR_phonon, KPOINTS, POTCAR and jobfile
