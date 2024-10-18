@@ -1,8 +1,10 @@
 
 ---
-<div style="background-color: #f0f8ff; padding: 10px; border-radius: 5px;">
+
 # Steps for VASP calculations for phonons
 Check [phonopy](https://phonopy.github.io/phonopy/).
+
+<div style="background-color: red; padding: 10px; border-radius: 5px;">
 
 # Web Application Name
 
