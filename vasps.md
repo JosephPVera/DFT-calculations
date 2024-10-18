@@ -3,12 +3,11 @@
 # Steps for VASP calculations for phonons
 Check [phonopy](https://phonopy.github.io/phonopy/).
 
-<div style="background-color: red; padding: 10px; border-radius: 5px;">
+## Activation
+1. module spider phonopy
+2. module load phonopy/2.16.3-foss-2022a
+3. Create two folders with "mkdir relax phonon"
 
-# Web Application Name
-
-A brief description of the web application and its purpose.
-</div>
 ## Demo
 
 You can view a live demo of the application at [demo link](https://example.com).
