@@ -13,7 +13,7 @@ Check [phonopy](https://phonopy.github.io/phonopy/).
 2. Load the module
    ```bash
    module load phonopy/2.16.3-foss-2022a
-3. Create the folders with 
+3. Create the folders  
    ```bash
    mkdir relax phonon
 
