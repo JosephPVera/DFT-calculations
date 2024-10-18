@@ -4,8 +4,15 @@
 Check [phonopy](https://phonopy.github.io/phonopy/).
 
 ## Folder Scheme
-
-
+/principal
+|
+|-/relax
+|          
+|-/phonon-----/dis-001
+            |-/dis-001
+            |-/dis-...
+            |-/nac
+            
 ## Activation
 1. module spider phonopy
 2. module load phonopy/2.16.3-foss-2022a
