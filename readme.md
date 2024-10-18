@@ -33,7 +33,7 @@ Check [phonopy](https://phonopy.github.io/phonopy/).
 4. Use the command
    ```bash
    phonopy -d --dim="2 2 2
-   
+   ```
    for apply the transformation and create
    different POSCAR with finite-difference (displaced atoms) in the lattice parameter
    (Supercell method). It is possible to change the values "2 2 2" according to your material
