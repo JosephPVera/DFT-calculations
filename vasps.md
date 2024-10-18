@@ -3,7 +3,7 @@
 
 ## Steps for VASP calculations for phonons
 
-```markdown
+
 # Web Application Name
 
 A brief description of the web application and its purpose.
