@@ -1,36 +1,22 @@
+# Project Name
 
----
+A brief description of your project goes here.
 
-# Steps for VASP calculations for phonons
-Check [phonopy](https://phonopy.github.io/phonopy/).
-
-<div style="background-color: red; padding: 10px; border-radius: 5px;">
-
-# Web Application Name
-
-A brief description of the web application and its purpose.
-</div>
-## Demo
-
-You can view a live demo of the application at [demo link](https://example.com).
+<div style="background-color: #ffcccc; padding: 10px; border-radius: 5px;">
 
 ## Features
 
-- User authentication
-- Responsive design
-- Real-time data updates
+- Feature 1
+- Feature 2
+- Feature 3
 
-## Technologies Used
-
-- React
-- Node.js
-- Express
-- MongoDB
+</div>
 
 ## Installation
 
-1. Clone the repository:
+Instructions to install your project:
 
-   ```bash
-   git clone https://github.com/yourusername/projectname.git
-   cd projectname
+```bash
+git clone https://github.com/yourusername/projectname.git
+cd projectname
+npm install
