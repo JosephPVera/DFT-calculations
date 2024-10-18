@@ -38,6 +38,7 @@ Check [phonopy](https://phonopy.github.io/phonopy/).
    create the FORCE_SETS file (this file is very important)
 
 <p style="color: red;">IMPORTANT: NEXT CALCULATIONS PERFORM IN PHONON FOLDER.</p>
+![Important](https://img.shields.io/badge/Important-Notice-red)
 
 ### Density of states (DOS)
 1. Create mesh.conf file with the command "touch mesh.conf"
