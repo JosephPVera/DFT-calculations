@@ -135,28 +135,3 @@ Check [phonopy](https://phonopy.github.io/phonopy/).
 
 ### Dielectric constant
 1. Check the BORN file (second line is information about the dielectric tensor)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/yourusername/projectname.git
-   cd projectname
