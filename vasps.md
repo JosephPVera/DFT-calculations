@@ -1,7 +1,7 @@
 
 ---
 
-### Example 3: README for a Web Application
+## Steps for VASP calculations for phonons
 
 ```markdown
 # Web Application Name
