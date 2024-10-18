@@ -37,7 +37,7 @@ Check [phonopy](https://phonopy.github.io/phonopy/).
 8. In "phonon folder" use the command "phonopy -f dis-001/vasprun.xml dis-002/vasprun.xml" for
    create the FORCE_SETS file (this file is very important)
 
-<p style="color: red;">IMPORTANT: NEXT CALCULATIONS PERFORM IN PHONON FOLDER.</p>
+**IMPORTANT: NEXT CALCULATIONS PERFORM IN PHONON FOLDER**
 
 ### Density of states (DOS)
 1. Create mesh.conf file with the command "touch mesh.conf"
