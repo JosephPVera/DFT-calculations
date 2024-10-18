@@ -2,7 +2,7 @@
 ---
 
 ## Steps for VASP calculations for phonons
-Check https://phonopy.github.io/phonopy/ [phonopy](https://phonopy.github.io/phonopy/)
+Check [phonopy](https://phonopy.github.io/phonopy/).
 
 # Web Application Name
 
