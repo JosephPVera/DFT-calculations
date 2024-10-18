@@ -18,7 +18,36 @@ Check [phonopy](https://phonopy.github.io/phonopy/).
    mkdir relax phonon
 
 ## Relaxation
-1. Create INCAR_relax file
+1. Create INCAR_relax file, example:
+   ```bash
+   ! Electronic relaxation
+   ALGO   = Normal    ! Algorithm for electronic relaxation
+   NELMIN = 4         ! Minimum # of electronic steps
+   NELM = 100
+   EDIFF  = 1E-8      ! Accuracy for electronic groundstate
+   ENCUT  = 500       ! Cut-off energy for plane wave expansion
+   PREC   = Accurate  ! Low/Normal/Accurate
+   LREAL  = .FALSE.   ! Projection in reciprocal space?
+   ISMEAR = 1         ! Smearing of partial occupancies.
+   SIGMA  = 0.1       ! Smearing width
+   ISPIN  = 2         ! Spin polarization?
+   ISTART = 0
+   ICHARG = 2
+
+   ! Ionic relaxation
+   EDIFFG = -0.0005
+   NSW    = 200         ! Static high-accuracy calculation without relaxation
+   IBRION = 2          ! Algorithm for relaxing atomic positions 
+   ISIF = 3            ! 3 means relax volume, ISIF 2 or 0 relaxes only atoms, not lattice vectors
+   ISYM = 1
+   LWAVE = .FALSE.
+   LCHARG = .FALSE. 
+   LMAXMIX = 4
+ 
+  ! Memory handling
+  NPAR    = 4
+  NCORE = 10 
+  ```
 2. Introduce the POSCAR and jobfile
 3. Create KPOINTS using command "makekpoints"
 4. Create POTCAR using comand "makepot . Pt"
