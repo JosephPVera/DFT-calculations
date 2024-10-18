@@ -4,17 +4,12 @@
 Check [phonopy](https://phonopy.github.io/phonopy/).
 
 ## Folder Scheme
-/principal
-|
-|-/relax
-|          
-|-/phonon-----/dis-001
-            |-/dis-001
-            |-/dis-...
-            |-/nac
+
             
 ## Activation
-1. module spider phonopy
+1. search for the module
+   ```bash
+   module spider phonopy
 2. module load phonopy/2.16.3-foss-2022a
 3. Create two folders with "mkdir relax phonon"
 
