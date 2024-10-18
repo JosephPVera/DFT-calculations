@@ -7,11 +7,15 @@ Check [phonopy](https://phonopy.github.io/phonopy/).
 
             
 ## Activation
-1. search for the module
+1. Identify for the module
    ```bash
    module spider phonopy
-2. module load phonopy/2.16.3-foss-2022a
-3. Create two folders with "mkdir relax phonon"
+2. Load the module
+   ```bash
+   module load phonopy/2.16.3-foss-2022a
+3. Create the folders with 
+   ```bash
+   mkdir relax phonon
 
 ## Relaxation
 1. Create INCAR_relax file
