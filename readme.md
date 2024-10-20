@@ -19,7 +19,7 @@ Check [phonopy](https://phonopy.github.io/phonopy/).
 
 ## Relaxation
 In **relax** file:
-1. Create INCAR_relax file, example:
+1. Create **INCAR_relax** file, example:
    ```bash
    # Electronic relaxation
    ALGO   = Normal    # Algorithm for electronic relaxation
@@ -49,12 +49,12 @@ In **relax** file:
    NPAR    = 4        # number of bands that are treated in parallel
    NCORE = 10         # number of compute cores that work on an individual orbital
    ```
-2. Introduce the POSCAR and jobfile (HPC clusters use Slurm as workload manager and job scheduler).
-3. Create KPOINTS file using command
+2. Introduce the **POSCAR** and **jobfile** (HPC clusters use Slurm as workload manager and job scheduler).
+3. Create **KPOINTS** file using command
    ```bash
    makekpoints
    ```
-4. Create POTCAR using comand
+4. Create **POTCAR** using comand
    ```bash
    makepot . Pt
    ```
@@ -67,20 +67,47 @@ In **relax** file:
    st 
    ```   
 
-## phonon
-1. Create INCAR_phonon file
-2. Use the CONTCAR file from Relaxation section and change the name to POSCAR
-3. Copy KPOINTS and POTCAR from Relaxation section
+## Phonon
+In **phonon** file
+1. Create INCAR_phonon file, example:
+   ```bash
+   ! Electronic relaxation
+ALGO   = Normal    ! Algorithm for electronic relaxation
+NELMIN = 4         ! Minimum # of electronic steps
+NELM = 100
+EDIFF  = 1E-8      ! Accuracy for electronic groundstate
+ENCUT  = 500       ! Cut-off energy for plane wave expansion
+PREC   = Accurate  ! Low/Normal/Accurate
+LREAL  = .FALSE.   ! Projection in reciprocal space?
+ISMEAR = 1         ! Smearing of partial occupancies.
+SIGMA  = 0.1       ! Smearing width
+ISTART = 0
+ICHARG = 2
 
-4. Use the command
+! Ionic relaxation
+NSW    = 0         ! Static high-accuracy calculation without relaxation
+IBRION = -1          ! Algorithm for relaxing atomic positions 
+ISYM = 0
+LWAVE = .FALSE.
+LCHARG = .FALSE. 
+LMAXMIX = 4
+ 
+! Memory handling
+NPAR    = 4
+NCORE = 10 
+  ``` 
+3. Use the CONTCAR file from Relaxation section and change the name to POSCAR
+4. Copy KPOINTS and POTCAR from Relaxation section
+
+5. Use the command
    ```bash
    phonopy -d --dim="2 2 2
    ```
    for apply the transformation and create
    different POSCAR with finite-difference (displaced atoms) in the lattice parameter
    (Supercell method). It is possible to change the values "2 2 2" according to your material.
-5. Now you will find POSCAR with different numbers: POSCAR-001, POSCAR-002
-6. Create folders for each new POSCAR with 
+6. Now you will find POSCAR with different numbers: POSCAR-001, POSCAR-002
+7. Create folders for each new POSCAR with 
    ```bash
    mkdir dis-001 dis-002
    ```
