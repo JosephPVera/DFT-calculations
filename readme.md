@@ -16,7 +16,7 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    mkdir {200..900..50}
    ```
    
-   - Introduce the same **POSCAR** and **jobfile** in each folder.
+   - Introduce the same **POSCAR** and **jobfile** files in each folder.
    - In **INCAR** file change the tag "**ENCUT**" following the name of the files: **{200..900..50}**
    - Create **KPOINTS** files in each folder using the command
      ```bash
@@ -58,3 +58,25 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    toten */OUTCAR > toten.dat
    vaspout */OUTCAR > vaspout.dat
    ```   
+
+## Convergence test (K-density)
+1. Create different files  
+   ```bash
+   mkdir {2..9..1}
+   ```
+   - Introduce the same **POSCAR**, **POTCAR** and **jobfile** files in each folder.
+   - Use the **INCAR** file with the converged energy cutoff, from Convergence test (Energy Cutoff) section, in each folder.
+   - Create **KPOINTS** file in each folder by changing the tag **k-density** following the name of the files: **{2..9..1}**, use the command
+     ```bash
+     makekpoints -d 2
+     ```
+     change the last number for different k-density.
+2. Use the following command for run your work
+   ```bash
+   sub
+   ```
+3. Use the following command for check if your work is finished
+   ```bash
+   st
+   ```  
+4. Repeat the steps 4 and 5 from Convergence test (Energy Cutoff) section.
