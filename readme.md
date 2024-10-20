@@ -18,6 +18,7 @@ Check [phonopy](https://phonopy.github.io/phonopy/).
    mkdir relax phonon
 
 ## Relaxation
+In **relax** file:
 1. Create INCAR_relax file, example:
    ```bash
    # Electronic relaxation
@@ -48,11 +49,23 @@ Check [phonopy](https://phonopy.github.io/phonopy/).
    NPAR    = 4        # number of bands that are treated in parallel
    NCORE = 10         # number of compute cores that work on an individual orbital
    ```
-2. Introduce the POSCAR and jobfile
-3. Create KPOINTS using command "makekpoints"
-4. Create POTCAR using comand "makepot . Pt"
-5. Use command "sub" for run your work
-6. Use command "st" for check if your work is finished
+2. Introduce the POSCAR and jobfile (HPC clusters use Slurm as workload manager and job scheduler).
+3. Create KPOINTS file using command:
+   ```bash
+   makekpoints
+   ```
+4. Create POTCAR using comand:
+   ```bash
+   makepot . Pt
+   ```
+5. For run your work use the following command:
+   ```bash
+   sub 
+   ```   
+8. Check if your work is finished:
+   ```bash
+   st 
+   ```   
 
 ## phonon
 1. Create INCAR_phonon file
