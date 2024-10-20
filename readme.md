@@ -42,6 +42,10 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    ```bash
    sub
    ```
+   or all at once, using
+   ```bash
+   for dir in */;do cd $dir; sub; cd ../;done 
+   ```   
 3. Use the following command for check if your work is finished
    ```bash
    st
@@ -75,6 +79,10 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    ```bash
    sub
    ```
+   or all at once, using
+   ```bash
+   for dir in */;do cd $dir; sub; cd ../;done 
+   ```  
 3. Use the following command for check if your work is finished
    ```bash
    st
