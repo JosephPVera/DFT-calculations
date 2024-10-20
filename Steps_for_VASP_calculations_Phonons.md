@@ -256,7 +256,7 @@ In **phonon** folder:
    phonopy-vasp-born > BORN 
    ```
 
-### Correcting calculations with NAC   
+### Correcting calculations with [NAC](https://phonopy.github.io/phonopy/formulation.html#non-analytical-term-correction-theory)   
 1. Now copy BORN file to **phonon** folder
    ```bash
    cp BORN ../
