@@ -6,14 +6,21 @@ Steps for VASP calculations using **PBE** and **HSE06** pseudopotentials.
 
 For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **makepot**, **dosplot.py** and **bandplot.py** is necessary use scripts, check **/.../vasp/template/bin**.
 
+# Creating the tree 
+```bash
+mkdir energy-cutoff k-density PBE HSE06
+mkdir PBE/relax PBE/dos PBE/bs
+mkdir HSE06/relax HSE06/dos HSE06/bs
+```
+
 ---
 # PBE pseudopotential
 ---
 
 ## Convergence test (Energy Cutoff)
-1. Create **energy_cutoff** folder
+1. Enter to **energy_cutoff** folder
    ```bash
-   mkdir energy-cutoff
+   cd energy-cutoff
    ```
 2. Create different folders 
    ```bash
@@ -68,9 +75,9 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    ```   
 
 ## Convergence test (K-density)
-1. Create **k-density** folder
+1. Enter to **k-density** folder
    ```bash
-   mkdir k-density
+   cd k-density
    ```
 2. Create different files  
    ```bash
@@ -99,7 +106,6 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
 
 ## Creating folders
    ```bash
-   mkdir PBE
    mkdir PBE/relax
    mkdir PBE/dos
    mkdir PBE/bs
