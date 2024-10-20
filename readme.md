@@ -145,7 +145,7 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    ```bash
    dosplot.py --ldos 1
    ```
-   change the last number according to your material
+   change the last number according to your material.
 9. Check your images 
    ```bash
    eog TDOS.png
