@@ -78,7 +78,7 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    ```
    - Introduce the same **POSCAR**, **POTCAR** and **jobfile** files in each folder.
      ```bash
-     cp ../energy-cutoff/POSCAR ../energy-cutoff/POTCAR ../energy-cutoff/jobfile
+     cp ../energy-cutoff/POSCAR ../energy-cutoff/POTCAR ../energy-cutoff/jobfile .
      ```
    - Use the **INCAR** file with the converged energy cutoff, from Convergence test (Energy Cutoff) section, in each folder.
    - Create **KPOINTS** file in each folder by changing the tag **k-density** following the name of the files: **{2..9..1}**, use the command
@@ -120,18 +120,33 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
 0. This is a self-consistent calculation
 1. Enter to **dos** folder
    ```bash
-   cd PBE/dos
+   cd ../dos
    ```
 2. Create **INCAR_PBE_dos** file
 3. Use the **CONTCAR** file from Relaxation section and change the name to **POSCAR**
    ```bash
    cp ../relax/CONTCAR POSCAR
    ```
-4. Use the same jobfile, KPOINTS and POTCAR from Relaxation section
+4. Use the same **jobfile**, **KPOINTS** and **POTCAR** files from Relaxation section
+   ```bash
+   cp ../relax/jobfile ../relax/KPOINTS ../relax/POTCAR .
+   ```
 5. Run your work
-6. Check your outcomes, using the command "bandgap OUTCAR" you can check the information about 
-   the bandgap
-7. Use the command "dosplot.py" for plot the DOS
-8. It is possible check the Local density of states (LDOS) using the command   
-   "dosplot.py --ldos 1", change the last number according to your material
-9. Check your images with "eog TDOS.png"
+6. Check your outcomes, using the following command you can check the information about 
+   the bandgap (VBM and CBM)
+   ```bash
+   bandgap OUTCAR
+   ```
+7. Use the following command for plot the DOS
+   ```bash
+   dosplot.py
+   ```
+8. It is possible check the Local density of states (LDOS) using the command    
+   ```bash
+   dosplot.py --ldos 1
+   ```
+   change the last number according to your material
+9. Check your images 
+   ```bash
+   eog TDOS.png
+   ```
