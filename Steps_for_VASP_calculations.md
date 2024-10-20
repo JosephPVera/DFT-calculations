@@ -339,4 +339,3 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
 ---
 # Disfruta tus resultados
 ---
-Written by Joseph P.Vera, 2024-02
