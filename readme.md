@@ -69,7 +69,7 @@ In **relax** folder:
 
 ## Phonon
 In **phonon** folder:
-1. Create **INCAR_phonon file**, example:
+1. Create **INCAR_phonon** file, example:
    ```bash
    # Electronic relaxation
    ALGO   = Normal    # Algorithm for electronic relaxation
