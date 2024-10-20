@@ -164,29 +164,61 @@ In **phonon** folder:
 4. Check information in **total_dos.dat** file
 
 ### Thermal properties
-1. Use the command "phonopy -p -s -t  mesh.conf" for plot the thermal properties
-2. Check the outcome with "evince thermal_properties.pdf"
-3. Check information in "thermal_properties.yaml" file
+1. Use the following command for plot the thermal properties
+   ```bash
+   phonopy -p -s -t  mesh.conf
+   ```
+2. Check the outcome 
+   ```bash
+   evince thermal_properties.pdf
+   ```
+3. Check information in **thermal_properties.yam** file.
 
 ### Partial Density of States (PDOS)
-1. Create pdos.conf file
-   - Include name of the atoms of your material with the tag "ATOM_NAME"
-   - Include the transformation applied with the tag "DIM"  
-   - Include the Monkhorst-Pack scheme with the tag "MP"
-   - Include the Projected DOS with the tag "PDOS"
-2. Use the command "phonopy -p -s pdos.conf" for plot the PDOS
-3. Check the outcome with "evince partial_dos.pdf"
-4. Check information in "projected_dos.dat" file
+1. Create **pdos.conf** file
+   ```bash
+   touch pdos.conf
+   ```
+   Include name of the atoms of your material with the tag **ATOM_NAME**, the transformation applied with the tag **DIM** ,
+   the Monkhorst-Pack scheme with the tag **MP** and the Projected DOS with the tag **PDOS**. Here an example:
+   ```bash
+   ATOM_NAME = B N
+   DIM = 2 2 2
+   MP = 8 8 8
+   PDOS = AUTO
+   ```
+2. Use the following command for plot the PDOS
+   ```bash
+   phonopy -p -s pdos.conf
+   ```
+3. Check the outcome 
+   ```bash
+   evince partial_dos.pdf
+   ```
+4. Check information in **projected_dos.dat** file.
 
 ### Band structure
-1. Create band.conf file
-   - Include name of the atoms of your material with the tag "ATOM_NAME"
-   - Include the transformation applied with the tag "DIM"
-   - Include the high symmetry points with the tag "BAND"
-   - Include the labels for the high symmetry points with the tag "BAND_LABELS"
-2. Use the command "phonopy -p -s band.conf" for plot the band structure
-3. Check the outcome with "evince band.pdf"
-4. Check information in "band.yaml" file
+1. Create **band.conf** file
+   ```bash
+   touch band.conf
+   ```   
+   Include name of the atoms of your material with the tag **ATOM_NAME**, the transformation applied with the tag **DIM**,
+   the high symmetry points with the tag **BAND** and the labels for the high symmetry points with the tag **BAND_LABELS**. Here an example:
+   ```bash
+   ATOM_NAME = B N
+   DIM =  2 2 2
+   BAND= 0.0 0.0 0.0   0.5 0.0 0.5   0.5 0.25 0.75   0.375 0.375 0.75   0.0 0.0 0.0   0.5 0.5 0.5   0.625 0.250 0.625   0.5 0.25 0.75   0.5 0.5 0.5  0.375 0.375 0.75   0.625 0.25 0.625   0.5 0.0 0.5
+   BAND_LABELS = $\Gamma$ X W K $\Gamma$ L U W L K U X    
+   ```     
+2. Use the following command for plot the band structure
+   ```bash
+   phonopy -p -s band.conf
+   ```
+3. Check the outcome
+   ```bash
+   evince band.pdf
+   ``` 
+5. Check information in **band.yaml** file.
 
 ### Non-analytical term correction (NAC)
 0. Create a "nac" file
