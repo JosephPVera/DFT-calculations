@@ -109,12 +109,11 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    ```bash
    cd PBE/relax
    ```
-2. Create **INCAR_relax** file, I recommend use the standart value for the energy cutoff **ENCUT  = 500** for the next calculations.
-3. Use the same **POSCAR** and **jobfile** from Convergence test section.
-4. Create **KPOINTS** file.   
-5. Create **POTCAR** file.
-6. Run your work.
-7. Check your outcomes.
+2. Create **INCAR_PBE_relax** file, I recommend use the standart value for the energy cutoff **ENCUT  = 500** for the next calculations.
+3. Use the same **POSCAR**, **POTCAR** and **jobfile** from Convergence test section.
+4. Create **KPOINTS** file following the converged k-density.   
+5. Run your work.
+6. Check your outcomes.
 
 ## Density of states (DOS)
 0. This is a self-consistent calculation
@@ -149,4 +148,65 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
 9. Check your images 
    ```bash
    eog TDOS.png
+   ```
+
+## Band structure
+0. This is a non-self-consistent calculation
+1. Enter to **bs** folder
+   ```bash
+   cd ../bs
+   ```
+2. Create **INCAR_PBE_bs** file, include the new tag **ICHARG = 11**, last tag indicates the 
+   non-self-consistent calculation
+3. Copy **CHGCAR**, **POSCAR**, **POTCAR** and **jobfile** from DOS section
+   ```bash
+   cd ../dos/CHGCAR ../dos/POSCAR ../dos/jobfile ../dos/POTCAR .
+   ```
+4. Create **KPOINTS** file with the high symmetry points for the First Brillouin Zone (1BZ), here an example
+   ```bash
+   k-points along fcc high symmetry lines
+   20     0  !                           # of points per line
+   Line-mode
+   reciprocal
+   0.000  0.000  0.000  \Gamma
+   0.500  0.000  0.500  X
+
+   0.500  0.000  0.500  X
+   0.500  0.250  0.750  W
+
+   0.500  0.250  0.750  W
+   0.375  0.375  0.750  K
+
+   0.375  0.375  0.750  K
+   0.000  0.000  0.000  \Gamma
+
+   0.000  0.000  0.000  \Gamma
+   0.500  0.500  0.500  L
+ 
+   0.500  0.500  0.500  L
+   0.625  0.250  0.625  U
+
+   0.625  0.250  0.625  U
+   0.500  0.250  0.750  W
+
+   0.500  0.250  0.750  W
+   0.500  0.500  0.500  L
+
+   0.500  0.500  0.500  L
+   0.375  0.375  0.750  K
+
+   0.375  0.375  0.750  K
+   0.625  0.250  0.625  U
+
+   0.625  0.250  0.625  U
+   0.500  0.000  0.500  X
+   ```
+5. Run your work
+6. Plot the band structure with the command
+   ```bash
+   bandplot.py
+   ```
+7. Check your image 
+   ```bash
+   eog bandstruct.png
    ```
