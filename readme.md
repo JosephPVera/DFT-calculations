@@ -79,7 +79,7 @@ In **phonon** folder:
    ENCUT  = 500       # Cut-off energy for plane wave expansion
    PREC   = Accurate  # Low/Normal/Accurate
    LREAL  = .FALSE.   # Projection in reciprocal space?
-   ISMEAR = 1         # Smearing of partial occupancies.
+   ISMEAR = 1         # Smearing of partial occupancies
    SIGMA  = 0.1       # Smearing width
    ISTART = 0         # Determines whether or not to read the WAVECAR
    ICHARG = 2         # Determines how VASP constructs the initial charge density
@@ -218,25 +218,95 @@ In **phonon** folder:
    ```bash
    evince band.pdf
    ``` 
-5. Check information in **band.yaml** file.
+4. Check information in **band.yaml** file.
 
 ### Non-analytical term correction (NAC)
-0. Create a "nac" file
-1. Create INCAR_nac
-2. Copy POSCAR (primitice cell), KPOINTS, POTCAR and jobfile
+0. Create a **nac** file
+   ```bash
+   mkdir nac
+   cd ..
+   ```
+1. Create **INCAR_nac**, example:
+   ```bash
+   # Electronic relaxation
+   ALGO   = Normal        # Algorithm for electronic relaxation
+   PREC = Accurate        # Low/Normal/Accurate
+   IBRION = -1            # Algorithm for relaxing atomic positions 
+   NELMIN = 5             # sets the maximum number of electronic self-consistency steps
+   ENCUT = 500            # Cut-off energy for plane wave expansion
+   EDIFF  = 1E-8          # Accuracy for electronic groundstate
+   ISMEAR = 0             # Smearing of partial occupancies.
+   SIGMA = 1E-02          # Smearing width
+   IALGO = 38             # selects the algorithm to optimize the orbitals. 
+   LREAL = .FALSE.        # Projection in reciprocal space?
+   LWAVE = .FALSE.        # Determines whether the wavefunctions are saved in WAVECAR
+   LCHARG = .FALSE.       # Determines whether the charge densities are saved in CHGCAR and CHG
+   LEPSILON = .TRUE.      # determines the static dielectric matrix, ion-clamped piezoelectric tensor and the Born effective charges using density functional perturbation theory
+   ```
+2. Copy **POSCAR (primitice cell)**, **KPOINTS**, **POTCAR** and **jobfile**
+   ```bash
+   cp ../POSCAR ../jobfile ../KPOINTS ../POTCAR .
+   ``` 
 3. Run your work
-    
-4. Use the command "phonopy-vasp-born > BORN" for create the BORN file
-5. Now copy BORN file to phonon folder
-6. Repeat the above commands adding "--nac" for calculate with the term correction
-   - DOS:                "phonopy -p -s --nac mesh.conf"
-   - Thermal properties: "phonopy -p -s -t --nac mesh.conf"
-   - PDOS:               "phonopy -p -s --nac pdos.conf"
-   - Band Structure:     "phonopy -p -s --nac band.conf"
-7. For plot DOS and Band Structure at once
-   - Create "band-dos.conf"
-   - Use the command "phonopy -p -s --nac band-pdos.conf" for plot 
-   - Check the outcome with "evince band_dos.pdf"
+   ```bash
+   sub 
+   ```  
+4. Use the following command for create the **BORN** file
+   ```bash
+   phonopy-vasp-born > BORN 
+   ```
+
+# Correcting calculations with NAC   
+1. Now copy BORN file to **phonon** folder
+   ```bash
+   cp BORN ../
+   ```   
+2. Repeat the above commands adding the tag **--nac** for calculate with the term correction
+   - DOS:                
+     ```bash
+     phonopy -p -s --nac mesh.conf
+     ```
+   - Thermal properties: 
+     ```bash
+     phonopy -p -s -t --nac mesh.conf
+     ```
+   - PDOS:               
+     ```bash
+     phonopy -p -s --nac pdos.conf
+     ```
+   - Band Structure:    
+     ```bash
+     phonopy -p -s --nac band.conf
+     ```
+3. For plot DOS and Band Structure at once
+   - Create **band-dos.conf**, here an example:
+     ```bash
+     ATOM_NAME = B N
+     DIM =  2 2 2
+     MP = 8 8 8
+     BAND= 0.0 0.0 0.0   0.5 0.0 0.5   0.5 0.25 0.75   0.375 0.375 0.75   0.0 0.0 0.0   0.5 0.5 0.5   0.625 0.250 0.625   0.5 0.25 0.75   0.5 0.5 0.5  0.375 0.375 0.75   0.625 0.25 0.625   0.5 0.0 0.5
+     BAND_LABELS = $\Gamma$ X W K $\Gamma$ L U W L K U X
+     ```
+   - Use the following command for plot
+     ```bash
+     phonopy -p -s --nac band-pdos.conf
+     ```
+   - Check the outcome 
+     ```bash
+     evince band_dos.pdf
+     ```
 
 ### Dielectric constant
-1. Check the BORN file (second line is information about the dielectric tensor)
+1. Check the **BORN** file (second line is information about the dielectric tensor), here an example:
+   ```bash
+   # epsilon and Z* of atoms 1 3
+      4.46664232    0.00000000    0.00000000    0.00000000    4.46664232    0.00000000    0.00000000    0.00000000    4.68631509 
+      2.51940463    0.00000000    0.00000000    0.00000000    2.51940463    0.00000000    0.00000000    0.00000000    2.67878546 
+     -2.51940463   -0.00000000    0.00000000   -0.00000000   -2.51940463   -0.00000000    0.00000000    0.00000000   -2.67878546 
+   ```
+
+---
+Enjoy your outcomes
+---
+Disfruta tus resultados
+---
