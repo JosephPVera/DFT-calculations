@@ -106,12 +106,7 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
 4. Check if your works are finished.
 5. Repeat the steps 5 and 6 from Convergence test (Energy Cutoff) section.
 
-## Creating folders
-   ```bash
-   mkdir PBE/relax
-   mkdir PBE/dos
-   mkdir PBE/bs
-   ```
+
 ## Relaxation
 1. Enter to **relax** folder
    ```bash
@@ -222,20 +217,13 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
 ---
 # HSE06 pseudopotential
 ---
-# Creating folders
-   ```bash
-   mkdir HSE06
-   mkdir HSE06/relax
-   mkdir HSE06/dos
-   mkdir HSE06/bs
-   ```
 
 ## Relaxation
 1. Enter to **relax** folder
    ```bash
    cd HSE06/relax
    ```
-2. Create **INCAR_HSE06_relax** file, include the tags for hybrid calculations
+2. Create **INCAR_HSE06_relax** file, include the tags for hybrid calculations:
    ```bash
    LHFCALC = .TRUE.        # specifies whether a Hartree-Fock/DFT hybrid functional type calculation is performed. 
    HFSCREEN = 0.2          # HF Screening parameter (0.2 for HSE06)
@@ -243,9 +231,80 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    AGGAX = 0.75            # parameter that multiplies the gradient correction in the GGA exchange functional
    Time = 0.4              # Timestep (0.4 for HSE06)
    ```
-3. Introduce **POSCAR**, **KPOINTS**, **POTCAR** and **jobfile**, it can be copy from PBE calculations
+3. Introduce **POSCAR**, **KPOINTS**, **POTCAR** and **jobfile**, which can be copied from PBE calculations
    ```bash
    cp ../../PBE/dos/POSCAR ../../PBE/dos/KPOINTS ../../PBE/dos/POTCAR ../../PBE/dos/jobfile .
    ```
 4. Run your work.
 5. Check your outcomes.
+
+## Density of states (DOS)
+0. This is a self-consistent calculation.
+1. Enter to **dos** folder
+   ```bash
+   cd ../dos
+   ```
+2. Create the **INCAR_HSE06_dos** file, include the tags for hybrid calculations.
+3. Use the **CONTCAR** file from Relaxation_HSE06 section and change the name to **POSCAR**
+   ```bash
+   cp ../relax/CONTCAR POSCAR
+   ```
+4. Copy KPOINTS, POTCAR, jobfile from Relaxation_HSE06 section
+   ```bash
+   cp ../relax/jobfile ../relax/KPOINTS ../relax/POTCAR .
+   ```
+5. Run your work.
+6. Use the same steps 6, 7, 8 and 9 from DOS_PBE section.
+
+## Band structure
+0. This is a non-self-consistent calculation
+1. Enter to **bs** folder
+   ```bash
+   cd ../bs
+   ```
+2. Create **INCAR_HSE06_bs**, include the tags for hybrid calculations and a new tag **ICHARG = 11**, last tag indicates the 
+   non-self-consistent calculation.
+3. Copy **CHGCAR**, **POTCAR**, **POSCAR** and **jobfile** from DOS_HSE06 section
+   ```bash
+   cd ../dos/CHGCAR ../dos/POSCAR ../dos/jobfile ../dos/POTCAR .
+   ```
+4. Create KPOINTS file
+   - Copy **IBZKPT** file from DOS_HSE06 section
+     ```bash
+     cp ../dos/IBZKPT .
+     ```
+   - Copy **OUTCAR** file from **Band structure PBE section**: inside **OUTCAR_PBE** look for the
+     "**k-points in reciprocal lattice and weights: k-points**" section (it is information with 4
+     columns) and copy it (**copy only the numbers**)
+     ```bash
+     cp ../../PBE/bs/OUTCAR OUTCAR_PBE
+     ```
+     Here is a brief example of **OUTCAR_PBE**
+     ```bash
+     k-points in reciprocal lattice and weights: k-points along fcc high symmetry lines  
+     0.00000000  0.00000000  0.00000000       0.005
+     0.02631579  0.00000000  0.02631579       0.005
+     0.05263158  0.00000000  0.05263158       0.005
+     0.07894737  0.00000000  0.07894737       0.005
+     0.10526316  0.00000000  0.10526316       0.005
+     0.13157895  0.00000000  0.13157895       0.005
+     0.15789474  0.00000000  0.15789474       0.005
+     0.18421053  0.00000000  0.18421053       0.005
+     0.21052632  0.00000000  0.21052632       0.005
+     ```
+   - Here it is possible to use two methods:
+     * Create kdensity.dat file and paste the "k-points in reciprocal lattice and weights: 
+       k-density:" information, then concatenate with IBZKPT file using the command 
+       "cat IBZKPT kpoints.dat > KPOINTS"
+     * Manually add the "k-points in reciprocal lattice and weights: k-density:" information
+       at the final of IBZKPT file without leaving spaces, then change the name from IBZKPT to
+       KPOINTS
+   - Enter to KPOINTS and change the weights to zero (only in the pasted part), it is the 4th
+     column
+   - In KPOINTS change the number of points (second line), usually it is the number of lines in 
+     the file minus 3 (Ln - 3)
+   - Include the high symmetry points for the 1BZ, look for the points in pasted part and include
+     the name after the weights
+5. Run your work
+6. Plot the band structure with command "bandplot.py"
+7. Check your images with "eog bandstruct.png"
