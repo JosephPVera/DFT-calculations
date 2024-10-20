@@ -117,7 +117,7 @@ In **phonon** folder:
    ```bash
    mkdir dis-001 dis-002
    ```
-7. For each folder, for example **dis-001**
+7. For each folder, for example **dis-001** folder:
    - Copy **POSCAR-001** and change the name to **POSCAR**
      ```bash
      cp POSCAR-001 dis-001/POSCAR
