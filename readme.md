@@ -210,3 +210,34 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    ```bash
    eog bandstruct.png
    ```
+
+---
+# HSE06 pseudopotential
+---
+# Creating folders
+   ```bash
+   mkdir HSE06
+   mkdir HSE06/relax
+   mkdir HSE06/dos
+   mkdir HSE06/bs
+   ```
+
+## Relaxation
+1. Enter to **relax** folder
+   ```bash
+   cd HSE06/relax
+   ```
+2. Create **INCAR_HSE06_relax** file, include the tags for hybrid calculations
+   ```bash
+   LHFCALC = .TRUE.        # specifies whether a Hartree-Fock/DFT hybrid functional type calculation is performed. 
+   HFSCREEN = 0.2          # HF Screening parameter (0.2 for HSE06)
+   AEXX = 0.25             # Fraction of exact exchange in a Hartree-Fock-type/hybrid-functional calculation
+   AGGAX = 0.75            # parameter that multiplies the gradient correction in the GGA exchange functional
+   Time = 0.4              # Timestep (0.4 for HSE06)
+   ```
+3. Introduce **POSCAR**, **KPOINTS**, **POTCAR** and **jobfile**, it can be copy from PBE calculations
+   ```bash
+   cp ../../PBE/dos/POSCAR ../../PBE/dos/KPOINTS ../../PBE/dos/POTCAR ../../PBE/dos/jobfile .
+   ```
+4. Run your work.
+5. Check your outcomes.
