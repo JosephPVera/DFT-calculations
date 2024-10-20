@@ -20,7 +20,7 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
      ```bash
      makekpoints
      ```
-     or at once using:
+     or at once, using:
      ```bash
      for dir in */;do cd $dir; makekpoints; cd ../;done
      ```
@@ -32,7 +32,7 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
      ```bash
      makepot . Pt Si
      ```
-     or at once using:
+     or at once, using:
      ```bash
      for dir in */;do cd $dir; makepot . Pt Si; cd ../;done
      ```     
