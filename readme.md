@@ -7,7 +7,7 @@ Steps for VASP calculations using **PBE** and **HSE06** pseudopotentials.
 For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **makepot**, **dosplot.py** and **bandplot.py** is necessary use scripts, check **/.../vasp/template/bin**.
 
 
-# Creating the tree 
+## Creating the tree 
 ```bash
 mkdir energy-cutoff k-density PBE HSE06
 mkdir PBE/relax PBE/dos PBE/bs
