@@ -132,8 +132,12 @@ In **phonon** folder:
      sub 
      ```  
    - Repeat the same steps for the other cases
-9. In "phonon folder" use the command "phonopy -f dis-001/vasprun.xml dis-002/vasprun.xml" for
-   create the FORCE_SETS file (this file is very important)
+8. Now use the command 
+   ```bash
+   cd ..
+   phonopy -f dis-001/vasprun.xml dis-002/vasprun.xml
+   ```
+   for create the **FORCE_SETS** file (this file is very important).
 
 **IMPORTANT: NEXT CALCULATIONS PERFORM IN PHONON FOLDER**
 
