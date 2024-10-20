@@ -74,7 +74,14 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
      ```bash
      makekpoints -d 2
      ```
-     change the last number for different k-density.
+     change the last number for different k-density. All at once, using:
+     ```bash
+     for dir in {2..9}; do cd "$dir"; makekpoints -d "$dir";cd ..;done
+     ```
+     check if it is correct
+     ```bash
+     grep k-density */KPOINTS
+     ```
 2. Run your works.
 3. Check if your work is finished.
 4. Repeat the steps 4 and 5 from Convergence test (Energy Cutoff) section.
