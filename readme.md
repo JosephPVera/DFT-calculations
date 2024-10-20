@@ -11,7 +11,11 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
 ---
 
 ## Convergence test (Energy Cutoff)
-1. Create different folders 
+1. Create **energy_cutoff** folder
+   ```bash
+   mkdir energy-cutoff
+   ```
+2. Create different folders 
    ```bash
    mkdir {200..900..50}
    ```
@@ -38,7 +42,7 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
      ```bash
      for dir in */;do cd $dir; makepot . Pt Si; cd ../;done
      ```     
-2. Use the following command for run your works
+3. Use the following command for run your works
    ```bash
    sub
    ```
@@ -46,17 +50,17 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    ```bash
    for dir in */;do cd $dir; sub; cd ../;done 
    ```   
-3. Use the following command for check if your work is finished
+4. Use the following command for check if your works are finished
    ```bash
    st
    ```   
-4. If all works are finished, use the following commands for check your outcomes 
+5. If all works are finished, use the following commands for check your outcomes 
    ```bash
    toten */OUTCAR
    vaspout */OUTCAR
    ```
    **toten** script allows us to check information about total energy, while **vaspout** script allows us to check information about MxForce, Drift, pressure and total energy.
-5. Save your outcomes in a file with differents extension like .ods, .dat, .xlsx or .txt using the
+6. Save your outcomes in a file with differents extension like .ods, .dat, .xlsx or .txt using the
    commands
    ```bash
    toten */OUTCAR > toten.dat
@@ -64,11 +68,18 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    ```   
 
 ## Convergence test (K-density)
-1. Create different files  
+1. Create **k-density** folder
+   ```bash
+   mkdir k-density
+   ```
+2. Create different files  
    ```bash
    mkdir {2..9..1}
    ```
    - Introduce the same **POSCAR**, **POTCAR** and **jobfile** files in each folder.
+     ```bash
+     cp ../energy-cutoff/POSCAR ../energy-cutoff/POTCAR ../energy-cutoff/jobfile
+     ```
    - Use the **INCAR** file with the converged energy cutoff, from Convergence test (Energy Cutoff) section, in each folder.
    - Create **KPOINTS** file in each folder by changing the tag **k-density** following the name of the files: **{2..9..1}**, use the command
      ```bash
@@ -82,14 +93,39 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
      ```bash
      grep k-density */KPOINTS
      ```
-2. Run your works.
-3. Check if your work is finished.
-4. Repeat the steps 4 and 5 from Convergence test (Energy Cutoff) section.
+3. Run your works.
+4. Check if your works are finished.
+5. Repeat the steps 5 and 6 from Convergence test (Energy Cutoff) section.
 
+## Creating folders
+   ```bash
+   mkdir PBE
+   mkdir PBE/relax
+   mkdir PBE/dos
+   mkdir PBE/bs
+   ```
 ## Relaxation
-1. Create **INCAR_relax** file, I recommend use the standart value for the energy cutoff **ENCUT  = 500** for the next calculations.
-2. Use the same **POSCAR** and **jobfile** from Convergence test section.
-3. Create **KPOINTS** file.   
-4. Create **POTCAR** file.
-5. Run your work.
-6. Check your outcomes.
+1. Enter to **relax** folder
+2. Create **INCAR_relax** file, I recommend use the standart value for the energy cutoff **ENCUT  = 500** for the next calculations.
+3. Use the same **POSCAR** and **jobfile** from Convergence test section.
+4. Create **KPOINTS** file.   
+5. Create **POTCAR** file.
+6. Run your work.
+7. Check your outcomes.
+
+## Density of states (DOS)
+0. This is a self-consistent calculation
+1. Enter to **dos** folder
+2. Create **INCAR_PBE_dos** file
+3. Use the **CONTCAR** file from Relaxation section and change the name to **POSCAR**
+```bash
+cp ../relax/CONTCAR POSCAR
+```
+4. Use the same jobfile, KPOINTS and POTCAR from Relaxation section
+5. Run your work
+6. Check your outcomes, using the command "bandgap OUTCAR" you can check the information about 
+   the bandgap
+7. Use the command "dosplot.py" for plot the DOS
+8. It is possible check the Local density of states (LDOS) using the command   
+   "dosplot.py --ldos 1", change the last number according to your material
+9. Check your images with "eog TDOS.png"
