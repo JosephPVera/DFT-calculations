@@ -88,3 +88,11 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    st
    ```  
 4. Repeat the steps 4 and 5 from Convergence test (Energy Cutoff) section.
+
+## Relaxation
+1. Create **INCAR_relax** file, I recommend use the standart value for the energy cutoff **ENCUT  = 500** for the next calculations.
+2. Use the same **POSCAR** and **jobfile** from Convergence test section.
+3. Create **KPOINTS** file.   
+4. Create **POTCAR** file.
+5. Run your work.
+6. Check your outcomes.
