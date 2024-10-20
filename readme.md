@@ -256,7 +256,7 @@ In **phonon** folder:
    phonopy-vasp-born > BORN 
    ```
 
-# Correcting calculations with NAC   
+### Correcting calculations with NAC   
 1. Now copy BORN file to **phonon** folder
    ```bash
    cp BORN ../
@@ -306,7 +306,7 @@ In **phonon** folder:
    ```
 
 ---
-Enjoy your outcomes
+# Enjoy your outcomes
 ---
-Disfruta tus resultados
+# Disfruta tus resultados
 ---
