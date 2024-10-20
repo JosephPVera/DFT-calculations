@@ -3,8 +3,11 @@
 # Steps for VASP calculations: Phonons
 Check [phonopy](https://phonopy.github.io/phonopy/).
 
-## Folder Scheme
-
+## Creating the tree
+```bash
+mkdir phonon relax
+mkdir phonon/nac
+```
             
 ## Activation
 1. Identify for the module
