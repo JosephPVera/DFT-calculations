@@ -306,7 +306,11 @@ In **phonon** folder:
    ```
 
 ---
-Enjoy your outcomes
+<div style="text-align: center;">
+<h1>Enjoy your outcomes</h1>
+</div>
 ---
-Disfruta tus resultados
+<div style="text-align: center;">
+<h1>Disfruta tus resultados</h1>
+</div>
 ---
