@@ -34,7 +34,7 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
      ```bash
      makepot . Pt Si
      ```
-     or at once, using:
+     or all at once, using:
      ```bash
      for dir in */;do cd $dir; makepot . Pt Si; cd ../;done
      ```     
