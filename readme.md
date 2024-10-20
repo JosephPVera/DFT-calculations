@@ -139,16 +139,29 @@ In **phonon** folder:
    ```
    for create the **FORCE_SETS** file (this file is very important).
 
-**IMPORTANT: NEXT CALCULATIONS PERFORM IN PHONON FOLDER**
 
+**IMPORTANT: NEXT CALCULATIONS PERFORM IN PHONON FOLDER**
 ### Density of states (DOS)
-1. Create mesh.conf file with the command "touch mesh.conf"
-   - Include name of the atoms of your material with the tag "ATOM_NAME"
-   - Include the transformation applied with the tag "DIM"  
-   - Include the Monkhorst-Pack scheme with the tag "MP"
-2. Use the command "phonopy -p -s mesh.conf" for plot the DOS
-3. Check the outcome with "evince total_dos.pdf"
-4. Check information in "total_dos.dat" file
+1. Create **mesh.conf** file 
+   ```bash
+   touch mesh.conf
+   ```
+   Include name of the atoms of your material with the tag **ATOM_NAME**, the transformation applied with the tag **DIM**  
+   and the Monkhorst-Pack scheme with the tag **MP**. Here an example:
+   ```bash
+   ATOM_NAME = B N 
+   DIM = 2 2 2
+   MP = 8 8 8
+   ```
+2. Use the following command for plot the DOS
+   ```bash
+   phonopy -p -s mesh.conf
+   ```
+3. Check the outcome 
+   ```bash
+   evince total_dos.pdf
+   ```
+4. Check information in **total_dos.dat** file
 
 ### Thermal properties
 1. Use the command "phonopy -p -s -t  mesh.conf" for plot the thermal properties
