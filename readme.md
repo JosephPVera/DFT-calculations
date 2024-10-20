@@ -332,3 +332,10 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
 5. Run your work
 6. Plot the band structure.
 7. Check your image.
+
+
+---
+# Enjoy your outcomes
+---
+# Disfruta tus resultados
+---
