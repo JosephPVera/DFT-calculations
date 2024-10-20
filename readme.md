@@ -36,10 +36,26 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
      ```bash
      for dir in */;do cd $dir; makepot . Pt Si; cd ../;done
      ```     
-3. Use command "sub" for run your work
-4. Use command "st" for check if your work is finished
-   
-5. If all works are finished, use commands "vaspout */OUTCAR", "bandgap */OUTCAR" or 
-   "toten */OUTCAR" for check your outcomes
-6. Save your outcomes in a file with differents extension like .ods, .dat, .xlsx or .txt using
-   command "bandgap *dos/OUTCAR > bandgap.dat"
+2. Use the following command for run your work
+   ```bash
+   sub
+   ```
+3. Use the following command for check if your work is finished
+   ```bash
+   st
+   ```   
+4. If all works are finished, use the following commands for check your outcomes
+   "" 
+   ```bash
+   toten */OUTCAR
+   vaspout */OUTCAR
+   bandgap */OUTCAR
+   ```
+   **toten** script allows us to check information about total energy, while **vaspout** script allows us to check information about MxForce, Drift, pressure and total energy.
+5. Save your outcomes in a file with differents extension like .ods, .dat, .xlsx or .txt using the
+   commands
+   ```bash
+   toten */OUTCAR > toten.dat
+   vaspout */OUTCAR > vaspout.dat
+   bandgap *dos/OUTCAR > bandgap.dat
+   ```   
