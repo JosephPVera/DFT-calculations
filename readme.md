@@ -38,7 +38,7 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
      ```bash
      for dir in */;do cd $dir; makepot . Pt Si; cd ../;done
      ```     
-2. Use the following command for run your work
+2. Use the following command for run your works
    ```bash
    sub
    ```
@@ -75,18 +75,8 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
      makekpoints -d 2
      ```
      change the last number for different k-density.
-2. Use the following command for run your work
-   ```bash
-   sub
-   ```
-   or all at once, using
-   ```bash
-   for dir in */;do cd $dir; sub; cd ../;done 
-   ```  
-3. Use the following command for check if your work is finished
-   ```bash
-   st
-   ```  
+2. Run your works.
+3. Check if your work is finished.
 4. Repeat the steps 4 and 5 from Convergence test (Energy Cutoff) section.
 
 ## Relaxation
