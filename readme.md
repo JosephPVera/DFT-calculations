@@ -106,6 +106,9 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    ```
 ## Relaxation
 1. Enter to **relax** folder
+   ```bash
+   cd PBE/relax
+   ```
 2. Create **INCAR_relax** file, I recommend use the standart value for the energy cutoff **ENCUT  = 500** for the next calculations.
 3. Use the same **POSCAR** and **jobfile** from Convergence test section.
 4. Create **KPOINTS** file.   
@@ -116,11 +119,14 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
 ## Density of states (DOS)
 0. This is a self-consistent calculation
 1. Enter to **dos** folder
+   ```bash
+   cd PBE/dos
+   ```
 2. Create **INCAR_PBE_dos** file
 3. Use the **CONTCAR** file from Relaxation section and change the name to **POSCAR**
-```bash
-cp ../relax/CONTCAR POSCAR
-```
+   ```bash
+   cp ../relax/CONTCAR POSCAR
+   ```
 4. Use the same jobfile, KPOINTS and POTCAR from Relaxation section
 5. Run your work
 6. Check your outcomes, using the command "bandgap OUTCAR" you can check the information about 
