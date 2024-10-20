@@ -1,6 +1,6 @@
 --- 
 # Steps for VASP calculations: Relax, DOS and Band Structure
-Check [VASP - UIO](https://wiki.uio.no/mn/kjemi/vaspwiki/index.php/Main_Page)
+Check [VASP - UIO](https://wiki.uio.no/mn/kjemi/vaspwiki/index.php/Main_Page).
 
 Steps for VASP calculations using PBE and HSE06 pseudopotentials.
 
