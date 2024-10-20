@@ -49,7 +49,6 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    ```bash
    toten */OUTCAR
    vaspout */OUTCAR
-   bandgap */OUTCAR
    ```
    **toten** script allows us to check information about total energy, while **vaspout** script allows us to check information about MxForce, Drift, pressure and total energy.
 5. Save your outcomes in a file with differents extension like .ods, .dat, .xlsx or .txt using the
@@ -57,5 +56,4 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    ```bash
    toten */OUTCAR > toten.dat
    vaspout */OUTCAR > vaspout.dat
-   bandgap *dos/OUTCAR > bandgap.dat
    ```   
