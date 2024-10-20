@@ -50,19 +50,19 @@ In **relax** file:
    NCORE = 10         # number of compute cores that work on an individual orbital
    ```
 2. Introduce the POSCAR and jobfile (HPC clusters use Slurm as workload manager and job scheduler).
-3. Create KPOINTS file using command:
+3. Create KPOINTS file using command
    ```bash
    makekpoints
    ```
-4. Create POTCAR using comand:
+4. Create POTCAR using comand
    ```bash
    makepot . Pt
    ```
-5. For run your work use the following command:
+5. For run your work use the following command
    ```bash
    sub 
    ```   
-8. Check if your work is finished:
+8. Check if your work is finished
    ```bash
    st 
    ```   
