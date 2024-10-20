@@ -268,7 +268,7 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    ```bash
    cd ../dos/CHGCAR ../dos/POSCAR ../dos/jobfile ../dos/POTCAR .
    ```
-4. Create KPOINTS file
+4. Create **KPOINTS** file
    - Copy **IBZKPT** file from DOS_HSE06 section
      ```bash
      cp ../dos/IBZKPT .
@@ -279,7 +279,7 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
      ```bash
      cp ../../PBE/bs/OUTCAR OUTCAR_PBE
      ```
-     Here is a brief example of **OUTCAR_PBE**
+     Here is a brief example of **OUTCAR_PBE**:
      ```bash
      k-points in reciprocal lattice and weights: k-points along fcc high symmetry lines  
      0.00000000  0.00000000  0.00000000       0.005
@@ -292,19 +292,43 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
      0.18421053  0.00000000  0.18421053       0.005
      0.21052632  0.00000000  0.21052632       0.005
      ```
-   - Here it is possible to use two methods:
-     * Create kdensity.dat file and paste the "k-points in reciprocal lattice and weights: 
-       k-density:" information, then concatenate with IBZKPT file using the command 
-       "cat IBZKPT kpoints.dat > KPOINTS"
-     * Manually add the "k-points in reciprocal lattice and weights: k-density:" information
-       at the final of IBZKPT file without leaving spaces, then change the name from IBZKPT to
-       KPOINTS
-   - Enter to KPOINTS and change the weights to zero (only in the pasted part), it is the 4th
-     column
-   - In KPOINTS change the number of points (second line), usually it is the number of lines in 
-     the file minus 3 (Ln - 3)
+   - **Here it is possible to use two methods**:
+     1. Create **kdensity.dat** file and paste the "**k-points in reciprocal lattice and weights: 
+        k-points**" information
+        ```bash
+        mkdir kdensity.dat
+        ```
+        then concatenate with **IBZKPT** file to create the **KPOINTS** file using the command
+        ```bash
+        cat IBZKPT kpoints.dat > KPOINTS
+        ```
+     2. Manually add the "**k-points in reciprocal lattice and weights: 
+        k-points**" information at the final of **IBZKPT** file without leaving spaces, then change the name from **IBZKPT** to
+        **KPOINTS** file.
+        ```bash
+        mv IBZKPT KPOINTS
+        ```
+   - Enter to **KPOINTS** file
+     ```bash
+     vim KPOINTS
+     ```
+     and **change the weights to zero (only in the pasted part)**, it is the 4th
+     column. Here is a brief example:
+     ```bash
+     0.00000000  0.00000000  0.00000000       0
+     0.02631579  0.00000000  0.02631579       0
+     0.05263158  0.00000000  0.05263158       0
+     0.07894737  0.00000000  0.07894737       0
+     0.10526316  0.00000000  0.10526316       0
+     0.13157895  0.00000000  0.13157895       0
+     0.15789474  0.00000000  0.15789474       0
+     0.18421053  0.00000000  0.18421053       0
+     0.21052632  0.00000000  0.21052632       0     
+     ```
+   - In **KPOINTS** file change the number of points (second line), usually it is the number of lines in 
+     the file minus 3 (Ln - 3).
    - Include the high symmetry points for the 1BZ, look for the points in pasted part and include
-     the name after the weights
+     the name after the weights.
 5. Run your work
-6. Plot the band structure with command "bandplot.py"
-7. Check your images with "eog bandstruct.png"
+6. Plot the band structure.
+7. Check your image.
