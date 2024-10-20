@@ -15,6 +15,7 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    ```bash
    mkdir {200..900..50}
    ```
+   
    - Introduce the same **POSCAR** and **jobfile** in each folder.
    - In **INCAR** file change the tag "**ENCUT**" following the name of the files: **{200..900..50}**
    - Create **KPOINTS** files in each folder using the command
@@ -45,8 +46,7 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    ```bash
    st
    ```   
-4. If all works are finished, use the following commands for check your outcomes
-   "" 
+4. If all works are finished, use the following commands for check your outcomes 
    ```bash
    toten */OUTCAR
    vaspout */OUTCAR
