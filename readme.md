@@ -18,7 +18,7 @@ Check [phonopy](https://phonopy.github.io/phonopy/).
    mkdir relax phonon
 
 ## Relaxation
-In **relax** file:
+In **relax** folder:
 1. Create **INCAR_relax** file, example:
    ```bash
    # Electronic relaxation
@@ -68,8 +68,8 @@ In **relax** file:
    ```   
 
 ## Phonon
-In **phonon** file
-1. Create INCAR_phonon file, example:
+In **phonon** folder:
+1. Create **INCAR_phonon file**, example:
    ```bash
    # Electronic relaxation
    ALGO   = Normal    # Algorithm for electronic relaxation
@@ -96,25 +96,41 @@ In **phonon** file
    NPAR    = 4        # number of bands that are treated in parallel
    NCORE = 10         # number of compute cores that work on an individual orbital
    ``` 
-3. Use the CONTCAR file from Relaxation section and change the name to POSCAR
-4. Copy KPOINTS and POTCAR from Relaxation section
-
-5. Use the command
+2. Use the **CONTCAR** file from Relaxation section (**relax folder**) and change the name to **POSCAR**.
    ```bash
-   phonopy -d --dim="2 2 2
+   cp ../relax/CONTCAR POSCAR
+   ``` 
+3. Copy **KPOINTS** and **POTCAR** from Relaxation section (**relax folder**).
+   ```bash
+   cp ../relax/KPOINTS KPOINTS
+   cp ../relax/POTCAR POTCAR
+   ``` 
+4. Use the command
+   ```bash
+   phonopy -d --dim="2 2 2"
    ```
    for apply the transformation and create
-   different POSCAR with finite-difference (displaced atoms) in the lattice parameter
+   different **POSCAR's** with finite-difference (displaced atoms) in the lattice parameter
    (Supercell method). It is possible to change the values "2 2 2" according to your material.
-6. Now you will find POSCAR with different numbers: POSCAR-001, POSCAR-002
-7. Create folders for each new POSCAR with 
+5. Now you will find **POSCAR's** with different numbers: **POSCAR-001**, **POSCAR-002** and so on.
+6. Create folders for each new **POSCAR** with 
    ```bash
    mkdir dis-001 dis-002
    ```
-8. For each folder, example "dis-001"
-   - Copy POSCAR-001 and change the name to POSCAR
-   - Copy INCAR_phonon, KPOINTS, POTCAR and jobfile
-   - Run your work 
+7. For each folder, for example **dis-001**
+   - Copy **POSCAR-001** and change the name to **POSCAR**
+     ```bash
+     cp POSCAR-001 dis-001/POSCAR
+     ```
+   - Copy **INCAR_phonon**, **KPOINTS**, **POTCAR** and **jobfile**
+     ```bash
+     cp INCAR_phonon dis-001/INCAR
+     cp KPOINTS POTCAR jobfile dis-001
+     ```
+   - Run your work
+     ```bash
+     sub 
+     ```  
    - Repeat the same steps for the other cases
 9. In "phonon folder" use the command "phonopy -f dis-001/vasprun.xml dis-002/vasprun.xml" for
    create the FORCE_SETS file (this file is very important)
