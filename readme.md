@@ -71,31 +71,31 @@ In **relax** file:
 In **phonon** file
 1. Create INCAR_phonon file, example:
    ```bash
-   ! Electronic relaxation
-ALGO   = Normal    ! Algorithm for electronic relaxation
-NELMIN = 4         ! Minimum # of electronic steps
-NELM = 100
-EDIFF  = 1E-8      ! Accuracy for electronic groundstate
-ENCUT  = 500       ! Cut-off energy for plane wave expansion
-PREC   = Accurate  ! Low/Normal/Accurate
-LREAL  = .FALSE.   ! Projection in reciprocal space?
-ISMEAR = 1         ! Smearing of partial occupancies.
-SIGMA  = 0.1       ! Smearing width
-ISTART = 0
-ICHARG = 2
+   # Electronic relaxation
+   ALGO   = Normal    # Algorithm for electronic relaxation
+   NELMIN = 4         # Minimum # of electronic steps
+   NELM = 100         # sets the maximum number of electronic self-consistency steps 
+   EDIFF  = 1E-8      # Accuracy for electronic groundstate
+   ENCUT  = 500       # Cut-off energy for plane wave expansion
+   PREC   = Accurate  # Low/Normal/Accurate
+   LREAL  = .FALSE.   # Projection in reciprocal space?
+   ISMEAR = 1         # Smearing of partial occupancies.
+   SIGMA  = 0.1       # Smearing width
+   ISTART = 0         # Determines whether or not to read the WAVECAR
+   ICHARG = 2         # Determines how VASP constructs the initial charge density
 
-! Ionic relaxation
-NSW    = 0         ! Static high-accuracy calculation without relaxation
-IBRION = -1          ! Algorithm for relaxing atomic positions 
-ISYM = 0
-LWAVE = .FALSE.
-LCHARG = .FALSE. 
-LMAXMIX = 4
+   # Ionic relaxation
+   NSW    = 0         # Static high-accuracy calculation without relaxation
+   IBRION = -1        # Algorithm for relaxing atomic positions 
+   ISYM = 0           # Determines the way VASP treats symmetry
+   LWAVE = .FALSE.    # Determines whether the wavefunctions are saved in WAVECAR
+   LCHARG = .FALSE.   # Determines whether the charge densities are saved in CHGCAR and CHG
+   LMAXMIX = 4
  
-! Memory handling
-NPAR    = 4
-NCORE = 10 
-  ``` 
+   # Memory handling
+   NPAR    = 4        # number of bands that are treated in parallel
+   NCORE = 10         # number of compute cores that work on an individual orbital
+   ``` 
 3. Use the CONTCAR file from Relaxation section and change the name to POSCAR
 4. Copy KPOINTS and POTCAR from Relaxation section
 
