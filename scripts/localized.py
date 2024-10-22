@@ -135,4 +135,11 @@ with open('localized_defect.dat', 'w') as output_file:
     for line in final_results:
         output_file.write(line + '\n')
 
-print("The file was saved")
+#print("The file was saved")
+print("-------------------------------------------------------")
+print("-------------------------------------------------------")
+
+with open('localized_defect.dat', 'r') as file:
+#    print("\nlocalized_defect.dat\n")
+    for line in file:
+        print(line.strip())
