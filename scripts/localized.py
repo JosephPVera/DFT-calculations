@@ -7,7 +7,6 @@
 archivo_eigenval = 'EIGENVAL'
 file_path = 'PROCAR'  
 
-# Prompt the user to enter band numbers, separated by commas
 user_input = input('Band number(s)(example: 430,431,432): ')
 band_numbers = [int(band.strip()) for band in user_input.split(',')]  
 
