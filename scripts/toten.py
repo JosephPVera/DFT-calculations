@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Written by Joseph P.Vera
+# 2024-10
 
 import sys
 import re
