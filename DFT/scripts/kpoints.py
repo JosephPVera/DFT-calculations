@@ -3,7 +3,7 @@
 # 2024-10
 
 "Code to create the KPOINTS file for HSE06 calculations, using the OUTCAR and KPOINTS files from the band structure \
-with the PBE calculation and the IBZKPT file from DOS with the PBE calculation"
+and the IBZKPT file from DOS with the PBE calculation"
 
 # Read the OUTCAR file and extract the information 
 with open('../../PBE/bs/OUTCAR') as infile, open('kpoints.dat', 'w') as outfile:
