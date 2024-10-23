@@ -5,7 +5,7 @@
 import sys
 import re
 
-"Code for print the free energy TOTEN, energy without entropy (F) and energy(sigma->0) (E_0)"
+"Code for print the free energy TOTEN, energy without entropy (F) and energy(sigma->0) (E_0) from OUTCAR file"
 
 def process_file(filename, print_header):
     if print_header:
