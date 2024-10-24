@@ -4,11 +4,16 @@
 
 "Code to extract information from EIGENVAL and PROCAR file to identify localized defects"
 
+import os
+
 archivo_eigenval = 'EIGENVAL'
 file_path = 'PROCAR'
 
-user_input = input('Band number(s)(example: 430,431,432): ')
+user_input = input('Band number(s): ') # example: 430,431,432
 band_numbers = [int(band.strip()) for band in user_input.split(',')] 
+
+# Extract folder name from current directory
+folder_name = os.path.basename(os.getcwd())
 
 # list to store the lines of the EIGENVAL file
 lineas = []
@@ -40,12 +45,14 @@ eigenval_results = []
 if indice_transicion is not None:
     inicio = max(0, indice_transicion - 5)          # Lines above the transition
     fin = min(len(lineas), indice_transicion + 6)   # Lines below the transition
+    eigenval_results.append(f"Defect: {folder_name}\n\n")
     eigenval_results.append("EIGENVAL:")
     eigenval_results.append("HOMO-LUMO transition\n")
     for j in range(inicio, fin):
         eigenval_results.append(lineas[j].strip())  # Append line without whitespace
 else:
     eigenval_results.append("No transition found.")
+    
 
 # Function to parse PROCAR file for specified band in all blocks
 def parse_procar_all_info(file_path, band_number):
@@ -130,8 +137,8 @@ for band_number in band_numbers:
 # Concatenate results
 final_results = eigenval_results + all_band_info
 
-# Save the results
-with open('localized_defect.dat', 'w') as output_file:
+# Save the results with folder name in the output file
+with open(f'localized_{folder_name}.dat', 'w') as output_file:
     for line in final_results:
         output_file.write(line + '\n')
 
@@ -139,7 +146,7 @@ with open('localized_defect.dat', 'w') as output_file:
 print("-------------------------------------------------------")
 print("-------------------------------------------------------")
 
-with open('localized_defect.dat', 'r') as file:
+with open(f'localized_{folder_name}.dat', 'r') as file:
 #    print("\nlocalized_defect.dat\n")
     for line in file:
         print(line.strip())
