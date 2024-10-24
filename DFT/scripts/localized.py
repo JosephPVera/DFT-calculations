@@ -3,6 +3,7 @@
 # 2024-10
 
 "Code to extract information from EIGENVAL and PROCAR file to identify localized defects"
+"The HOMO-LUMO transition refers to the transition between the Highest Occupied Molecular Orbital (HOMO) and the Lowest Unoccupied Molecular Orbital (LUMO)"
 
 import os
 
