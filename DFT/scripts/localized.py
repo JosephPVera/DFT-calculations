@@ -12,16 +12,15 @@ import os
 archivo_eigenval = 'EIGENVAL'
 file_path = 'PROCAR'
 
-user_input = input('Band number(s): ') # example: 430,431,432 or 0 for EIGENVAL only
+user_input = input('Band number(s): ') 
 band_numbers = [int(band.strip()) for band in user_input.split(',')] 
 
 # Extract folder name from current directory
 folder_name = os.path.basename(os.getcwd())
 
-# list to store the lines of the EIGENVAL file
 lineas = []
 
-# Read the EIGENVAL file and store the lines in a list
+# Read the EIGENVAL file
 with open(archivo_eigenval, 'r') as f:
     lineas = f.readlines()
 
@@ -46,9 +45,11 @@ eigenval_results = []
 
 # Print the lines around the transition
 if indice_transicion is not None:
-    inicio = max(0, indice_transicion - 5)          # Lines above the transition
-    fin = min(len(lineas), indice_transicion + 6)   # Lines below the transition
+    inicio = max(0, indice_transicion - 5)          # Lines above the transition: 5
+    fin = min(len(lineas), indice_transicion + 6)   # Lines below the transition: 6
     eigenval_results.append(f"Defect: {folder_name}\n\n")
+    eigenval_results.append("VBM = 7.2945")
+    eigenval_results.append("CBM = 11.7449\n\n")
     eigenval_results.append("EIGENVAL:")
     eigenval_results.append("HOMO-LUMO transition\n")
     eigenval_results.append("Band     Energy(up)  Energy(down)   Occ(up)    Occ(down)")
@@ -96,7 +97,7 @@ def parse_procar_all_info(file_path, band_number):
                                     formatted_line = f"{ion_data[0]:<8} {ion_data[1]:<8} {ion_data[2]:<8} {ion_data[3]:<8} {ion_data[4]:<8}"
                                     results.append(formatted_line)  # Only add the line if it's relevant
 
-                current_block = []  # Reset current block for the next section
+                current_block = []  
 
             # Store lines in the current block
             current_block.append(line)
@@ -130,11 +131,13 @@ def parse_procar_all_info(file_path, band_number):
 
     return results
 
-# list to hold all band information
+# list to band information
 all_band_info = []
 
 # When user_input = 0, only display EIGENVAL information and exit
 if band_numbers == [0]:
+    print("-------------------------------------------------------")
+    print("-------------------------------------------------------")
     for line in eigenval_results:
         print(line)
 else:
@@ -146,12 +149,13 @@ else:
     # Concatenate results
     final_results = eigenval_results + all_band_info
 
-    # Create 'localized' folder if it doesn't exist
-    localized_folder = '../localized/'
+    # Create 'localized' folder 
+    localized_folder = f'../../../localized-defects/{folder_name}/'
+#    localized_folder = '../localized-defects'
     if not os.path.exists(localized_folder):
         os.makedirs(localized_folder)
 
-    # Save the results with folder name in the localized output folder
+    # Save the results
     output_file_path = os.path.join(localized_folder, f'localized_{folder_name}.dat')
     with open(output_file_path, 'w') as output_file:
         for line in final_results:
