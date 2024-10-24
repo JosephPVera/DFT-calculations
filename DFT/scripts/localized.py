@@ -48,6 +48,7 @@ if indice_transicion is not None:
     eigenval_results.append(f"Defect: {folder_name}\n\n")
     eigenval_results.append("EIGENVAL:")
     eigenval_results.append("HOMO-LUMO transition\n")
+    eigenval_results.append("Band     Energy(up)  Energy(down)   Occ(up)    Occ(down)")
     for j in range(inicio, fin):
         eigenval_results.append(lineas[j].strip())  # Append line without whitespace
 else:
