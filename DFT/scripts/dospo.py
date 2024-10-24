@@ -2,6 +2,13 @@
 # Written by Joseph P.Vera
 # 2024-10
 
+"Example: dos.py 1 --s \
+          dos.py 1 --p \
+          dos.py 1 --d \
+          dos.py 1 --all \
+          dos.py 1 --tot --all \
+          dos.py --tot"  
+
 import numpy as np
 import matplotlib.pyplot as plt
 import re
