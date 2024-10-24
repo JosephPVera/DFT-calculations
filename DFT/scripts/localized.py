@@ -4,13 +4,15 @@
 
 "Code to extract information from EIGENVAL and PROCAR file to identify localized defects"
 "The HOMO-LUMO transition refers to the transition between the Highest Occupied Molecular Orbital (HOMO) and the Lowest Unoccupied Molecular Orbital (LUMO)"
+"When ----> Band number(s) = 0 : display the information in EIGENVAL file \
+      ----> Band number(s) = 1, 2, ... , band : display and save information"
 
 import os
 
 archivo_eigenval = 'EIGENVAL'
 file_path = 'PROCAR'
 
-user_input = input('Band number(s): ') # example: 430,431,432
+user_input = input('Band number(s): ') # example: 430,431,432 or 0 for EIGENVAL only
 band_numbers = [int(band.strip()) for band in user_input.split(',')] 
 
 # Extract folder name from current directory
@@ -131,24 +133,35 @@ def parse_procar_all_info(file_path, band_number):
 # list to hold all band information
 all_band_info = []
 
-# Get band information for each specified band number
-for band_number in band_numbers:
-    band_info = parse_procar_all_info(file_path, band_number)
-    all_band_info.extend(band_info)  # Append results for the current band
+# When user_input = 0, only display EIGENVAL information and exit
+if band_numbers == [0]:
+    for line in eigenval_results:
+        print(line)
+else:
+    # Get band information for each specified band number
+    for band_number in band_numbers:
+        band_info = parse_procar_all_info(file_path, band_number)
+        all_band_info.extend(band_info)  # Append results for the current band
 
-# Concatenate results
-final_results = eigenval_results + all_band_info
+    # Concatenate results
+    final_results = eigenval_results + all_band_info
 
-# Save the results with folder name in the output file
-with open(f'localized_{folder_name}.dat', 'w') as output_file:
-    for line in final_results:
-        output_file.write(line + '\n')
+    # Create 'localized' folder if it doesn't exist
+    localized_folder = '../localized/'
+    if not os.path.exists(localized_folder):
+        os.makedirs(localized_folder)
 
-#print("The file was saved")
-print("-------------------------------------------------------")
-print("-------------------------------------------------------")
+    # Save the results with folder name in the localized output folder
+    output_file_path = os.path.join(localized_folder, f'localized_{folder_name}.dat')
+    with open(output_file_path, 'w') as output_file:
+        for line in final_results:
+            output_file.write(line + '\n')
 
-with open(f'localized_{folder_name}.dat', 'r') as file:
-#    print("\nlocalized_defect.dat\n")
-    for line in file:
-        print(line.strip())
+    #print("The file was saved")
+    print("-------------------------------------------------------")
+    print("-------------------------------------------------------")
+
+    with open(output_file_path, 'r') as file:
+    #    print("\nlocalized_defect.dat\n")
+        for line in file:
+            print(line.strip())
