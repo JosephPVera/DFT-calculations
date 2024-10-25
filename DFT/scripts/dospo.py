@@ -2,12 +2,12 @@
 # Written by Joseph P.Vera
 # 2024-10
 
-"Example: dos.py 1 --s \
-          dos.py 1 --p \
-          dos.py 1 --d \
-          dos.py 1 --all \
-          dos.py 1 --tot --all \
-          dos.py --tot"  
+"Example: dos.py 1 --s    # plot the s-orbital for the atom 1 \
+          dos.py 1 --p    # plot the p-orbital for the atom 1 \
+          dos.py 1 --d    # plot the d-orbital for the atom 1 \
+          dos.py 1 --all  # plot the s,p,d-orbitals for the atom 1\
+          dos.py 1 --tot --all # plot the total DOS and s,p,d-orbitals for the atom 1 \
+          dos.py --tot    # plot the total DOS for the atom 1"  
 
 import numpy as np
 import matplotlib.pyplot as plt
