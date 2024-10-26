@@ -18,7 +18,7 @@ import re
 import sys
 
 def get_value_from_outcar(key, outcar_file="OUTCAR"):
-    "Extract specific values (NEDOS, ISPIN, or E-fermi) from the OUTCAR file"
+    "Extract specific values (NEDOS, ISPIN and E-fermi) from the OUTCAR file"
     patterns = {
         "NEDOS": r'number of dos\s+NEDOS\s*=\s*(\d+)',
         "ISPIN": r'ISPIN\s*=\s*(\d+)',
