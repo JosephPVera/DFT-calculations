@@ -338,7 +338,7 @@ output_file = os.path.join(localized_folder, f'localized_{folder_name}.dat')
 with open(output_file, 'w') as combined_file:
     # Read and write the content of eigenval_infos.dat
     combined_file.write(f"Defect: {folder_name}\n")
-    combined_file.write(f"VBM = {VBM} eV\n")
+    combined_file.write(f"\nVBM = {VBM} eV\n")
     combined_file.write(f"CBM = {CBM} eV\n\n\n")
     combined_file.write("###########################################################\n")
     combined_file.write("                        EIGENVAL file                            \n")
