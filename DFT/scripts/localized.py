@@ -352,4 +352,4 @@ for file in files_to_remove:
     except Exception as e:
         print(f"Error deleting {file} file: {e}")
         
-print(f"The localized_{folder_name}.dat file has been created.")
+print(f"The localized-defects/localized_{folder_name}.dat file has been created.")
