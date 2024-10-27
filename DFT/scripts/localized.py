@@ -6,7 +6,7 @@ import xml.etree.ElementTree as ET
 import os
 
 "Code use information from EIGENVAL and vasprun.xml"
-"There are two sub codes:  \
+"There are three sub codes:  \
        ----> The first code is a counter of superblock, blocks and subblocks in vasprun.xml. \
        ----> The second code parse the EIGENVAL file and sort the information about Spin up, kpoint (up), band (up), Spin down \
               kpoint (down) and band (down), only filters energy values (column 2 and 3) between VBM and CBM following the break of 1.000 \
