@@ -26,10 +26,10 @@ root = tree.getroot()
 
 "Counters"
 "Superblock (Spin), block (kpoint) and subblock (band) counters"
-# Key words: ---->  superblock Spin up: <set comment="spin1">
-#            ---->  superblock Spin down: <set comment="spin2">
-#            ---->  block kpoint N: <set comment="kpoint 1">
-#            ---->  subblock band N: <set comment="band 1">
+# Key words in vasprun.xml: ---->  superblock Spin up: <set comment="spin1">
+#                           ---->  superblock Spin down: <set comment="spin2">
+#                           ---->  block kpoint N: <set comment="kpoint 1">
+#                           ---->  subblock band N: <set comment="band 1">
 superblock_count = 0
 block_count = 0
 subblock_count = 0
