@@ -3,7 +3,7 @@
 # 2024-10
 
 "Plot the DOS using the OUTCAR and DOSCAR file"
-"Example: dos.py 1 --s    # plot the s-orbital for the atom 1 \
+"Usage:   dos.py 1 --s    # plot the s-orbital for the atom 1 \
           dos.py 1 --p    # plot the p-orbital for the atom 1 \
           dos.py 1 --d    # plot the d-orbital for the atom 1 \
           dos.py 1 --all  # plot the s,p,d-orbitals for the atom 1\
