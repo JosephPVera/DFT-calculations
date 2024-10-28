@@ -432,12 +432,12 @@ def plot_blocks(results, title_prefix="", sigma=2):
         
         # Plot the block
         plt.plot(band_numbers, sum_smoothed, linestyle='-', color='b')
-        plt.title(f"{title_prefix} - Block {idx + 1}")
+        plt.title(f"{title_prefix}: k-point {idx + 1}")
         plt.xlabel("Band Number")
-        plt.ylabel("Sum Closest to 1")
+        plt.ylabel("tot")
         
         # Save the plot in a file in the corresponding folder
-        file_path = os.path.join(output_folder, f"{title_prefix}_block_{idx + 1}.png")
+        file_path = os.path.join(output_folder, f"{title_prefix}_kpoint_{idx + 1}.png")
         plt.savefig(file_path)
         plt.close()  # Close the figure to free memory
 
