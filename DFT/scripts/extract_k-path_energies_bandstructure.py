@@ -11,7 +11,7 @@ from pymatgen.io.vasp import Vasprun
 from pymatgen.electronic_structure.bandstructure import BandStructureSymmLine, BandStructure, Spin
 import warnings
 
-"The code use the Vasprun.xml file, also is possible check the information in EIGENVALUE file"
+"The code use the vasprun.xml file, also is possible check the information in EIGENVALUE file"
 "In vasprun.xml search the key word as <kpoints> for check the k-path and >band< for check the energies"
 
 # Suppress specific warnings
