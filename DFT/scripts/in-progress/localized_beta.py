@@ -3,6 +3,7 @@
 # 2024-10
 
 "This code need to implement new ideas, but can plot band vs tot for check the localized states."
+"IMPROVE: VBM, CBM and 1000 (in for j in range(max(0, i - 1000)). branches??? " 
 import xml.etree.ElementTree as ET
 import os
 import argparse
