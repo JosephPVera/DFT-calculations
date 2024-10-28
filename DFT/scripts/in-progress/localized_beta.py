@@ -186,16 +186,16 @@ with open(output_file_path, 'w') as output_file:
         analyze_block(block, block_num, output_file)
 
 # Print the lists for spin up and spin down
-print("Spin Up - Band index list:", band_index_list_up)
-print("Spin Up - kpoint list:", kpoint_list_up)
-print("Spin Up - Spin list:", spin_list_up)
-print("Spin Up - Energies list:", energies_spin_up_list)  # Print the energies for spin up
+#print("Spin Up - Band index list:", band_index_list_up)
+#print("Spin Up - kpoint list:", kpoint_list_up)
+#print("Spin Up - Spin list:", spin_list_up)
+#print("Spin Up - Energies list:", energies_spin_up_list)  # Print the energies for spin up
 
-print("Spin Down - Band index list:", band_index_list_down)
-print("Spin Down - kpoint list:", kpoint_list_down)
-print("Spin Down - Spin list:", spin_list_down)
-print("Spin Down - Energies list:", energies_spin_down_list)  # Print the energies for spin down
-print("##########################################################################################")
+#print("Spin Down - Band index list:", band_index_list_down)
+#print("Spin Down - kpoint list:", kpoint_list_down)
+#print("Spin Down - Spin list:", spin_list_down)
+#print("Spin Down - Energies list:", energies_spin_down_list)  # Print the energies for spin down
+#print("##########################################################################################")
 #print("The eigenval_infos.dat file has been saved.")
 
 
