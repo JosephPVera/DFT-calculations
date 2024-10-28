@@ -466,36 +466,36 @@ plot_results(results_up, results_down)
 
 
 # Extract folder name from current directory
-folder_name = os.path.basename(os.getcwd())
+#folder_name = os.path.basename(os.getcwd())
 # Create 'localized' folder 
 #localized_folder = f'../../../localized-defects/{folder_name}/'
-localized_folder = 'localized-defects'
-if not os.path.exists(localized_folder):
-    os.makedirs(localized_folder)
+#localized_folder = 'localized-defects'
+#if not os.path.exists(localized_folder):
+#    os.makedirs(localized_folder)
 
     # Save the results
-output_file = os.path.join(localized_folder, f'localized_{folder_name}.dat')
+#output_file = os.path.join(localized_folder, f'localized_{folder_name}.dat')
 
 # Concatenate eigenval_infos.dat and vasprun_infos.dat
-with open(output_file, 'w') as combined_file:
+#with open(output_file, 'w') as combined_file:
     # Read and write the content of eigenval_infos.dat
-    combined_file.write(f"Defect: {folder_name}\n")
-    combined_file.write(f"\nVBM = {VBM} eV\n")
-    combined_file.write(f"CBM = {CBM} eV\n\n\n")
-    combined_file.write("###########################################################\n")
-    combined_file.write("                        EIGENVAL file                            \n")
-    combined_file.write("###########################################################\n")
-    with open(output_file_path, 'r') as eigenval_file:
-        combined_file.write(eigenval_file.read())
+#    combined_file.write(f"Defect: {folder_name}\n")
+#    combined_file.write(f"\nVBM = {VBM} eV\n")
+#    combined_file.write(f"CBM = {CBM} eV\n\n\n")
+#    combined_file.write("###########################################################\n")
+#    combined_file.write("                        EIGENVAL file                            \n")
+#    combined_file.write("###########################################################\n")
+#    with open(output_file_path, 'r') as eigenval_file:
+#        combined_file.write(eigenval_file.read())
     
     # Optionally add a separator for clarity
-    combined_file.write("\n\n\n\n########################################################################\n")
-    combined_file.write("                  vasprun.xml file (PROCAR information)\n")
-    combined_file.write("########################################################################\n")
+#    combined_file.write("\n\n\n\n########################################################################\n")
+#    combined_file.write("                  vasprun.xml file (PROCAR information)\n")
+#    combined_file.write("########################################################################\n")
     
     # Read and write the content of vasprun_infos.dat
-    with open('vasprun_infos.dat', 'r') as vasprun_file:
-        combined_file.write(vasprun_file.read())
+#    with open('vasprun_infos.dat', 'r') as vasprun_file:
+#        combined_file.write(vasprun_file.read())
 
 # Remove the eigenval_infos.dat and vasprun_infos.dat after finishing the calculations, 
 files_to_remove = ['eigenval_infos.dat', 'vasprun_infos.dat']
@@ -509,4 +509,4 @@ for file in files_to_remove:
     except Exception as e:
         print(f"Error deleting {file} file: {e}")
         
-print(f"The localized-defects/localized_{folder_name}.dat file has been saved.")
+#print(f"The localized-defects/localized_{folder_name}.dat file has been saved.")
