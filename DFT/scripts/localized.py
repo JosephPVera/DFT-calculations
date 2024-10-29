@@ -327,7 +327,7 @@ with open('vasprun_infos.dat', 'w') as file:
 folder_name = os.path.basename(os.getcwd())
 # Create 'localized' folder 
 #localized_folder = f'../../../localized-defects/{folder_name}/'
-localized_folder = 'localized-defects'
+localized_folder = f'localized-defects/{folder_name}/Data'
 if not os.path.exists(localized_folder):
     os.makedirs(localized_folder)
 
@@ -367,4 +367,4 @@ for file in files_to_remove:
     except Exception as e:
         print(f"Error deleting {file} file: {e}")
         
-print("The combined_infos.dat file has been created.")
+print(f"The localized_{folder_name}.dat file has been created.")
