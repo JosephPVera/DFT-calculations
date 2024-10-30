@@ -164,7 +164,7 @@ with open('total_results.dat', 'w') as f:
 #for total in total_results:
 #    print(total)
 
-def plot_blocks_from_file(file_path, spin_numbers, kpoint_numbers):
+def plot_localization(file_path, spin_numbers, kpoint_numbers):
 
     folder_name = os.path.basename(os.getcwd())
 
@@ -279,7 +279,7 @@ def plot_blocks_from_file(file_path, spin_numbers, kpoint_numbers):
         else:
             print(f"Block {i + 1} does not have enough columns.")
 
-plot_blocks_from_file('total_results.dat', spin_numbers, kpoint_numbers)
+plot_localization('total_results.dat', spin_numbers, kpoint_numbers)
 
 
 # Remove the total_results.dat file 
