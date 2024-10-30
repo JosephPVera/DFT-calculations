@@ -112,7 +112,7 @@ occupancy_list = []
 for spin_number in spin_numbers:
     for kpoint_number in kpoint_numbers:
         # spin superblock
-        spin_set = root.find(f".//set[@comment='spin {spin_number}']")  # key word ---> <set comment="spin1"> before to <set comment="kpoint 1">
+        spin_set = root.find(f".//set[@comment='spin {spin_number}']")  # key word ---> <set comment="spin 1"> before to <set comment="kpoint 1">
         
         if spin_set is not None:
             # kpoint block
