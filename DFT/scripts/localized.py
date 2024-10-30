@@ -59,7 +59,7 @@ for spin_set in root.findall(".//set[@comment='spin1']") + root.findall(".//set[
 print(f'Superblocks (Spin up and Spin down): {superblock_count}')
 print(f'Blocks (kpoints) per superblock: {block_count / 2:.0f}')
 print(f'Subblocks (bands) per superblock: {subblock_count / 2:.0f}')
-print("##########################################################################################")
+print("################################################################################")
 
 
 
@@ -186,7 +186,7 @@ print("Spin Up - Spin list:", spin_list_up)
 print("Spin Down - Band index list:", band_index_list_down)
 print("Spin Down - kpoint list:", kpoint_list_down)
 print("Spin Down - Spin list:", spin_list_down)
-print("##########################################################################################")
+print("################################################################################")
 #print("The eigenval_infos.dat file has been saved.")
 
 
