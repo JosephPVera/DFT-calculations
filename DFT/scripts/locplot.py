@@ -265,7 +265,6 @@ def plot_blocks_from_file(file_path, spin_numbers, kpoint_numbers):
             plt.xlabel('Energy', fontsize = 14)
             plt.ylabel('Localization', fontsize = 14)
             plt.xlim(subset['Energy'].min() - 0.9, subset['Energy'].max() + 0.9)
-#            plt.xlim(-15, 20)
             if spin == 1:
                 plt.title(f'Spin up - kpoint {kpoint}')
                 plot_filename = f'Spin_up-kpoint_{kpoint}.png'
