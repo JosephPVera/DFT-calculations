@@ -64,7 +64,7 @@ results = []
 
 results.append(f"{'Spin':<6} {'k-point':<10} {'Band':<10} {'tot':<10} {'sum':<10}")
 
-# Iterate through lists of inputs spin numbers, kpoint and band
+# Iterate through lists of inputs spin numbers, kpoint and band (s, p and d orbitals)
 for spin_number in spin_numbers:
     # Find the superblock. key word ---> <set comment="spin1"> 
     spin_set = root.find(f".//set[@comment='spin{spin_number}']")
