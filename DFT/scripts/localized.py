@@ -21,7 +21,7 @@ import argparse
        ----> The third code use the band_index_list_up, kpoint_list_up, spin_list_up, band_index_list_down, kpoint_list_down and spin_list_down lists \
               and parse each value of the list for get the desired information."
 
-"Only change the VBM and CBM following the gap of your material. Check lines 93 and 94."    
+"Only change the VBM and CBM following the gap of your material. Check lines 94 and 95."    
 
 input_file_path = 'EIGENVAL'  
 output_file_path = 'eigenval_infos.dat' 
