@@ -10,7 +10,7 @@ from scipy.ndimage import gaussian_filter1d
 import os
 from io import StringIO
 
-"Code for plot the localized defects. Default Energy versus the 5 biggest numbers of each band (check PROCAR)."
+"Code for plot the localized defects. Default Energy versus the 5 biggest numbers of each band (check PROCAR), that can be changed."
 "Only change the VBM and CBM following the gap of your material. Check lines 259 and 260."
 
 tree = ET.parse('vasprun.xml')
