@@ -9,8 +9,8 @@
           dos.py 1 --all  # plot the s,p,d-orbitals for the atom 1\
           dos.py 1 --tot --all # plot the total DOS and s,p,d-orbitals for the atom 1 \
           dos.py --tot    # plot the total DOS \
-          dos.py 1 --s --x -10 20 --y 0 10 # introduce the x and y range \
-          dos.py 1 --tot --all --x -10 20 --y 0 10"  
+          dos.py 1 --s --x -10 20 --y 0 10 # introduce the y range \
+          dos.py 1 --tot --all --x -10 20 --y 0 10 # introduce the x range"  
 
 import numpy as np
 import matplotlib.pyplot as plt
