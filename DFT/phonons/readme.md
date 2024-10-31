@@ -219,15 +219,15 @@ In **phonon** folder:
    ```bash
    phonopy -p -s band.conf
    ```
-3. Check the outcome
-   ```bash
-   evince band.pdf
-   ``` 
-4. Save the information in .dat file, the second line is the path
+3. Save the information in .dat file, the second line is the path
    ```bash
    phonopy-bandplot --gnuplot band.yaml > band.dat
    ```
-5. Check information in **band.yaml** file.
+4. Check the outcome
+   ```bash
+   evince band.pdf
+   ```    
+5. Check information in **band.yaml** and **band.dat** file.
 
 ### Non-analytical term correction (NAC)
 0. Create a **nac** file
