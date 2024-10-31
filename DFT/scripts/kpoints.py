@@ -2,7 +2,7 @@
 # Written by Joseph P.Vera
 # 2024-10
 
-"Code to create the KPOINTS file for HSE06 calculations, using the OUTCAR and KPOINTS files from the band structure \
+"Code to create the KPOINTS file for HSE06 calculations (path for band structure), using the OUTCAR and KPOINTS files from the band structure \
 and the IBZKPT file from DOS with the PBE calculation"
 
 # Read the OUTCAR file and extract the information 
