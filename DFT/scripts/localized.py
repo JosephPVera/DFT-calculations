@@ -327,7 +327,7 @@ with open('vasprun_infos.dat', 'w') as file:
 # Extract folder name from current directory
 folder_name = os.path.basename(os.getcwd())
 # Create 'localized' folder 
-#localized_folder = f'../../../localized-defects/{folder_name}/'
+#localized_folder = f'../../../localized-defects/{folder_name}/Data'
 localized_folder = f'localized-defects/{folder_name}/Data'
 if not os.path.exists(localized_folder):
     os.makedirs(localized_folder)
