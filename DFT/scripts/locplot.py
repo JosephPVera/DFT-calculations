@@ -165,7 +165,7 @@ with open('total_results.dat', 'w') as f:
 
 def plot_localized(file_path, spin_numbers, kpoint_numbers):
     folder_name = os.path.basename(os.getcwd())
-    localized_folder = f'../../../localized-defects/{folder_name}/Figures'
+    localized_folder = f'localized-defects/{folder_name}/Figures'
     if not os.path.exists(localized_folder):
         os.makedirs(localized_folder)
     
