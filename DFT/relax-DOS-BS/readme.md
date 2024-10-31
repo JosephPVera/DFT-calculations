@@ -4,7 +4,7 @@ Check [VASP - UIO](https://wiki.uio.no/mn/kjemi/vaspwiki/index.php/Main_Page).
 
 Steps for VASP calculations using **PBE** and **HSE06** pseudopotentials.
 
-For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **makepot**, **dospo.py** and **band.py** is necessary use scripts, check **/.../vasp/template/bin**.
+For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **makepot**, [**dospo.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/dospo.py) and [**band.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/band.py) is necessary use scripts, check **/.../vasp/template/bin**.
 
 ---
 # Creating the tree 
@@ -141,11 +141,11 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
    ```
 7. Use the following command for plot the DOS
    ```bash
-   dosplot.py
+   dospo.py
    ```
 8. It is possible check the Local density of states (LDOS) using the command    
    ```bash
-   dosplot.py --ldos 1
+   dospo.py 1 --all
    ```
    change the last number according to your material.
 9. Check your images 
@@ -207,7 +207,7 @@ For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **
 5. Run your work
 6. Plot the band structure with the command
    ```bash
-   bandplot.py
+   band.py
    ```
 7. Check your image 
    ```bash
