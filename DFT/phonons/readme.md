@@ -166,18 +166,18 @@ In **phonon** folder:
    ```bash
    evince total_dos.pdf
    ```
-4. Check information in **total_dos.dat** file
+4. Check information in **total_dos.dat** file.
 
 ### Thermal properties
 1. Use the following command for plot the thermal properties
    ```bash
-   phonopy -p -s -t  mesh.conf
+   phonopy -p -s -t  mesh.conf > thermal.dat
    ```
 2. Check the outcome 
    ```bash
    evince thermal_properties.pdf
    ```
-3. Check information in **thermal_properties.yam** file.
+3. Check information in **thermal_properties.yaml** or **thermal.dat** file.
 
 ### Partial Density of States (PDOS)
 1. Create **pdos.conf** file
