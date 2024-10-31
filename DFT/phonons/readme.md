@@ -318,11 +318,11 @@ In **phonon** folder:
 ---
 # Reminder
 1. Plots without NAC need the following files:
-   - DOS: FORCE_SETS, POSCAR (primitive cell), mesh.conf
-   - Thermal: FORCE_SETS, POSCAR (primitive cell), mesh.conf
-   - PDOS: FORCE_SETS, POSCAR (primitive cell), pdos.conf
-   - Band structure: FORCE_SETS, POSCAR (primitive cell), band.conf
-   - Band structure and PDOS at once: FORCE_SETS, POSCAR (primitive cell), band-pdos.conf
+   - DOS: **FORCE_SETS**, **POSCAR** (primitive cell) and **mesh.conf**
+   - Thermal: **FORCE_SETS**, **POSCAR** (primitive cell) and **mesh.conf**
+   - PDOS: **FORCE_SETS**, **POSCAR** (primitive cell) and **pdos.conf**
+   - Band structure: **FORCE_SETS**, **POSCAR** (primitive cell) and **band.conf**
+   - Band structure and PDOS at once: **FORCE_SETS**, **POSCAR** (primitive cell) and **band-pdos.conf**
 2. Plots with NAC need the same files that without NAC by adding the **NAC** file.
 ---
 # Enjoy your outcomes
