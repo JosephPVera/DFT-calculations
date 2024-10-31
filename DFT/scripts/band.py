@@ -10,7 +10,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pymatgen.io.vasp import Vasprun
 from pymatgen.electronic_structure.bandstructure import BandStructureSymmLine, BandStructure, Spin
-import warnings
 
 "Plot the band structure using the vasprun.xml and KPOINTS files from VASP calculations"
 "Usage: ----> band.py            # default plot \
