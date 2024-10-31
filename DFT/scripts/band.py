@@ -36,7 +36,6 @@ def check_vasprun():
 
 def compute_k_distance(kpoints):
     "Calculate the k-distance from the k-points"
-    "Calculate the k-distance from the k-points"
     "First value ---> Kpoint1 \
      Second value ---> norm(kpoint2 - Kpoint1) \
      Third value ---> norm(kpoint3 - Kpoint2) + Second value \
