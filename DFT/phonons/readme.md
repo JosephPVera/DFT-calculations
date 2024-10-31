@@ -317,7 +317,7 @@ In **phonon** folder:
 
 ---
 # Reminder
-1. Plots without NAC need the following files
+1. Plots without NAC need the following files:
    - DOS: FORCE_SETS, POSCAR (primitive cell), mesh.conf
    - Thermal: FORCE_SETS, POSCAR (primitive cell), mesh.conf
    - PDOS: FORCE_SETS, POSCAR (primitive cell), pdos.conf
