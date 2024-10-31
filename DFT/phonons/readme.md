@@ -171,7 +171,7 @@ In **phonon** folder:
 ### Thermal properties
 1. Use the following command for plot the thermal properties
    ```bash
-   phonopy -p -s -t  mesh.conf > thermal.dat
+   phonopy -p -s -t  mesh.conf > thermal_nonac.dat
    ```
 2. Check the outcome 
    ```bash
@@ -221,7 +221,7 @@ In **phonon** folder:
    ```
 3. Save the information in .dat file, the second line is the path
    ```bash
-   phonopy-bandplot --gnuplot band.yaml > band.dat
+   phonopy-bandplot --gnuplot band.yaml > band_nonac.dat
    ```
 4. Check the outcome
    ```bash
@@ -277,7 +277,7 @@ In **phonon** folder:
      ```
    - Thermal properties: 
      ```bash
-     phonopy -p -s -t --nac mesh.conf
+     phonopy -p -s -t --nac mesh.conf > thermal_nac.dat
      ```
    - PDOS:               
      ```bash
@@ -286,6 +286,7 @@ In **phonon** folder:
    - Band Structure:    
      ```bash
      phonopy -p -s --nac band.conf
+     phonopy-bandplot --gnuplot band.yaml > band_nac.dat
      ```
 3. For plot DOS and Band Structure at once
    - Create **band-dos.conf**, here an example:
