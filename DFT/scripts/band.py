@@ -36,6 +36,12 @@ def check_vasprun():
 
 def compute_k_distance(kpoints):
     "Calculate the k-distance from the k-points"
+    "Calculate the k-distance from the k-points"
+    "Value 1: 0 \
+     Value 2: norm([i + 1] - [i]) = distance 1 \
+     Value 3: norm([i + 2] - [i + 1]) + distance 1 = distance 2 \
+     Value 4: norm([i + 3] - [i + 2]) + distance 2 = distance 3 \
+      ....."        
     distances = [0.0]
     for i in range(1, len(kpoints)):
         dist = np.linalg.norm(kpoints[i].frac_coords - kpoints[i-1].frac_coords)
