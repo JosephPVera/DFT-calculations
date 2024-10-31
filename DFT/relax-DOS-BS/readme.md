@@ -4,7 +4,7 @@ Check [VASP - UIO](https://wiki.uio.no/mn/kjemi/vaspwiki/index.php/Main_Page).
 
 Steps for VASP calculations using **PBE** and **HSE06** pseudopotentials.
 
-For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **makepot**, **dosplot.py** and **bandplot.py** is necessary use scripts, check **/.../vasp/template/bin**.
+For use the commands as **vaspout**, **bandgap**, **toten**, **makekpoints**, **makepot**, **dospo.py** and **band.py** is necessary use scripts, check **/.../vasp/template/bin**.
 
 ---
 # Creating the tree 
