@@ -223,7 +223,11 @@ In **phonon** folder:
    ```bash
    evince band.pdf
    ``` 
-4. Check information in **band.yaml** file.
+4. Save the information in .dat file, the second line is the path
+   ```bash
+   phonopy-bandplot --gnuplot band.yaml > band.dat
+   ```
+5. Check information in **band.yaml** file.
 
 ### Non-analytical term correction (NAC)
 0. Create a **nac** file
