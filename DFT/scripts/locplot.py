@@ -164,68 +164,39 @@ with open('total_results.dat', 'w') as f:
 #for total in total_results:
 #    print(total)
 
-def plot_localization(file_path, spin_numbers, kpoint_numbers):
-
+def plot_blocks_from_file(file_path, spin_numbers, kpoint_numbers):
     folder_name = os.path.basename(os.getcwd())
-
-    # Create the localized-defects/{folder_name}/Figures files
-    localized_folder = f'localized-defects/{folder_name}/Figures'
+    localized_folder = f'../../../screnning-defects/complex/{folder_name}/Figures'
     if not os.path.exists(localized_folder):
-        os.makedirs(localized_folder)   
+        os.makedirs(localized_folder)
     
     with open(file_path, 'r') as file:
         content = file.readlines()
 
-    # Skip the first line
-    content = ''.join(content[1:])  
-    # Divide into blocks
+    content = ''.join(content[1:])
     blocks = content.strip().split('\n\n')
 
-    # Check the number of blocks
-#    print(f"Total blocks found: {len(blocks)}")
-
-    # Make sure there is at least one spin and one kpoint
     if len(spin_numbers) == 0 or len(kpoint_numbers) == 0:
         print("Error: Spin numbers or kpoint numbers are empty.")
         return
-    
-    # Calculate the total number of spin and kpoint combinations
+
     total_combinations = len(spin_numbers) * len(kpoint_numbers)
 
-    # Make sure the number of blocks doesnt exceed the number of combinations
     if len(blocks) > total_combinations:
         print(f"Warning: More blocks ({len(blocks)}) than combinations ({total_combinations}).")
 
-    # Iterate over each block
     for i, block in enumerate(blocks):
-        # Make sure you dont exceed the number of combinations
         if i >= total_combinations:
             break
-        
-#        print(f"Processing block {i + 1}/{len(blocks)}")
-        
-        # Convert the block to a DataFrame
+
         data = pd.read_csv(StringIO(block), sep=r'\s+', header=None)
 
-        # Make sure the block has enough columns
-        "column 0 --- Spin \
-         column 1 --- kpoint \
-         column 2 --- Band \
-         column 3 --- tot \
-         column 4 --- sum (5 biggest values) \
-         column 5 --- Energy \
-         column 6 --- occupancy"
         if data.shape[1] >= 7:
-            subset = data.iloc[:, [5, 4, 6]]  
+            subset = data.iloc[:, [5, 4, 6]]
             subset.columns = ['Energy', 'sum', 'occ']
 
-            # Gaussian 
-            sigma = 1
-            smoothed_energy = gaussian_filter1d(subset['sum'], sigma=sigma)
-
-            # Obtain the corresponding spin and kpoint combination
-            spin_index = i // len(kpoint_numbers)  # Determine the spin index
-            kpoint_index = i % len(kpoint_numbers)  # Determine the kpoint index
+            spin_index = i // len(kpoint_numbers)
+            kpoint_index = i % len(kpoint_numbers)
 
             if kpoint_index >= len(kpoint_numbers):
                 print(f"Warning: Index for kpoint exceeds available kpoints.")
@@ -234,13 +205,9 @@ def plot_localization(file_path, spin_numbers, kpoint_numbers):
             spin = spin_numbers[spin_index]
             kpoint = kpoint_numbers[kpoint_index]
 
-#            print(f"Current combination - Spin: {spin}, Kpoint: {kpoint}, Block: {i + 1}")
-
-            # Figure
             plt.figure(figsize=(10, 6))
-            for j in range(len(smoothed_energy)):
-                if np.isfinite(smoothed_energy[j]):
-                    # Following the occupancy
+            for j in range(len(subset['sum'])):
+                if np.isfinite(subset['sum'].iloc[j]):
                     if subset['occ'].iloc[j] > 0.9:
                         color = 'blue'
                     elif subset['occ'].iloc[j] < 0.1:
@@ -248,7 +215,7 @@ def plot_localization(file_path, spin_numbers, kpoint_numbers):
                     else:
                         color = 'green'
                     
-                    plt.scatter(subset['Energy'].iloc[j], smoothed_energy[j], marker='o', color=color)
+                    plt.scatter(subset['Energy'].iloc[j], subset['sum'].iloc[j], marker='o', color=color)
 
             occupied_patch = plt.Line2D([0], [0], marker='o', color='w', label='Occupied', markerfacecolor='blue', markersize=10)
             unoccupied_patch = plt.Line2D([0], [0], marker='o', color='w', label='Unoccupied', markerfacecolor='red', markersize=10)
@@ -262,9 +229,10 @@ def plot_localization(file_path, spin_numbers, kpoint_numbers):
             plt.axvspan(subset['Energy'].min() - 0.9, VBM, color='lightblue', alpha=0.4)
             plt.axvspan(CBM, subset['Energy'].max() + 0.9, color='thistle', alpha=0.4)
             
-            plt.xlabel('Energy', fontsize = 14)
-            plt.ylabel('Localization', fontsize = 14)
+            plt.xlabel('Energy', fontsize=14)
+            plt.ylabel('Localization', fontsize=14)
             plt.xlim(subset['Energy'].min() - 0.9, subset['Energy'].max() + 0.9)
+
             if spin == 1:
                 plt.title(f'Spin up - kpoint {kpoint}')
                 plot_filename = f'Spin_up-kpoint_{kpoint}.png'
@@ -279,7 +247,7 @@ def plot_localization(file_path, spin_numbers, kpoint_numbers):
         else:
             print(f"Block {i + 1} does not have enough columns.")
 
-plot_localization('total_results.dat', spin_numbers, kpoint_numbers)
+plot_blocks_from_file('total_results.dat', spin_numbers, kpoint_numbers)
 
 
 # Remove the total_results.dat file 
