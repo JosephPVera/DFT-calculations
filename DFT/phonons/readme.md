@@ -307,7 +307,7 @@ In **phonon** folder:
      ```
 
 ### Dielectric constant
-1. Check the **BORN** file (second line is information about the dielectric tensor), here an example:
+1. Check the **BORN** file (second line is information about the electronic dielectric tensor), here an example:
    ```bash
    # epsilon and Z* of atoms 1 3
       4.46664232    0.00000000    0.00000000    0.00000000    4.46664232    0.00000000    0.00000000    0.00000000    4.68631509 
