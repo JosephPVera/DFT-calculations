@@ -2,6 +2,7 @@
 
 # Steps for VASP calculations: Phonons
 Check [phonopy](https://phonopy.github.io/phonopy/).
+
 The outputs can be used for custom plots using [phonplot.py](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/phonplot.py).
 ---
 ## Creating the tree
