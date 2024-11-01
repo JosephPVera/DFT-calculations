@@ -12,9 +12,9 @@ import numpy as np
 "The output are saved with the following names: DOS  ----> total_dos.dat \
                                                 PDOS ----> projected_dos.dat \
                                                 Thermal ----> thermal.dat \
-                                                Band ----> band.dat \
-                                                Band with NAC ----> band_nac.dat \
-                                                Band without NAC ----> band_nonac.dat"
+                                                Single Band ----> band.dat \
+                                                Merge Band with and without NAC ----> band_nac.dat and band_nonac.dat"
+
 "Usage: ----> phonplot.py --tdos                    # Total DOS \
         ----> phonplot.py --pdos                    # Partial DOS \
         ----> phonplot.py --ter                     # Thermal properties \
