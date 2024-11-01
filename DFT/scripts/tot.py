@@ -39,4 +39,4 @@ if __name__ == "__main__":
             total_energy = process_vasrun_file(filename)
             if total_energy is not None:
                 # Print the filename and its total energy
-                print(f"{filename:<20} {total_energy:<20.6f}")
+                print(f"{filename:<20} {total_energy:<20.8f}")
