@@ -10,7 +10,7 @@ import os
 from io import StringIO
 import argparse
 
-"Usage: ----> locplot.py         # By default: VBM=7.2945 and CBM=11.7449 \
+"Usage: ----> locplot.py                 # By default: VBM=7.2945 and CBM=11.7449 \
         ----> locplot.py --band 0.9 15.2 # Modify the VBM and CBM"
         
 "Code for plot the localized defects. Default Energy versus the sum of 5 biggest numbers of each band (check PROCAR), that can be changed. "
