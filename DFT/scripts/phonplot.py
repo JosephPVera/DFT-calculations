@@ -8,7 +8,7 @@ import argparse
 import pandas as pd
 import numpy as np
 
-"Code for plot DOS, PDOS, thermal properties and band structure using the output from phonopy calculations."
+"Code for plot DOS, PDOS, thermal properties and band structure using the outputs from phonopy calculations."
 "The output are saved with the following names: DOS  ----> total_dos.dat \
                                                 PDOS ----> projected_dos.dat \
                                                 Thermal ----> thermal.dat \
