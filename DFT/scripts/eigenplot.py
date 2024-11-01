@@ -1,7 +1,3 @@
-#!/usr/bin/env python3
-# Written by Joseph P.Vera
-# 2024-10
-
 import xml.etree.ElementTree as ET
 import pandas as pd
 import numpy as np
@@ -9,9 +5,9 @@ import matplotlib.pyplot as plt
 from scipy.ndimage import gaussian_filter1d
 import os
 from io import StringIO
+from fractions import Fraction
 
 "Code for plot the Kohn-Sham states."
-"Code works fine, it is necessary to implement the K points on the x axis, just as a label. Improve!!"
 
 tree = ET.parse('vasprun.xml')
 root = tree.getroot()
@@ -164,26 +160,50 @@ with open('total_results.dat', 'w') as f:
 #for total in total_results:
 #    print(total)
 
-def plot_eigenvalues(file_name):
+
+def extract_kpoint_coordinates(tree):
+    
+    # Find the <varray name="kpointlist"> tag and extract k-point coordinates
+    kpoint_coordinates = []
+    kpointlist = root.find(".//varray[@name='kpointlist']")
+    
+    if kpointlist is not None:
+        for v in kpointlist.findall("v"):
+            coordinates = [float(coord) for coord in v.text.strip().split()]
+            kpoint_coordinates.append(coordinates)
+    else:
+        print("The <varray name='kpointlist'> tag was not found in the file.")
+    
+    return kpoint_coordinates
+
+def generate_x_labels(kpt_coords, line_break="\n"):
+    result = []
+    for k in kpt_coords:
+        x_label = []
+        for i in k:
+            frac = Fraction(i).limit_denominator(10)
+            if frac.numerator == 0:
+                x_label.append("0")
+            else:
+                x_label.append(f"{frac.numerator}/{frac.denominator}")
+        if x_label == ["0", "0", "0"]:
+            result.append("Γ")
+        else:
+            result.append(line_break.join(x_label))
+    return result
+
+def plot_eigenvalues(file_name, kpoint_coordinates):
     with open(file_name, 'r') as file:
         content = file.readlines()
 
-    # Skip the first line
-    content = ''.join(content[1:])  
-    # Divide into blocks
+    content = ''.join(content[1:])  # Skip the first line
     blocks = content.strip().split('\n\n')
 
-    # Check the number of blocks
-    # print(f"Total blocks found: {len(blocks)}")
-
     num_blocks = len(blocks)
-#    print(f'Number of blocks: {num_blocks}')
 
-    # Split blocks into spin up and spin down
     blocks_up = blocks[:num_blocks // 2]
     blocks_down = blocks[num_blocks // 2:]
 
-    # Lists to store data for plotting
     kpoint_vals_up = []
     energy_vals_up = []
     colors_up = []
@@ -193,69 +213,62 @@ def plot_eigenvalues(file_name):
     colors_down = []
 
     for i, block in enumerate(blocks):
-        
         data = pd.read_csv(StringIO(block), sep=r'\s+', header=None)
 
-        # Make sure the block has enough columns
-        """column 0 --- Spin \
-         column 1 --- kpoint \
-         column 2 --- Band \
-         column 3 --- tot \
-         column 4 --- sum (5 biggest values) \
-         column 5 --- Energy \
-         column 6 --- occupancy"""
         if data.shape[1] >= 7:
             subset = data.iloc[:, [1, 5, 6]]  
             subset.columns = ['kpoint', 'Energy', 'occ']
 
-            occupancy = subset['occ'].to_list()  # list for iteration
+            occupancy = subset['occ'].to_list()  
             rupture_point = next((j for j, val in enumerate(occupancy) if val < 1.0), None)
         
-            if rupture_point is not None and rupture_point >= 10 and rupture_point < len(occupancy) - 10: # This ensures that the rupture point is far enough into the dataset to allow for a symmetric extraction of data around it
+            if rupture_point is not None and rupture_point >= 10 and rupture_point < len(occupancy) - 10:
                 kpoint_vals = subset['kpoint'][rupture_point - 14:rupture_point + 11].to_list()
                 energy_vals = subset['Energy'][rupture_point - 14:rupture_point + 11].to_list()
-                occupancy_group = occupancy[rupture_point - 14:rupture_point + 11] # group around the rupture point
+                occupancy_group = occupancy[rupture_point - 14:rupture_point + 11]
 
-                # Classify the blocks
-                if i < num_blocks // 2:  # Spin up
+                if i < num_blocks // 2:  
                     kpoint_vals_up.extend(kpoint_vals)
                     energy_vals_up.extend(energy_vals)
                     colors_up.extend(['blue' if val > 0.9 else 'red' if val < 0.1 else 'green' for val in occupancy_group])
-                else:  # Spin down
+                else:  
                     kpoint_vals_down.extend(kpoint_vals)
                     energy_vals_down.extend(energy_vals)
                     colors_down.extend(['blue' if val > 0.9 else 'red' if val < 0.1 else 'green' for val in occupancy_group])
 
-    
     fig, axs = plt.subplots(1, 2, figsize=(10, 8))  
 
+    # Generate formatted x-axis labels from kpoint_coordinates
+    kpoint_labels = generate_x_labels(kpoint_coordinates)
+
+    # Map each kpoint to its respective label
+    unique_kpoints = sorted(set(kpoint_vals_up + kpoint_vals_down))
+    x_tick_labels = [kpoint_labels[unique_kpoints.index(kpt)] if kpt in unique_kpoints else '' for kpt in unique_kpoints]
+    
     # Subplot Spin up
     axs[0].scatter(kpoint_vals_up, energy_vals_up, color=colors_up, label='Spin Up', s=30)
     axs[0].set_xlabel('K-point coordinates', fontsize=12)
     axs[0].set_title('Spin up', fontsize=12)
-    axs[0].set_ylabel('Energy (eV)', fontsize = 12)
+    axs[0].set_ylabel('Energy (eV)', fontsize=12)
     axs[0].set_xlim(min(kpoint_vals_up) - 0.5, max(kpoint_vals_up) + 0.5)
     axs[0].set_ylim(5.5, 13.5)
-#    axs[0].tick_params(axis='x', which='both', bottom=True, top=False, labelbottom=False)
     axs[0].axhspan(7.2945, 5.5, color='lightblue', alpha=0.4)
     axs[0].axhspan(11.7449, 13.5, color='thistle', alpha=0.4)
-    #    axs[0].legend(loc='upper left')
+    axs[0].set_xticks(unique_kpoints)
+    axs[0].set_xticklabels(x_tick_labels, rotation=0, fontsize=8, size=10)
 
     # Subplot Spin down
     axs[1].scatter(kpoint_vals_down, energy_vals_down, color=colors_down, label='Spin Down', s=30)
     axs[1].set_xlabel('K-point coordinates', fontsize=12)
     axs[1].set_title('Spin down', fontsize=12)
     axs[1].tick_params(axis='y', which='both', left=True, right=False, labelleft=False)
-#    axs[1].tick_params(axis='x', which='both', bottom=True, top=False, labelbottom=False)    
     axs[1].set_xlim(min(kpoint_vals_down) - 0.5, max(kpoint_vals_down) + 0.5)
-#    axs[1].set_ylim(min(energy_vals_down) - 0.4, max(energy_vals_down) - 0.4)
     axs[1].set_ylim(5.5, 13.5)
     axs[1].axhspan(7.2945, 5.5, color='lightblue', alpha=0.4)
     axs[1].axhspan(11.7449, 13.5, color='thistle', alpha=0.4)
-    #    axs[1].legend(loc='upper left')
+    axs[1].set_xticks(unique_kpoints)
+    axs[1].set_xticklabels(x_tick_labels, rotation=0, fontsize=8, size=10)
 
-
-    
     occupied_patch = plt.Line2D([0], [0], marker='o', color='w', label='Occupied', markerfacecolor='blue', markersize=10)
     unoccupied_patch = plt.Line2D([0], [0], marker='o', color='w', label='Unoccupied', markerfacecolor='red', markersize=10)
     partially_occupied_patch = plt.Line2D([0], [0], marker='o', color='w', label='Partially occupied', markerfacecolor='green', markersize=10)
@@ -263,12 +276,13 @@ def plot_eigenvalues(file_name):
     cbm_patch = plt.Line2D([0], [0], color='thistle', label='CBM')
     plt.legend(handles=[occupied_patch, unoccupied_patch, partially_occupied_patch, vbm_patch, cbm_patch], bbox_to_anchor=(1.56, 0.7))
     plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.1, wspace=0.03)
-#    fig.text(0.5, 0.01, 'K-point coordinates', ha='center', fontsize=12)
     plt.tight_layout()
     plt.savefig('kohn-sham-states.png', dpi=150)
 
-plot_eigenvalues('total_results.dat')
+kpoint_coordinates = extract_kpoint_coordinates(tree)
 
+# Plot eigenvalues with k-point coordinates and formatted labels
+plot_eigenvalues('total_results.dat', kpoint_coordinates)
 
 # Remove the total_results.dat file 
 files_to_remove = ['total_results.dat']
