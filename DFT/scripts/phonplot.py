@@ -15,11 +15,11 @@ import numpy as np
                                                 Band ----> band.dat \
                                                 Band with NAC ----> band_nac.dat \
                                                 Band without NAC ----> band_nonac.dat"
-"Usage: ----> phonplot.py --tdos # Total DOS \
-        ----> phonplot.py --pdos # Partial DOS \
-        ----> phonplot.py --ter  # Thermal properties \
-        ----> phonplot.py --band  # Band structure \
-        ----> phonplot.py --tband  # band structure with and without NAC \
+"Usage: ----> phonplot.py --tdos                    # Total DOS \
+        ----> phonplot.py --pdos                    # Partial DOS \
+        ----> phonplot.py --ter                     # Thermal properties \
+        ----> phonplot.py --band                    # Band structure \
+        ----> phonplot.py --tband                   # band structure with and without NAC \
         ----> phonplot.py --tdos --x 0 12 --y -1 23 # Total DOS, set y and x-axis range"
 
 
