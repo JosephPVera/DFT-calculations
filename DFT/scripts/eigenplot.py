@@ -10,11 +10,19 @@ from scipy.ndimage import gaussian_filter1d
 import os
 from io import StringIO
 from fractions import Fraction
+import argparse
 
 "Code for plot the Kohn-Sham states."
 
 tree = ET.parse('vasprun.xml')
 root = tree.getroot()
+
+VBM = 7.2945
+CBM = 11.7449
+parser = argparse.ArgumentParser(description="Modify the VBM and CBM.")
+parser.add_argument('--band', nargs=2, type=float, default=[VBM, CBM], help="Specifies the values ​​for VBM and CBM. By default: VBM=7.2945 and CBM=11.7449")
+args = parser.parse_args()
+vbm, cbm = args.band
 
 # Find the spin numbers, kpoint and band in vasprun.xml
 spin_numbers = []
@@ -255,9 +263,9 @@ def plot_eigenvalues(file_name, kpoint_coordinates):
     axs[0].set_title('Spin up', fontsize=12)
     axs[0].set_ylabel('Energy (eV)', fontsize=12)
     axs[0].set_xlim(min(kpoint_vals_up) - 0.5, max(kpoint_vals_up) + 0.5)
-    axs[0].set_ylim(5.5, 13.5)
-    axs[0].axhspan(7.2945, 5.5, color='lightblue', alpha=0.4)
-    axs[0].axhspan(11.7449, 13.5, color='thistle', alpha=0.4)
+    axs[0].set_ylim(vbm - 1.7945, cbm + 1.7551)
+    axs[0].axhspan(vbm, vbm - 1.7945, color='lightblue', alpha=0.4)
+    axs[0].axhspan(cbm, cbm + 1.7551, color='thistle', alpha=0.4)
     axs[0].set_xticks(unique_kpoints)
     axs[0].set_xticklabels(x_tick_labels, rotation=0, fontsize=8, size=10)
 
@@ -267,9 +275,9 @@ def plot_eigenvalues(file_name, kpoint_coordinates):
     axs[1].set_title('Spin down', fontsize=12)
     axs[1].tick_params(axis='y', which='both', left=True, right=False, labelleft=False)
     axs[1].set_xlim(min(kpoint_vals_down) - 0.5, max(kpoint_vals_down) + 0.5)
-    axs[1].set_ylim(5.5, 13.5)
-    axs[1].axhspan(7.2945, 5.5, color='lightblue', alpha=0.4)
-    axs[1].axhspan(11.7449, 13.5, color='thistle', alpha=0.4)
+    axs[1].set_ylim(vbm - 1.7945, cbm + 1.7551)
+    axs[1].axhspan(vbm, vbm - 1.7945, color='lightblue', alpha=0.4)
+    axs[1].axhspan(cbm, cbm + 1.7551, color='thistle', alpha=0.4)
     axs[1].set_xticks(unique_kpoints)
     axs[1].set_xticklabels(x_tick_labels, rotation=0, fontsize=8, size=10)
 
