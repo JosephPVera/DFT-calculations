@@ -3,13 +3,13 @@
 # 2024-10
 
 "Plot the DOS using the OUTCAR and DOSCAR file"
-"Usage:   dos.py 1 --s    # plot the s-orbital for the atom 1 \
-          dos.py 1 --p    # plot the p-orbital for the atom 1 \
-          dos.py 1 --d    # plot the d-orbital for the atom 1 \
-          dos.py 1 --all  # plot the s,p,d-orbitals for the atom 1\
-          dos.py 1 --tot --all # plot the total DOS and s,p,d-orbitals for the atom 1 \
-          dos.py --tot    # plot the total DOS \
-          dos.py 1 --s --x -10 20 --y 0 10 # introduce the y range \
+"Usage:   dos.py 1 --s                             # plot the s-orbital for the atom 1 \
+          dos.py 1 --p                             # plot the p-orbital for the atom 1 \
+          dos.py 1 --d                             # plot the d-orbital for the atom 1 \
+          dos.py 1 --all                           # plot the s,p,d-orbitals for the atom 1\
+          dos.py 1 --tot --all                     # plot the total DOS and s,p,d-orbitals for the atom 1 \
+          dos.py --tot                             # plot the total DOS \
+          dos.py 1 --s --x -10 20 --y 0 10         # introduce the y range \
           dos.py 1 --tot --all --x -10 20 --y 0 10 # introduce the x range"  
 
 import numpy as np
