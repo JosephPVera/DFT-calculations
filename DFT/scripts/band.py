@@ -12,10 +12,10 @@ from pymatgen.io.vasp import Vasprun
 from pymatgen.electronic_structure.bandstructure import BandStructureSymmLine, BandStructure, Spin
 
 "Plot the band structure using the vasprun.xml and KPOINTS files from VASP calculations"
-"Usage: ----> band.py            # default plot \
-        ----> band.py --y -10 15 # set the y-axis \
-        ----> band.py --band     # include the VBM and CBM limits \
-        ----> band.py --y -10 15 --band"
+"Usage: ----> band.py                   # default plot \
+        ----> band.py --y -10 15        # set the y-axis \
+        ----> band.py --band            # include the VBM and CBM limits \
+        ----> band.py --y -10 15 --band # Set range in y-axis and show horizontal lines of the VBM and CBM."
 "IMPORTANT: For hybrid calculations, use the KPOINTS from PBE with the same path (only for plot)"
 
 def check_vasprun():
