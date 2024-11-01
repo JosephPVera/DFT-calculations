@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+# Written by Joseph P.Vera
+# 2024-11
+
 import xml.etree.ElementTree as ET
 import pandas as pd
 import numpy as np
