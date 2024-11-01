@@ -13,8 +13,9 @@ from fractions import Fraction
 import argparse
 
 "Usage: ----> eigenplot.py         # By default: VBM=7.2945 and CBM=11.7449 \
-        ----> eigenplot.py --band 0.9 15.2 # Modify the VBM and CBM"
-
+        ----> eigenplot.py --band 0.9 15.2 # Modify the VBM and CBM \
+        ----> eigenplot.py --band 0.9 15.2 --res 0.9 # Modify the VBM and CBM, and also rescale for set to 0"
+        
 "Code for plot the Kohn-Sham states."
 
 tree = ET.parse('vasprun.xml')
@@ -24,8 +25,10 @@ VBM = 7.2945
 CBM = 11.7449
 parser = argparse.ArgumentParser(description="Modify the VBM and CBM.")
 parser.add_argument('--band', nargs=2, type=float, default=[VBM, CBM], help="Specifies the values ​​for VBM and CBM. By default: VBM=7.2945 and CBM=11.7449")
+parser.add_argument('--res', type=float, default=0.0, help="Rescale respect to VBM")
 args = parser.parse_args()
 vbm, cbm = args.band
+res = args.res 
 
 # Find the spin numbers, kpoint and band in vasprun.xml
 spin_numbers = []
@@ -251,6 +254,9 @@ def plot_eigenvalues(file_name, kpoint_coordinates):
                     energy_vals_down.extend(energy_vals)
                     colors_down.extend(['blue' if val > 0.9 else 'red' if val < 0.1 else 'green' for val in occupancy_group])
 
+    rescale_up = [valor - res for valor in energy_vals_up] # res for rescale respect to VBM, by default is 0. Use command--res
+    rescale_down = [valor - res for valor in energy_vals_down] # res for rescale respect to VBM, by default is 0. Use command--res
+    
     fig, axs = plt.subplots(1, 2, figsize=(10, 8))  
 
     # Generate formatted x-axis labels from kpoint_coordinates
@@ -261,26 +267,26 @@ def plot_eigenvalues(file_name, kpoint_coordinates):
     x_tick_labels = [kpoint_labels[unique_kpoints.index(kpt)] if kpt in unique_kpoints else '' for kpt in unique_kpoints]
     
     # Subplot Spin up
-    axs[0].scatter(kpoint_vals_up, energy_vals_up, color=colors_up, label='Spin Up', s=30)
+    axs[0].scatter(kpoint_vals_up, rescale_up, color=colors_up, label='Spin Up', s=30) 
     axs[0].set_xlabel('K-point coordinates', fontsize=12)
     axs[0].set_title('Spin up', fontsize=12)
     axs[0].set_ylabel('Energy (eV)', fontsize=12)
     axs[0].set_xlim(min(kpoint_vals_up) - 0.5, max(kpoint_vals_up) + 0.5)
-    axs[0].set_ylim(vbm - 1.7945, cbm + 1.7551)
-    axs[0].axhspan(vbm, vbm - 1.7945, color='lightblue', alpha=0.4)
-    axs[0].axhspan(cbm, cbm + 1.7551, color='thistle', alpha=0.4)
+    axs[0].set_ylim(vbm - 1.7945 - res, cbm + 1.7551 - res)
+    axs[0].axhspan(vbm -res , vbm - 1.7945 - res, color='lightblue', alpha=0.4)
+    axs[0].axhspan(cbm - res, cbm + 1.7551 - res, color='thistle', alpha=0.4)
     axs[0].set_xticks(unique_kpoints)
     axs[0].set_xticklabels(x_tick_labels, rotation=0, fontsize=8, size=10)
 
     # Subplot Spin down
-    axs[1].scatter(kpoint_vals_down, energy_vals_down, color=colors_down, label='Spin Down', s=30)
+    axs[1].scatter(kpoint_vals_down, rescale_down, color=colors_down, label='Spin Down', s=30) 
     axs[1].set_xlabel('K-point coordinates', fontsize=12)
     axs[1].set_title('Spin down', fontsize=12)
     axs[1].tick_params(axis='y', which='both', left=True, right=False, labelleft=False)
     axs[1].set_xlim(min(kpoint_vals_down) - 0.5, max(kpoint_vals_down) + 0.5)
-    axs[1].set_ylim(vbm - 1.7945, cbm + 1.7551)
-    axs[1].axhspan(vbm, vbm - 1.7945, color='lightblue', alpha=0.4)
-    axs[1].axhspan(cbm, cbm + 1.7551, color='thistle', alpha=0.4)
+    axs[1].set_ylim(vbm - 1.7945 - res, cbm + 1.7551 - res)
+    axs[1].axhspan(vbm - res, vbm - 1.7945 - res, color='lightblue', alpha=0.4)
+    axs[1].axhspan(cbm - res, cbm + 1.7551 - res, color='thistle', alpha=0.4)
     axs[1].set_xticks(unique_kpoints)
     axs[1].set_xticklabels(x_tick_labels, rotation=0, fontsize=8, size=10)
 
