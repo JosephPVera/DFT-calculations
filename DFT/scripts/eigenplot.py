@@ -12,8 +12,8 @@ from io import StringIO
 from fractions import Fraction
 import argparse
 
-"Usage: ----> eigenplot.py         # By default: VBM=7.2945 and CBM=11.7449 \
-        ----> eigenplot.py --band 0.9 15.2 # Modify the VBM and CBM \
+"Usage: ----> eigenplot.py                           # By default: VBM=7.2945 and CBM=11.7449 \
+        ----> eigenplot.py --band 0.9 15.2           # Modify the VBM and CBM \
         ----> eigenplot.py --band 0.9 15.2 --res 0.9 # Modify the VBM and CBM, and also rescale for set to 0"
         
 "Code for plot the Kohn-Sham states."
