@@ -8,12 +8,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 from io import StringIO
+import argparse
 
-"Code for plot the localized defects. Default Energy versus the sum of 5 biggest numbers of each band (check PROCAR), that can be changed."
-"Only change the VBM and CBM following the gap of your material. Check lines 259 and 260."
+"Usage: ----> locplot.py         # By default: VBM=7.2945 and CBM=11.7449 \
+        ----> locplot.py --band 0.9 15.2 # Modify the VBM and CBM"
+        
+"Code for plot the localized defects. Default Energy versus the sum of 5 biggest numbers of each band (check PROCAR), that can be changed. "
 
 tree = ET.parse('vasprun.xml')
 root = tree.getroot()
+
+VBM = 7.2945
+CBM = 11.7449
+parser = argparse.ArgumentParser(description="Modify the VBM and CBM.")
+parser.add_argument('--band', nargs=2, type=float, default=[VBM, CBM], help="Specifies the values ​​for VBM and CBM. By default: VBM=7.2945 and CBM=11.7449")
+args = parser.parse_args()
+vbm, cbm = args.band
 
 # Find the spin numbers, kpoint and band in vasprun.xml
 spin_numbers = []
@@ -223,10 +233,8 @@ def plot_localized(file_path, spin_numbers, kpoint_numbers):
             cbm_patch = plt.Line2D([0], [0], color='thistle', label='CBM')
             plt.legend(handles=[occupied_patch, unoccupied_patch, partially_occupied_patch, vbm_patch, cbm_patch])
 
-            VBM = 7.2945
-            CBM = 11.7449
-            plt.axvspan(subset['Energy'].min() - 0.9, VBM, color='lightblue', alpha=0.4)
-            plt.axvspan(CBM, subset['Energy'].max() + 0.9, color='thistle', alpha=0.4)
+            plt.axvspan(subset['Energy'].min() - 0.9, vbm, color='lightblue', alpha=0.4)
+            plt.axvspan(cbm, subset['Energy'].max() + 0.9, color='thistle', alpha=0.4)
             
             plt.xlabel('Energy', fontsize=14)
             plt.ylabel('Localization', fontsize=14)
