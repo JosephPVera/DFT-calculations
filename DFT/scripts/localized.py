@@ -10,6 +10,7 @@ import argparse
         ----> localized.py --occ   # only occupied sates within the the band gap, if they exist at all \
         ----> localized.py --nocc  # only unoccupied sates within the the band gap, if they exist at all \
         ----> localized.py --pocc  # only partially occupied sates within the the band gap, if they exist at all"
+        ----> localized.py --band 5.4 11.3 # Modify the VBM and CBM"
         
 "Code use information from EIGENVAL and vasprun.xml"
 "There are three sub codes:  \
@@ -19,9 +20,7 @@ import argparse
               in the column 4 and 5 (when continuity of 1.00 is broken)(HOMO-LUMO transition). That information is store in lists as band_index_list_up, \
               kpoint_list_up, spin_list_up, band_index_list_down, kpoint_list_down and spin_list_down. \
        ----> The third code use the band_index_list_up, kpoint_list_up, spin_list_up, band_index_list_down, kpoint_list_down and spin_list_down lists \
-              and parse each value of the list for get the desired information."
-
-"Only change the VBM and CBM following the gap of your material. Check lines 94 and 95."    
+              and parse each value of the list for get the desired information."    
 
 input_file_path = 'EIGENVAL'  
 output_file_path = 'eigenval_infos.dat' 
