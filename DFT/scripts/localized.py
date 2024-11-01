@@ -63,6 +63,9 @@ print("#########################################################################
 
 
 
+# VBM and CBM 
+VBM = 7.2945
+CBM = 11.7449
 
 "Parsing the EIGENVAL file"
 # Parse commands arguments for filter options
@@ -70,7 +73,9 @@ parser = argparse.ArgumentParser(description="Parse EIGENVAL and vasprun.xml fil
 parser.add_argument('--occ', action='store_true', help="Save only Occupied values")
 parser.add_argument('--nocc', action='store_true', help="Save only Unoccupied values")
 parser.add_argument('--pocc', action='store_true', help="Save only Partially Occupied values")
+parser.add_argument('--band', nargs=2, type=float, default=[VBM, CBM], help="Specifies the values ​​for VBM and CBM. By default: VBM=7.2945 and CBM=11.7449")
 args = parser.parse_args()
+vbm, cbm = args.band
 
 # Define filtering options based on arguments
 filter_occupancy = []
@@ -89,10 +94,6 @@ spin_list_up = []
 band_index_list_down = []
 kpoint_list_down = []
 spin_list_down = []
-
-# VBM and CBM 
-VBM = 7.2945
-CBM = 11.7449
 
 # Read the file and store the blocks
 with open(input_file_path, 'r') as file:
@@ -139,7 +140,7 @@ def analyze_block(block, block_num, output_file):
         if occ != 1.0: 
             output_file.write("\nBand(up)   Energy(up)     Occ(up)    Occupancy\n")
             for j in range(max(0, i - 20), min(len(band_indices), i + 20)): # above the break of 1.000 and below the break of 1.000
-                if VBM < energies_spin_up[j] < CBM: # Compare the column 2 with VBM and CBM
+                if vbm < energies_spin_up[j] < cbm: # Compare the column 2 with VBM and CBM
                     label = (
                         "Occupied" if occupancies_spin_up[j] > 0.9 else
                         "Unoccupied" if occupancies_spin_up[j] < 0.1 else
@@ -158,7 +159,7 @@ def analyze_block(block, block_num, output_file):
         if occ != 1.0:
             output_file.write("\nBand(down) Energy(down)   Occ(down)  Occupancy\n")
             for j in range(max(0, i - 20), min(len(band_indices), i + 20)): # above the break of 1.000 and below the break of 1.000
-                if VBM < energies_spin_down[j] < CBM: # Compare the column 3 with VBM and CBM
+                if vbm < energies_spin_down[j] < cbm: # Compare the column 3 with VBM and CBM
                     label = (
                         "Occupied" if occupancies_spin_down[j] > 0.9 else
                         "Unoccupied" if occupancies_spin_down[j] < 0.1 else
@@ -188,7 +189,6 @@ print("Spin Down - kpoint list:", kpoint_list_down)
 print("Spin Down - Spin list:", spin_list_down)
 print("################################################################################")
 #print("The eigenval_infos.dat file has been saved.")
-
 
 
 
@@ -339,8 +339,8 @@ output_file = os.path.join(localized_folder, f'localized_{folder_name}.dat')
 with open(output_file, 'w') as combined_file:
     # Read and write the content of eigenval_infos.dat
     combined_file.write(f"Defect: {folder_name}\n")
-    combined_file.write(f"\nVBM = {VBM} eV\n")
-    combined_file.write(f"CBM = {CBM} eV\n\n\n")
+    combined_file.write(f"\nVBM = {vbm} eV\n")
+    combined_file.write(f"CBM = {cbm} eV\n\n\n")
     combined_file.write("###########################################################\n")
     combined_file.write("                        EIGENVAL file                            \n")
     combined_file.write("###########################################################\n")
