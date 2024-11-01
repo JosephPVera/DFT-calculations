@@ -9,7 +9,7 @@ import argparse
 "Usage: ----> localized.py         # all information within the band gap (occupied, unoccupied, partially occupied), if they exist at all \
         ----> localized.py --occ   # only occupied sates within the the band gap, if they exist at all \
         ----> localized.py --nocc  # only unoccupied sates within the the band gap, if they exist at all \
-        ----> localized.py --pocc  # only partially occupied sates within the the band gap, if they exist at all"
+        ----> localized.py --pocc  # only partially occupied sates within the the band gap, if they exist at all \
         ----> localized.py --band 5.4 11.3 # Modify the VBM and CBM"
         
 "Code use information from EIGENVAL and vasprun.xml"
