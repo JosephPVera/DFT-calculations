@@ -217,6 +217,7 @@ def main():
                 vbm_info = bs.get_vbm()
 #                print("VBM Energy:", vbm_info["energy"])
 #                print("CBM Energy:", cbm_info["energy"])
+                plt.axhspan(0, cbm_info["energy"] - vbm_info["energy"], color='gray', alpha=0.4)                     
                 plt.axhline(y=0.00, color='g', linestyle='dashed')
                 plt.axhline(y=cbm_info["energy"] - vbm_info["energy"], color='g', linestyle='dashed')
 
