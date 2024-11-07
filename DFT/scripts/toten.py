@@ -32,7 +32,7 @@ def process_file(filename, print_header):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: script.py file")
+        print("Usage: toten.py OUTCAR")
         sys.exit(1)
 
     # Process each file passed as an argument
