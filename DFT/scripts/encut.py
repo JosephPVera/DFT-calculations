@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import argparse  
 
-"Plot the convergence for ENCUT"
+"Plot the ENCUT convergence"
 "Usage:  ----> encut.py              # Default Realtive energy vs ENCUT \
          ----> encut.py --tot        # Total energy vs ENCUT \
          ----> encut.py --x 0.01 0.1 # Set X-range \
