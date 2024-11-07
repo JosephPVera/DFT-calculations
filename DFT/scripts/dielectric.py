@@ -2,7 +2,7 @@
 # Written by Joseph P.Vera
 # 2024-11
 
-"Code for search information about the dielectrical tensor"
+"Code for search information about the dielectric tensor"
 
 import xml.etree.ElementTree as ET
 
