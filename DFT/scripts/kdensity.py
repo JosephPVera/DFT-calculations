@@ -12,7 +12,7 @@ import argparse
 "Plot the k-density convergence"
 "Usage:  ----> kdensity.py              # Default Relative energy vs K-density \
          ----> kdensity.py --tot        # Total energy vs K-density \
-         ----> kdensity.py --grid        # Relative energy vs K-grid \
+         ----> kdensity.py --grid       # Relative energy vs K-grid \
          ----> kdensity.py --x 0.01 0.1 # Set X-range \
          ----> kdensity.py --y 0.01 0.1 # Set Y-range \
          ----> kdensity.py --cri        # Set the criteria for the relative energy vs K-density plot"
