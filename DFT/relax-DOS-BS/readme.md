@@ -106,6 +106,7 @@ or can be plot straight using [**encut.py**](https://github.com/JosephPVera/DFT-
 3. Run your works.
 4. Check if your works are finished.
 5. Repeat the steps 5 and 6 from Convergence test (Energy Cutoff) section.
+   
 or can be plot straight using [**kdensity.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/kdensity.py).
 
 ## Relaxation
