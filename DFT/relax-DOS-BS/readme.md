@@ -75,7 +75,7 @@ For use the commands as **vaspout**, [**bandgap.py**](https://github.com/JosephP
    toten */OUTCAR > toten.dat
    vaspout */OUTCAR > vaspout.dat
    ```   
-7. OPTIONAL: Once the works are completed, it can be plot [**encut.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/encut.py).
+7. OPTIONAL: Once the works are completed, it can be plot straight using [**encut.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/encut.py).
 
 ## Convergence test (K-density)
 1. Enter to **k-density** folder
@@ -106,7 +106,7 @@ For use the commands as **vaspout**, [**bandgap.py**](https://github.com/JosephP
 3. Run your works.
 4. Check if your works are finished.
 5. Repeat the steps 5 and 6 from Convergence test (Energy Cutoff) section.
-6. OPTIONAL: Once the works are completed, it can be plot [**kdensity.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/kdensity.py).
+6. OPTIONAL: Once the works are completed, it can be plot straight using [**kdensity.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/kdensity.py).
 
 ## Relaxation
 1. Enter to **relax** folder
