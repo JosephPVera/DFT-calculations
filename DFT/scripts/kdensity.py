@@ -11,8 +11,8 @@ import argparse
 
 "Plot the k-density convergence"
 "Usage:  ----> kdensity.py              # Default Relative energy vs K-density \
-         ----> kdensity.py --tot        # Total energy vs K-density \
-         ----> kdensity.py --grid       # Relative energy vs K-grid \
+         ----> kdensity.py --tot        # Total energy/atom vs K-density \
+         ----> kdensity.py --grid        # Relative energy vs K-grid \
          ----> kdensity.py --x 0.01 0.1 # Set X-range \
          ----> kdensity.py --y 0.01 0.1 # Set Y-range \
          ----> kdensity.py --cri        # Set the criteria for the relative energy vs K-density plot"
@@ -48,6 +48,20 @@ def extract_toten(filename):
     except Exception as e:
         print(f"Error reading e_wo_entrp from {filename}: {e}")
         return None
+        
+def extract_num_atoms(root):
+    "Extract the number of atoms from a vasprun.xml file."
+    try:
+        atoms_element = root.find(".//atoms")
+        if atoms_element is not None:
+            num_atoms = int(atoms_element.text.strip()) # keyword: <atoms>       9 </atoms>
+            return num_atoms
+        else:
+            print(f"Number of atoms not found in the file.")
+            return None
+    except Exception as e:
+        print(f"Error reading number of atoms: {e}")
+        return None  
 
 def plot_convergence(k_density_values, y_values, ylabel, show_criteria, criteria_value, show_k_density, x_range=None, y_range=None):
     plt.plot(k_density_values, y_values, marker='o', linestyle='-', color='b')
@@ -108,12 +122,14 @@ if __name__ == "__main__":
             
             total_energy = extract_toten(root)
             kgrid = extract_kgrid(root)
+            num_atoms = extract_num_atoms(root)
             
-            if total_energy is not None and kgrid is not None:
+            if total_energy is not None and kgrid is not None and num_atoms is not None:
                 # Get the folder name to create k-density column
+                tot_per_atom = total_energy / num_atoms
                 folder_name = filename.split("/")[0] 
                 k_density_values.append(folder_name)
-                data.append((k_density_values[-1], kgrid, total_energy))
+                data.append((k_density_values[-1], kgrid, total_energy, tot_per_atom))
                 
                 kgrid_values.append(kgrid)
                 total_energies.append(total_energy)
@@ -143,8 +159,9 @@ if __name__ == "__main__":
 
     # Check if --tot command is passed
     if args.tot:
-        ylabel = 'Total energy (eV)'
-        y_values = total_energies  # Plot total energy vs ENCUT
+        ylabel = 'Total energy/atom (eV)'
+        y_values = [energy / num_atoms for energy in total_energies] # Plot total energy/atom vs ENCUT
+#        y_values = total_energies # Plot total energy vs ENCUT
         show_criteria = False  # Don't show the criteria when using --tot
         name_fig = "toten-kdensity_convergence.png"
         show_k_density = True  # Don't rotate if plotting total energy
@@ -156,4 +173,4 @@ if __name__ == "__main__":
         show_k_density = not args.grid  # If --grid is passed, don't show k-density
         
     # Plot
-    plot_convergence(k_density_values if not args.grid else kgrid_values, y_values, ylabel, show_criteria, args.cri, show_k_density, x_range=args.x, y_range=args.y)
+    plot_convergence(k_density_values if not args.grid else kgrid_values, y_values, ylabel, show_criteria, args.cri, show_k_density, x_range=args.x,
