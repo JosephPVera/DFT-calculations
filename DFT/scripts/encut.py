@@ -9,9 +9,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import argparse  
 
-"Plot the ENCUT convergence"
+"Plot the convergence for ENCUT"
 "Usage:  ----> encut.py              # Default Realtive energy vs ENCUT \
-         ----> encut.py --tot        # Total energy vs ENCUT \
+         ----> encut.py --tot        # Total energy/atom vs ENCUT \
          ----> encut.py --x 0.01 0.1 # Set X-range \
          ----> encut.py --y 0.01 0.1 # Set Y-range \
          ----> encut.py --cri        # Set the criteria for the relative energy vs ENCUT plot"
@@ -47,6 +47,20 @@ def extract_toten(filename):
     except Exception as e:
         print(f"Error reading e_wo_entrp from {filename}: {e}")
         return None
+        
+def extract_num_atoms(root):
+    "Extract the number of atoms from a vasprun.xml file."
+    try:
+        atoms_element = root.find(".//atoms")
+        if atoms_element is not None:
+            num_atoms = int(atoms_element.text.strip()) # keyword: <atoms>       9 </atoms>
+            return num_atoms
+        else:
+            print(f"Number of atoms not found in the file.")
+            return None
+    except Exception as e:
+        print(f"Error reading number of atoms: {e}")
+        return None        
 
 def plot_convergence(encut_values, y_values, ylabel, show_criteria, criteria_value, x_range=None, y_range=None):
     plt.plot(encut_values, y_values, marker='o', linestyle='-', color='b')
@@ -55,7 +69,7 @@ def plot_convergence(encut_values, y_values, ylabel, show_criteria, criteria_val
         plt.xlim(x_range)
     if y_range:
         plt.ylim(y_range)
-    
+     
     # Only include the criteria line if show_criteria is True
     if show_criteria:
         plt.axhline(criteria_value, linestyle='--', color='r', label=f'criteria = {criteria_value} eV')
@@ -94,9 +108,11 @@ if __name__ == "__main__":
             
             total_energy = extract_toten(root)
             encut = extract_encut(root)
+            num_atoms = extract_num_atoms(root)
             
-            if total_energy is not None and encut is not None:
-                data.append((encut, total_energy))
+            if total_energy is not None and encut is not None and num_atoms is not None:
+                tot_per_atom = total_energy / num_atoms  # Calculate total energy per atom
+                data.append((encut, total_energy, tot_per_atom))  # Append the data as a tuple
         except Exception as e:
             print(f"Error processing file {filename}: {e}")
 
@@ -121,8 +137,9 @@ if __name__ == "__main__":
 
     # Check if --tot command is passed
     if args.tot:
-        ylabel = 'Total energy (eV)'
-        y_values = total_energies # Plot total energy vs ENCUT
+        ylabel = 'Total energy/atom (eV)'
+        y_values = [energy / num_atoms for energy in total_energies] # Plot total energy/atom vs ENCUT
+#        y_values = total_energies # Plot total energy vs ENCUT
         show_criteria = False  # Don't show the criteria when using --tot
         name_fig = "toten-encut_convergence.png"
     else:
