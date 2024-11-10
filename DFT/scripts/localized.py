@@ -138,7 +138,7 @@ def analyze_block(block, block_num, output_file):
     for i, occ in enumerate(occupancies_spin_up):
         if occ != 1.0: 
             output_file.write("\nBand(up)   Energy(up)     Occ(up)    Occupancy\n")
-            for j in range(max(0, i - 20), min(len(band_indices), i + 20)): # above the break of 1.000 and below the break of 1.000
+            for j in range(max(0, i - 500), min(len(band_indices), i + 500)): # above the break of 1.000 and below the break of 1.000
                 if vbm < energies_spin_up[j] < cbm: # Compare the column 2 with VBM and CBM
                     label = (
                         "Occupied" if occupancies_spin_up[j] > 0.9 else
@@ -157,7 +157,7 @@ def analyze_block(block, block_num, output_file):
     for i, occ in enumerate(occupancies_spin_down):
         if occ != 1.0:
             output_file.write("\nBand(down) Energy(down)   Occ(down)  Occupancy\n")
-            for j in range(max(0, i - 20), min(len(band_indices), i + 20)): # above the break of 1.000 and below the break of 1.000
+            for j in range(max(0, i - 500), min(len(band_indices), i + 500)): # above the break of 1.000 and below the break of 1.000
                 if vbm < energies_spin_down[j] < cbm: # Compare the column 3 with VBM and CBM
                     label = (
                         "Occupied" if occupancies_spin_down[j] > 0.9 else
