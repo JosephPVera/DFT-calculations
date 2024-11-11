@@ -329,8 +329,8 @@ For use the commands as **vaspout**, [**bandgap.py**](https://github.com/JosephP
    - In **KPOINTS** file change the number of points (second line), usually it is the number of lines in 
      the file minus 3 (Ln - 3).
    - Include the high symmetry points for the 1BZ, look for the points in pasted part and include
-     the name after the weights.
-   - The script [**kpoints.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/scripts/kpoints.py) create the **KPOINTS** file.
+     the labels after the weights.
+   - **OPTIONAL**: The script [**kpoints.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/scripts/kpoints.py) create the **KPOINTS** file.
 5. Run your work
 6. Plot the band structure.
 7. Check your image.
