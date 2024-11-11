@@ -297,7 +297,7 @@ For use the commands as **vaspout**, [**bandgap.py**](https://github.com/JosephP
      1. Create **kdensity.dat** file and paste the "**k-points in reciprocal lattice and weights: 
         k-points**" information
         ```bash
-        mkdir kdensity.dat
+        touch kdensity.dat
         ```
         then concatenate with **IBZKPT** file to create the **KPOINTS** file using the command
         ```bash
