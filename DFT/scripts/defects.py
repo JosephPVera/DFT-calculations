@@ -20,9 +20,6 @@ frac_positions_perfect = poscar_perfect.get_scaled_positions()
 symbols_defect = poscar_defect.get_chemical_symbols()
 symbols_perfect = poscar_perfect.get_chemical_symbols()
 
-# Get the name of the current folder
-name_folder = os.path.basename(os.getcwd())
-
 # Tolerance to compare the positions in different POSCAR's (for find the vacancy, substitutional, or interstitial atoms)
 tolerance = 0.001
 
@@ -90,7 +87,18 @@ vacancies = find_vacancy(frac_positions_perfect, frac_positions_defect, symbols_
 susbstitutional = find_susbstitutional(frac_positions_defect, frac_positions_perfect, symbols_defect, symbols_perfect)
 interstitial = find_interstitial(frac_positions_defect, frac_positions_perfect, symbols_defect)
 
-with open("neighbor_atoms.dat", "w") as file:
+# Get the name of the current folder
+folder_name = os.path.basename(os.getcwd())
+
+# Create 'localized' folder
+localized_folder = f'localized-defects/{folder_name}/Data'
+if not os.path.exists(localized_folder):
+    os.makedirs(localized_folder)
+
+# Save the results in localized_{folder_name}.dat
+output_file = os.path.join(localized_folder, f'neighbor_atoms.dat')
+
+with open(output_file, "w") as file:
     # Print vacancies
     if vacancies:
         for symbol, frac_position, index in vacancies:
@@ -104,17 +112,17 @@ with open("neighbor_atoms.dat", "w") as file:
 
             closest_atoms = find_closest_atoms(frac_position, frac_positions_defect, symbols_defect)
 
-            print(f"\nClosest neighbors to the V_{symbol} defect in {name_folder}/POSCAR:")
+            print(f"\nClosest neighbors to the V_{symbol} defect in {folder_name}/POSCAR:")
             print(f"{'Index':<10} {'Atom':<10} {'Position':<30} {'Distance (A)':<10}")
-            file.write(f"\nClosest neighbors to the V_{symbol} defect in {name_folder}/POSCAR:\n")
+            file.write(f"\nClosest neighbors to the V_{symbol} defect in {folder_name}/POSCAR:\n")
             file.write(f"{'Index':<10} {'Atom':<10} {'Position':<30} {'Distance (A)':<10}\n")
             for distance, neighbor_symbol, neighbor_frac_position, neighbor_index in closest_atoms:
                 frac_pos_str = ' '.join(f"{coord:.6f}" for coord in neighbor_frac_position)
                 print(f"{neighbor_index:<10} {neighbor_symbol:<10} {frac_pos_str:<30} {distance:<10.4f}")
                 file.write(f"{neighbor_index:<10} {neighbor_symbol:<10} {frac_pos_str:<30} {distance:<10.4f}\n")
     else:
-        print(f"\nThere are no vacancy defects in the {name_folder}/POSCAR")
-        file.write(f"\nThere are no vacancy defects in the {name_folder}/POSCAR\n")
+        print(f"\nThere are no vacancy defects in the {folder_name}/POSCAR")
+        file.write(f"\nThere are no vacancy defects in the {folder_name}/POSCAR\n")
 
     # Print substitutionals
     if susbstitutional:
@@ -122,13 +130,13 @@ with open("neighbor_atoms.dat", "w") as file:
             print("\n##################################################################")
             print(f"\nSubstitutional: {new_symbol}_{old_symbol}")
             print(f"Index in ../perfect/POSCAR: {new_index}")
-            print(f"Index in {name_folder}/POSCAR: {old_index}")
+            print(f"Index in {folder_name}/POSCAR: {old_index}")
             print(f"Position: {frac_position}")
 
             file.write("\n##################################################################\n")
             file.write(f"\nSubstitutional: {new_symbol}_{old_symbol}\n")
             file.write(f"Index in ../perfect/POSCAR: {new_index}\n")
-            file.write(f"Index in {name_folder}/POSCAR: {old_index}\n")
+            file.write(f"Index in {folder_name}/POSCAR: {old_index}\n")
             file.write(f"Position: {frac_position}\n")
 
             closest_atoms = find_closest_atoms(frac_position, frac_positions_defect, symbols_defect)
@@ -143,9 +151,9 @@ with open("neighbor_atoms.dat", "w") as file:
                 same_distance_atoms = [atom for atom in closest_atoms if np.isclose(atom[0], closest_distance)]
                 same_distance_atoms.sort(key=lambda x: x[0])
 
-                print(f"\nClosest neighbors to the {new_symbol}_{old_symbol} defect in {name_folder}/POSCAR:")
+                print(f"\nClosest neighbors to the {new_symbol}_{old_symbol} defect in {folder_name}/POSCAR:")
                 print(f"{'Index':<10} {'Atom':<10} {'Position':<30} {'Distance (A)':<10}")
-                file.write(f"\nClosest neighbors to the {new_symbol}_{old_symbol} defect in {name_folder}/POSCAR:\n")
+                file.write(f"\nClosest neighbors to the {new_symbol}_{old_symbol} defect in {folder_name}/POSCAR:\n")
                 file.write(f"{'Index':<10} {'Atom':<10} {'Position':<30} {'Distance (A)':<10}\n")
                 for distance, neighbor_symbol, neighbor_frac_position, neighbor_index in same_distance_atoms:
                     frac_pos_str = ' '.join(f"{coord:.6f}" for coord in neighbor_frac_position)
@@ -153,28 +161,28 @@ with open("neighbor_atoms.dat", "w") as file:
                     file.write(f"{neighbor_index:<10} {neighbor_symbol:<10} {frac_pos_str:<30} {distance:<10.4f}\n")
     else:
         print("\n##################################################################")
-        print(f"\nThere are no substitutional defects in the {name_folder}/POSCAR")
+        print(f"\nThere are no substitutional defects in the {folder_name}/POSCAR")
         file.write("\n##################################################################\n")
-        file.write(f"\nThere are no substitutional defects in the {name_folder}/POSCAR\n")
+        file.write(f"\nThere are no substitutional defects in the {folder_name}/POSCAR\n")
 
     # Print interstitials
     if interstitial:
         for symbol, frac_position, index in interstitial:
             print("\n##################################################################")
             print(f"Interstitial: {symbol}_i")
-            print(f"Index in {name_folder}/POSCAR: {index}")
+            print(f"Index in {folder_name}/POSCAR: {index}")
             print(f"Position: {frac_position}")
 
             file.write("\n##################################################################\n")
             file.write(f"Interstitial: {symbol}_i\n")
-            file.write(f"Index in {name_folder}/POSCAR: {index}\n")
+            file.write(f"Index in {folder_name}/POSCAR: {index}\n")
             file.write(f"Position: {frac_position}\n")
 
             closest_atoms = find_closest_atoms(frac_position, frac_positions_defect, symbols_defect)
 
-            print(f"\nClosest neighbors to the {symbol}_i defect in {name_folder}/POSCAR:")
+            print(f"\nClosest neighbors to the {symbol}_i defect in {folder_name}/POSCAR:")
             print(f"{'Index':<10} {'Atom':<10} {'Position':<30} {'Distance (A)':<10}")
-            file.write(f"\nClosest neighbors to the {symbol}_i defect in {name_folder}/POSCAR:\n")
+            file.write(f"\nClosest neighbors to the {symbol}_i defect in {folder_name}/POSCAR:\n")
             file.write(f"{'Index':<10} {'Atom':<10} {'Position':<30} {'Distance (A)':<10}\n")
             for distance, neighbor_symbol, neighbor_frac_position, neighbor_index in closest_atoms:
                 frac_pos_str = ' '.join(f"{coord:.6f}" for coord in neighbor_frac_position)
@@ -182,8 +190,8 @@ with open("neighbor_atoms.dat", "w") as file:
                 file.write(f"{neighbor_index:<10} {neighbor_symbol:<10} {frac_pos_str:<30} {distance:<10.4f}\n")
     else:
         print("\n##################################################################")
-        print(f"\nThere are no interstitial defects in the {name_folder}/POSCAR")
+        print(f"\nThere are no interstitial defects in the {folder_name}/POSCAR")
         file.write("\n##################################################################\n")
-        file.write(f"\nThere are no interstitial defects in the {name_folder}/POSCAR\n")
+        file.write(f"\nThere are no interstitial defects in the {folder_name}/POSCAR\n")
 
 print("\nDefect information was saved in neighbor_atoms.dat.")
