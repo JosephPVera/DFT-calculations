@@ -150,8 +150,11 @@ def plot_dos_for_atom(atom_number, orbital_types=None):
         ax.set_xlim(x_min, x_max)
     if y_min is not None and y_max is not None:
         ax.set_ylim(y_min, y_max)
-
-    plt.savefig(f"{orbital_types}-orbital_atom-{atom_number}.png", dpi=200, bbox_inches='tight')
+              
+    if '--s' in sys.argv or '--p' in sys.argv or '--d' in sys.argv:
+        plt.savefig(f"atom_{atom_number}-{orbital_types}_orbital-LDOS.png", dpi=200, bbox_inches='tight')
+    else:
+        plt.savefig(f"atom_{atom_number}-LDOS.png", dpi=200, bbox_inches='tight')
     plt.show()
 
 def plot_dos_combined(atom_number, orbital_types=None):
