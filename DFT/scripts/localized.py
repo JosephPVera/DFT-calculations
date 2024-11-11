@@ -13,13 +13,14 @@ root = tree.getroot()
 VBM = 7.2945
 CBM = 11.7449
 
+"Code use information from vasprun.xml file"
+
 "Usage: ----> localized.py                 # all information within the band gap (occupied, unoccupied, partially occupied), if they exist at all \
         ----> localized.py --occ           # only occupied sates within the the band gap, if they exist at all \
         ----> localized.py --nocc          # only unoccupied sates within the the band gap, if they exist at all \
         ----> localized.py --pocc          # only partially occupied sates within the the band gap, if they exist at all \
         ----> localized.py --band 5.4 11.3 # Modify the VBM and CBM"
         
-"Code use information from vasprun.xml file"
 "There are three sub codes:  \
        ----> The first code is used to find the values of spin, kpoints, and bands. \
        ----> The second code parse the vasprun.xml file (EIGENVAL information) and sort the information about Spin up, kpoint (up), band (up), Spin down \
