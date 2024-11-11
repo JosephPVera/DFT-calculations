@@ -184,7 +184,7 @@ for spin_number in spin_numbers:
             print(f"Superblock 'spin {spin_number}' not found.")
 
     if spin_number == 1:
-        eigen_val.append("\n\n")
+        eigen_val.append("\n")
                 
 print("Spin Up - Band index list:", band_index_list_up)
 print("Spin Up - kpoint list:", kpoint_list_up)
