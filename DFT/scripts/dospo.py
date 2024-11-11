@@ -248,7 +248,7 @@ def plot_dos_combined(atom_number, orbital_types=None):
     if y_min is not None and y_max is not None:
         ax.set_ylim(y_min, y_max)
 
-    plt.savefig(f"tdos-s_p_d_orbitals_atom-{atom_number}.png", dpi=300, bbox_inches='tight')
+    plt.savefig(f"atom_{atom_number}-tdos-s_p_d_orbitals.png", dpi=300, bbox_inches='tight')
     plt.show()
 
 if __name__ == '__main__':
