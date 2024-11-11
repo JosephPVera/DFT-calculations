@@ -77,7 +77,6 @@ for spin_number in spin_numbers:
 
 # Store
 results = []
-
 results.append(f"{'Spin':<6} {'k-point':<10} {'Band':<10} {'tot':<10} {'sum':<10}")
 
 # Iterate through lists of inputs spin numbers, kpoint and band (s, p and d orbitals)
@@ -171,7 +170,6 @@ for i, result in enumerate(results):
             total_results.append("")
 
 
-
 # store final results
 final_result = []
 for total in total_results:
@@ -180,10 +178,9 @@ for total in total_results:
 # for total in final_result:
 #     print(total)
 
-
 def extract_kpoint_coordinates(tree):
     
-    # Find the <varray name="kpointlist"> tag and extract k-point coordinates
+    # Find the keyword <varray name="kpointlist"> and extract k-point coordinates
     kpoint_coordinates = []
     kpointlist = root.find(".//varray[@name='kpointlist']")
     
