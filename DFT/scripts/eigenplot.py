@@ -169,13 +169,13 @@ for i, result in enumerate(results):
 
 
 
-with open('total_results.dat', 'w') as f:
-    for total in total_results:
-        f.write(total + '\n')
-        
-# print total results
-#for total in total_results:
-#    print(total)
+# store final results
+final_result = []
+for total in total_results:
+    final_result.append(total)
+
+# for total in final_result:
+#     print(total)
 
 
 def extract_kpoint_coordinates(tree):
@@ -209,11 +209,9 @@ def generate_x_labels(kpt_coords, line_break="\n"):
             result.append(line_break.join(x_label))
     return result
 
-def plot_eigenvalues(file_name, kpoint_coordinates):
-    with open(file_name, 'r') as file:
-        content = file.readlines()
+def plot_eigenvalues(final_result, kpoint_coordinates):
 
-    content = ''.join(content[1:])  # Skip the first line
+    content = '\n'.join(final_result[1:])  # Skip the first line
     blocks = content.strip().split('\n\n')
 
     num_blocks = len(blocks)
@@ -302,16 +300,4 @@ def plot_eigenvalues(file_name, kpoint_coordinates):
 kpoint_coordinates = extract_kpoint_coordinates(tree)
 
 # Plot eigenvalues with k-point coordinates and formatted labels
-plot_eigenvalues('total_results.dat', kpoint_coordinates)
-
-# Remove the total_results.dat file 
-files_to_remove = ['total_results.dat']
-
-for file in files_to_remove:
-    try:
-        os.remove(file)
-#        print(f"The {file} has been removed.")
-    except FileNotFoundError:
-        print(f"The {file} file not found.")
-    except Exception as e:
-        print(f"Error deleting {file} file: {e}")
+plot_eigenvalues(final_result, kpoint_coordinates)
