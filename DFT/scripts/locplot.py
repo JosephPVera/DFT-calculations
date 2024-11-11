@@ -11,7 +11,8 @@ from io import StringIO
 import argparse
 
 "Usage: ----> locplot.py                 # By default: VBM=7.2945 and CBM=11.7449 \
-        ----> locplot.py --band 0.9 15.2 # Modify the VBM and CBM"
+        ----> locplot.py --band 0.9 15.2 # Modify the VBM and CBM \
+        ----> locplot.py --tot           # Modify to use the column tot (s + p + d)"
         
 "Code for plot the localized defects. Default Energy versus the sum of 5 biggest numbers of each band (check PROCAR), that can be changed. "
 
@@ -20,10 +21,13 @@ root = tree.getroot()
 
 VBM = 7.2945
 CBM = 11.7449
+
 parser = argparse.ArgumentParser(description="Modify the VBM and CBM.")
 parser.add_argument('--band', nargs=2, type=float, default=[VBM, CBM], help="Specifies the values ​​for VBM and CBM. By default: VBM=7.2945 and CBM=11.7449")
+parser.add_argument("--tot", action="store_true", help="Use column 3 instead of column 4 in the subset.")
 args = parser.parse_args()
 vbm, cbm = args.band
+
 
 # Find the spin numbers, kpoint and band in vasprun.xml
 spin_numbers = []
@@ -199,16 +203,21 @@ def plot_localized(file_path, spin_numbers, kpoint_numbers):
             break
 
         data = pd.read_csv(StringIO(block), sep=r'\s+', header=None)
-
+        
         "Column 0 ----> spin number, \
          Column 1 ----> kpoint number, \
          Column 2 ----> band number, \
          Column 3 ----> tot (s + p + d), \
          Column 4 ----> sum of the 5 heaviest values from tot, \
          Column 5 ----> energy values, \
-         Column 6 ----> occupancies"    
+         Column 6 ----> occupancies"
         if data.shape[1] >= 7:
-            subset = data.iloc[:, [5, 4, 6]]
+            if args.tot:
+                subset = data.iloc[:, [5, 3, 6]]  # column tot 
+            else:
+                subset = data.iloc[:, [5, 4, 6]] # colum sum the 5 heaviest values
+                
+            #subset = data.iloc[:, [5, 4, 6]]
             subset.columns = ['Energy', 'sum', 'occ']
 
             spin_index = i // len(kpoint_numbers)
@@ -222,6 +231,7 @@ def plot_localized(file_path, spin_numbers, kpoint_numbers):
             kpoint = kpoint_numbers[kpoint_index]
 
             plt.figure(figsize=(10, 6))
+            
             for j in range(len(subset['sum'])):
                 if np.isfinite(subset['sum'].iloc[j]):
                     if subset['occ'].iloc[j] > 0.9:
