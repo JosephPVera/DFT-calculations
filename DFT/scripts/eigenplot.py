@@ -67,9 +67,9 @@ for spin_number in spin_numbers:
                         if band_number not in band_numbers:
                             band_numbers.append(band_number)
 
-#print("Lista de spin_numbers:", spin_numbers)
-#print("Lista de kpoint_numbers:", kpoint_numbers)
-#print("Lista de band_numbers:", band_numbers)
+#print("List of spin_numbers:", spin_numbers)
+#print("List of kpoint_numbers:", kpoint_numbers)
+#print("List of band_numbers:", band_numbers)
 
 
 # Store
