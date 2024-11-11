@@ -19,7 +19,7 @@ CBM = 11.7449
         ----> localized.py --pocc          # only partially occupied sates within the the band gap, if they exist at all \
         ----> localized.py --band 5.4 11.3 # Modify the VBM and CBM"
         
-"Code use information from EIGENVAL and vasprun.xml"
+"Code use information from vasprun.xml file"
 "There are three sub codes:  \
        ----> The first code is used to find the values of spin, kpoints, and bands. \
        ----> The second code parse the vasprun.xml file (EIGENVAL information) and sort the information about Spin up, kpoint (up), band (up), Spin down \
