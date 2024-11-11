@@ -11,17 +11,20 @@ from io import StringIO
 from fractions import Fraction
 import argparse
 
-"Usage: ----> eigenplot.py                           # By default: VBM=7.2945 and CBM=11.7449 \
-        ----> eigenplot.py --band 0.9 15.2           # Modify the VBM and CBM \
-        ----> eigenplot.py --band 0.9 15.2 --res 0.9 # Modify the VBM and CBM, and also rescale for set to 0"
-        
-"Code for plot the Kohn-Sham states."
-
 tree = ET.parse('vasprun.xml')
 root = tree.getroot()
 
+# variables
 VBM = 7.2945
 CBM = 11.7449
+
+"Code for plot the Kohn-Sham states."
+
+"Usage: ----> eigenplot.py                           # By default: VBM=7.2945 and CBM=11.7449 \
+        ----> eigenplot.py --band 0.9 15.2           # Modify the VBM and CBM \
+        ----> eigenplot.py --band 0.9 15.2 --res 0.9 # Modify the VBM and CBM, and also rescale for set to 0"
+
+
 parser = argparse.ArgumentParser(description="Modify the VBM and CBM.")
 parser.add_argument('--band', nargs=2, type=float, default=[VBM, CBM], help="Specifies the values ​​for VBM and CBM. By default: VBM=7.2945 and CBM=11.7449")
 parser.add_argument('--res', type=float, default=0.0, help="Rescale respect to VBM")
