@@ -113,7 +113,7 @@ For use the commands as **vaspout**, [**bandgap.py**](https://github.com/JosephP
    ```bash
    cd PBE/relax
    ```
-2. Create **INCAR_PBE_relax** file, I recommend use the standart value for the energy cutoff **ENCUT  = 500** for the next calculations.
+2. Create **INCAR_PBE_relax** file, use the converged energy cutoff **ENCUT** (following the convergence test) for the next calculations.
 3. Use the same **POSCAR**, **POTCAR** and **jobfile** from Convergence test section.
 4. Create **KPOINTS** file following the converged k-density.   
 5. Run your work.
