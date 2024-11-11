@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Written by Joseph P.Vera
-# 2024-10
+# 2024-11
 
 import xml.etree.ElementTree as ET
 import pandas as pd
@@ -10,24 +10,25 @@ import os
 from io import StringIO
 import argparse
 
-"Usage: ----> locplot.py                 # By default: VBM=7.2945 and CBM=11.7449 \
-        ----> locplot.py --band 0.9 15.2 # Modify the VBM and CBM \
-        ----> locplot.py --tot           # Modify to use the column tot (s + p + d)"
-        
-"Code for plot the localized defects. Default Energy versus the sum of 5 biggest numbers of each band (check PROCAR), that can be changed. "
-
 tree = ET.parse('vasprun.xml')
 root = tree.getroot()
 
+# variables
 VBM = 7.2945
 CBM = 11.7449
 
+"Code for plot the localized defects. Default Energy versus sum of the 5 heaviest values from tot (each band) (check PROCAR). "
+
+"Usage: ----> locplot.py                 # By default: VBM=7.2945 and CBM=11.7449 \
+        ----> locplot.py --band 0.9 15.2 # Modify the VBM and CBM \
+        ----> locplot.py --tot           # Modify to use the column tot (s + p + d): Energies versus tot"
+
+        
 parser = argparse.ArgumentParser(description="Modify the VBM and CBM.")
 parser.add_argument('--band', nargs=2, type=float, default=[VBM, CBM], help="Specifies the values ​​for VBM and CBM. By default: VBM=7.2945 and CBM=11.7449")
 parser.add_argument("--tot", action="store_true", help="Use column 3 instead of column 4 in the subset.")
 args = parser.parse_args()
 vbm, cbm = args.band
-
 
 # Find the spin numbers, kpoint and band in vasprun.xml
 spin_numbers = []
@@ -167,26 +168,21 @@ for i, result in enumerate(results):
         if row_index == len(band_numbers) - 1 and block_index < len(energy_values) - 1:
             total_results.append("")
 
+# store final results
+final_result = []
+for total in total_results:
+    final_result.append(total)
 
+# for total in final_result:
+#     print(total)
 
-with open('total_results.dat', 'w') as f:
-    for total in total_results:
-        f.write(total + '\n')
-        
-# print total results
-#for total in total_results:
-#    print(total)
-
-def plot_localized(file_path, spin_numbers, kpoint_numbers):
+def plot_localized(final_result, spin_numbers, kpoint_numbers):
     folder_name = os.path.basename(os.getcwd())
     localized_folder = f'localized-defects/{folder_name}/Figures'
     if not os.path.exists(localized_folder):
         os.makedirs(localized_folder)
-    
-    with open(file_path, 'r') as file:
-        content = file.readlines()
 
-    content = ''.join(content[1:])
+    content = '\n'.join(final_result[1:])
     blocks = content.strip().split('\n\n')
 
     if len(spin_numbers) == 0 or len(kpoint_numbers) == 0:
@@ -271,17 +267,4 @@ def plot_localized(file_path, spin_numbers, kpoint_numbers):
         else:
             print(f"Block {i + 1} does not have enough columns.")
 
-plot_localized('total_results.dat', spin_numbers, kpoint_numbers)
-
-
-# Remove the total_results.dat file 
-files_to_remove = ['total_results.dat']
-
-for file in files_to_remove:
-    try:
-        os.remove(file)
-#        print(f"The {file} has been removed.")
-    except FileNotFoundError:
-        print(f"The {file} file not found.")
-    except Exception as e:
-        print(f"Error deleting {file} file: {e}")
+plot_localized(final_result, spin_numbers, kpoint_numbers)
