@@ -140,7 +140,7 @@ For use the commands as **vaspout**, [**bandgap.py**](https://github.com/JosephP
    ```bash
    bandgap OUTCAR
    ```
-7. Use the following command for plot the DOS
+7. Use the following script for plot the DOS
    ```bash
    dospo.py
    ```
@@ -151,7 +151,7 @@ For use the commands as **vaspout**, [**bandgap.py**](https://github.com/JosephP
    change the last number according to your material.
 9. Check your images 
    ```bash
-   eog TDOS.png
+   eog total_dos.png
    ```
 
 ## Band structure
@@ -206,13 +206,13 @@ For use the commands as **vaspout**, [**bandgap.py**](https://github.com/JosephP
    0.500  0.000  0.500  X
    ```
 5. Run your work
-6. Plot the band structure with the command
+6. Plot the band structure with the script
    ```bash
    band.py
    ```
 7. Check your image 
    ```bash
-   eog bandstruct.png
+   eog band_structure_plot.png
    ```
 
 ---
