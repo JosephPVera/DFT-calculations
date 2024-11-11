@@ -19,7 +19,7 @@ For use the commands as **vaspout**, [**bandgap.py**](https://github.com/JosephP
 # PBE pseudopotential
 ---
 
-## Convergence test (Energy Cutoff)
+## Convergence test: Energy Cutoff
 1. Enter to **energy_cutoff** folder
    ```bash
    cd energy-cutoff
@@ -77,7 +77,7 @@ For use the commands as **vaspout**, [**bandgap.py**](https://github.com/JosephP
    ```   
 7. OPTIONAL: Once the works are completed, it can be plot straight using [**encut.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/encut.py).
 
-## Convergence test (K-density)
+## Convergence test: K-density
 1. Enter to **k-density** folder
    ```bash
    cd k-density
