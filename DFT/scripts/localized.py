@@ -240,8 +240,8 @@ if band_index_list_up and kpoint_list_up and spin_list_up:
                 band_subblock = kpoint_block.find(f".//set[@comment='band {band_number}']")
 
                 if band_subblock is not None:
-                    band_info.append(f"\nInformation of {band_subblock.attrib['comment']}:\n")
-                    band_info.append(f"{'index':<6} {'s':<10} {'p':<10} {'d':<10} {'tot':<10}\n")
+                    band_info.append(f"\nInformation of {band_subblock.attrib['comment']}:")
+                    band_info.append(f"{'index':<6} {'s':<10} {'p':<10} {'d':<10} {'tot':<10}")
 
                     # Add information of the band
                     for j, child in enumerate(band_subblock):
@@ -254,7 +254,7 @@ if band_index_list_up and kpoint_list_up and spin_list_up:
 
                         # Only print if the total (s+p+d) is greater than 0.1
                         if float(formatted_sum) > 0.1:
-                            band_info.append(f"{j + 1:<6} {formatted_values[0]:<10} {formatted_values[1]:<10} {formatted_values[2]:<10} {formatted_sum:<10}\n")
+                            band_info.append(f"{j + 1:<6} {formatted_values[0]:<10} {formatted_values[1]:<10} {formatted_values[2]:<10} {formatted_sum:<10}")
                 else:
                     band_info.append(f"Subblock 'band {band_number}' not found in 'kpoint {kpoint_number}'.\n")
 
