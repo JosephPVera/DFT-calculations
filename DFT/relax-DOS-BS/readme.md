@@ -166,7 +166,7 @@ For use the commands as **vaspout**, [**bandgap.py**](https://github.com/JosephP
    ```bash
    cd ../dos/CHGCAR ../dos/POSCAR ../dos/jobfile ../dos/POTCAR .
    ```
-4. Create **KPOINTS** file with the high symmetry points for the First Brillouin Zone (1BZ), here an example
+4. Create **KPOINTS** file with the high symmetry points for the First Brillouin Zone (1BZ) [[1]](https://doi.org/10.1016/j.commatsci.2010.05.010), here an example
    ```bash
    k-points along fcc high symmetry lines
    20     0  !                           # of points per line
