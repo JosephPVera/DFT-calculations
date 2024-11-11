@@ -200,6 +200,13 @@ def plot_localized(file_path, spin_numbers, kpoint_numbers):
 
         data = pd.read_csv(StringIO(block), sep=r'\s+', header=None)
 
+        "Column 0 ----> spin number, \
+         Column 1 ----> kpoint number, \
+         Column 2 ----> band number, \
+         Column 3 ----> tot (s + p + d), \
+         Column 4 ----> sum of the 5 heaviest values from tot, \
+         Column 5 ----> energy values, \
+         Column 6 ----> occupancies"    
         if data.shape[1] >= 7:
             subset = data.iloc[:, [5, 4, 6]]
             subset.columns = ['Energy', 'sum', 'occ']
