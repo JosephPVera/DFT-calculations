@@ -22,7 +22,7 @@ CBM = 11.7449
 
 "Usage: ----> eigenplot.py                           # By default: VBM=7.2945 and CBM=11.7449 \
         ----> eigenplot.py --band 0.9 15.2           # Modify the VBM and CBM \
-        ----> eigenplot.py --band 0.9 15.2 --res 0.9 # Modify the VBM and CBM, and also rescale for set to 0"
+        ----> eigenplot.py --band 0.9 15.2 --res 0.9 # Modify the VBM and CBM, and also rescale for set VBM = 0 and CBM = CBM - VBM"
 
 
 parser = argparse.ArgumentParser(description="Modify the VBM and CBM.")
