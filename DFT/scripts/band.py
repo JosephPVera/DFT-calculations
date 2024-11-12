@@ -35,11 +35,11 @@ def check_vasprun():
     return vasprun_files
 
 def compute_k_distance(kpoints):
-    "Calculate the k-distance from the k-points"
-    "First value ---> Kpoint1 \
-     Second value ---> norm(kpoint2 - Kpoint1) \
-     Third value ---> norm(kpoint3 - Kpoint2) + Second value \
-     Fourth value ---> norm(kpoint4 - Kpoint3) + Third value \
+    "Calculate the k-distance from the k-points, using the OUTCAR"
+    "Value 1: 0 \
+     Value 2: norm([i + 1] - [i]) = distance 1 \
+     Value 3: norm([i + 2] - [i + 1]) + distance 1 = distance 2 \
+     Value 4: norm([i + 3] - [i + 2]) + distance 1 + distance 2 = distance 3 \
      ..... "      
     distances = [0.0]
     for i in range(1, len(kpoints)):
