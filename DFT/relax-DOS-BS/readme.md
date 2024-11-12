@@ -267,7 +267,7 @@ For use the commands as **vaspout**, [**bandgap.py**](https://github.com/JosephP
    non-self-consistent calculation.
 3. Copy **CHGCAR**, **POTCAR**, **POSCAR** and **jobfile** from DOS_HSE06 section
    ```bash
-   cd ../dos/CHGCAR ../dos/POSCAR ../dos/jobfile ../dos/POTCAR .
+   cp ../dos/CHGCAR ../dos/POSCAR ../dos/jobfile ../dos/POTCAR .
    ```
 4. Create **KPOINTS** file
    - Copy **IBZKPT** file from DOS_HSE06 section
