@@ -229,7 +229,6 @@ For use the commands as **vaspout**, [**bandgap.py**](https://github.com/JosephP
    LHFCALC = .TRUE.        # specifies whether a Hartree-Fock/DFT hybrid functional type calculation is performed. 
    HFSCREEN = 0.2          # HF Screening parameter (0.2 for HSE06)
    AEXX = 0.25             # Fraction of exact exchange in a Hartree-Fock-type/hybrid-functional calculation
-   AGGAX = 0.75            # parameter that multiplies the gradient correction in the GGA exchange functional
    Time = 0.4              # Timestep (0.4 for HSE06)
    ```
 3. Introduce **POSCAR**, **KPOINTS**, **POTCAR** and **jobfile**, which can be copied from PBE calculations
