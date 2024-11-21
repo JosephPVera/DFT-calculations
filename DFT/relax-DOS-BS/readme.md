@@ -1,10 +1,12 @@
 --- 
+
 # Steps for VASP calculations: Relax, DOS and Band Structure
 Check [VASP - UIO](https://wiki.uio.no/mn/kjemi/vaspwiki/index.php/Main_Page).
 
 Steps for VASP calculations using **PBE** and **HSE06** pseudopotentials.
 
 Useful scripts: **vaspout**, [**bandgap.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/bandgap.py), [**toten.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/toten.py), **makekpoints**, **makepot**, [**dospo.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/dospo.py) and [**band.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/band.py) aaaaaaaaaaaaaaaaaaa. check **/.../vasp/template/bin**.
+
 ---
 # Creating the tree 
    ```bash
