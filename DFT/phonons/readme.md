@@ -1,7 +1,7 @@
 ---
 
 # Steps for VASP calculations: Phonons
-Check [phonopy](https://phonopy.github.io/phonopy/).
+Check [phonopy](https://phonopy.github.io/phonopy/) and [phonopy-vasp](https://phonopy.github.io/phonopy/vasp.html).
 
 The outputs can be used for custom plots using [phonplot.py](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/phonplot.py).
 
