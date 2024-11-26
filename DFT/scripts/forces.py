@@ -5,7 +5,7 @@
 import xml.etree.ElementTree as ET
 import numpy as np
 
-"Code for get the maximun force, pressure and drift. The maximum force and pressedure are extract form vasprun.xml file, while \
+"Code for get the maximun force, pressure and drift. The maximum force and pressedure are extract from vasprun.xml file, while \
  drift is extract from OUTCAR file. OPTION: All information can also be found on OUTCAR with keywords: TOTAL-FORCE and total drift."
 
 file_path = 'vasprun.xml'   
