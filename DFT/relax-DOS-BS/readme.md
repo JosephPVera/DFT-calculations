@@ -21,7 +21,7 @@ Check **/.../vasp/template/bin**.
 ---
 
 ## Convergence test: Energy Cutoff
-1. Enter to **energy_cutoff** folder
+1. Enter to **energy-cutoff** folder
    ```bash
    cd energy-cutoff
    ```
