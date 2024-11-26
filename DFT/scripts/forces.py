@@ -30,24 +30,30 @@ def extract_forces_and_stress(file_path):
         for v in varray.findall(".//v"):
             row = list(map(float, v.text.split()))
             stress_matrix.append(row)
-        stress_data.append(stress_matrix)
+        stress_data.append(stress_matrix)    
     return forces_data, stress_data
 
 def find_maximum_force(forces):
     max_force = float('-inf')  
-    for force in forces:
-        max_force_in_atom = max(force) 
-        if max_force_in_atom > max_force:
-            max_force = max_force_in_atom    
+    if isinstance(forces[0], list):
+        for force in forces:
+            max_force_in_atom = max(force) 
+            if max_force_in_atom > max_force:
+                max_force = max_force_in_atom
+    else:
+        max_force = max(forces)        
     return max_force
 
 def find_pressure(stress_data):
+    pressures = []
     for matrix in stress_data:
         trace = matrix[0][0] + matrix[1][1] + matrix[2][2]
-        pressure = trace/3   
-    return pressure
+        pressure = trace / 3   
+        pressures.append(pressure)
+    return pressures
 
 def find_drift(outcar_file):
+    drift_values = []
     with open(outcar_file, 'r') as f:
         lines = f.readlines()
 
@@ -59,15 +65,17 @@ def find_drift(outcar_file):
                 x = float(parts[2])  
                 y = float(parts[3]) 
                 z = float(parts[4]) 
-            
-                drift = np.sqrt(x**2 + y**2 + z**2)
                 
-                return drift  
+                drift = np.sqrt(x**2 + y**2 + z**2)
+                drift_values.append(drift)    
+    return drift_values
 
 forces, stress = extract_forces_and_stress(file_path)
-max_force = find_maximum_force(forces)
-pressure = find_pressure(stress)
-drift = find_drift(outcar_file)
+max_forces = [find_maximum_force(force_set) for force_set in forces]
+pressures = find_pressure(stress)
+
+drift_values = find_drift(outcar_file)
 
 print(f"{'MaxForce(eV/Å)':<20} {'Pressure(kB)':<20} {'Drift(eV/Å)':<14}")
-print(f"{max_force:<20.4f} {pressure:<20.4f} {drift:<14.4f}")
+for max_force, pressure, drift in zip(max_forces, pressures, drift_values):
+    print(f"{max_force:<20.4f} {pressure:<20.4f} {drift:<14.4f}")
