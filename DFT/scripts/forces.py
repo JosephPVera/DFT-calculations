@@ -20,9 +20,11 @@ def extract_forces_and_stress(file_path):
 
     # Find the keyword <varray name="forces" >
     for varray in root.findall(".//varray[@name='forces']"):
+        force_set = []  
         for v in varray.findall(".//v"):
             forces = list(map(float, v.text.split()))
-            forces_data.append(forces)
+            force_set.append(forces) 
+        forces_data.append(force_set)  
     
     # Find the keyword <varray name="stress" >
     for varray in root.findall(".//varray[@name='stress']"):
@@ -54,6 +56,8 @@ def find_pressure(stress_data):
 
 def find_drift(outcar_file):
     drift_values = []
+    max_drift_values = []
+
     with open(outcar_file, 'r') as f:
         lines = f.readlines()
 
@@ -65,17 +69,21 @@ def find_drift(outcar_file):
                 x = float(parts[2])  
                 y = float(parts[3]) 
                 z = float(parts[4]) 
-                
+
                 drift = np.sqrt(x**2 + y**2 + z**2)
-                drift_values.append(drift)    
-    return drift_values
+                
+                max_drift = max(x, y, z)
+
+                drift_values.append(drift)
+                max_drift_values.append(max_drift)    
+    return drift_values, max_drift_values
 
 forces, stress = extract_forces_and_stress(file_path)
 max_forces = [find_maximum_force(force_set) for force_set in forces]
 pressures = find_pressure(stress)
 
-drift_values = find_drift(outcar_file)
+drift_values, max_drift_values = find_drift(outcar_file)
 
-print(f"{'MaxForce(eV/Å)':<20} {'Pressure(kB)':<20} {'Drift(eV/Å)':<14}")
-for max_force, pressure, drift in zip(max_forces, pressures, drift_values):
-    print(f"{max_force:<20.4f} {pressure:<20.4f} {drift:<14.4f}")
+print(f"{'MaxForce(eV/Å)':<20} {'Pressure(kB)':<20} {'MaxDrift(eV/Å)':<20}")# {'Tot Drift(eV/Å)':<14}")
+for max_force, pressure, drift, max_drift in zip(max_forces, pressures, drift_values, max_drift_values):
+    print(f"{max_force:<20.4f} {pressure:<20.4f} {max_drift:<20.4f}")# {drift:<14.4f}")
