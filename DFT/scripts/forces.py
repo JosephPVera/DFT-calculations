@@ -37,13 +37,10 @@ def extract_forces_and_stress(file_path):
 
 def find_maximum_force(forces):
     max_force = float('-inf')  
-    if isinstance(forces[0], list):
-        for force in forces:
-            max_force_in_atom = max(force) 
-            if max_force_in_atom > max_force:
-                max_force = max_force_in_atom
-    else:
-        max_force = max(forces)        
+    for force in forces:
+        max_force_in_atom = max(abs(force[0]), abs(force[1]), abs(force[2])) 
+        if max_force_in_atom > max_force:
+            max_force = max_force_in_atom  
     return max_force
 
 def find_pressure(stress_data):
