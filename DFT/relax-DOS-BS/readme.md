@@ -34,7 +34,7 @@ Check **/.../vasp/template/bin**.
    - In **INCAR** file change the tag "**ENCUT**" following the name of the files: **{200..900..50}**
    - Create **KPOINTS** files in each folder using the command
      ```bash
-     makekpoints
+     kmesh.py
      ```
      or at once, using:
      ```bash
@@ -94,7 +94,7 @@ Check **/.../vasp/template/bin**.
    - Use the **INCAR** file with the converged energy cutoff, from Convergence test (Energy Cutoff) section, in each folder.
    - Create **KPOINTS** file in each folder by changing the tag **k-density** following the name of the files: **{2..9..1}**, use the command
      ```bash
-     makekpoints -d 2
+     kmesh.py --d 2
      ```
      change the last number for different k-density. All at once, using:
      ```bash
