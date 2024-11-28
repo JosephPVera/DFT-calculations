@@ -59,7 +59,7 @@ In **relax** folder:
 2. Introduce the **POSCAR** and **jobfile** (HPC clusters use Slurm as workload manager and job scheduler).
 3. Create **KPOINTS** file using command
    ```bash
-   makekpoints
+   kmesh.py
    ```
 4. Create **POTCAR** using comand
    ```bash
