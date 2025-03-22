@@ -10,7 +10,9 @@ Check **/.../vasp/template/bin**.
 ---
 # Creating the tree 
    ```bash
-   mkdir energy-cutoff k-density PBE HSE06
+   mkdir encut kdensity PBE HSE06
+   mkdir encut/cutoff-perfect encut/cutoff-increased encut/cutoff-decreased
+   mkdir kdensity/kdensity-perfect kdensity/kdensity-increased kdensity/kdensity-decreased
    mkdir PBE/relax PBE/dos PBE/bs
    mkdir HSE06/relax HSE06/dos HSE06/bs
    ```
