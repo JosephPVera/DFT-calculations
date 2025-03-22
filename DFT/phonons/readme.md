@@ -6,14 +6,14 @@ Check [phonopy](https://phonopy.github.io/phonopy/) and [phonopy-vasp](https://p
 The outputs can be used for custom plots using [phonplot.py](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/phonplot.py).
 
 ---
-## Creating the tree
+## 0. Creating the tree
 ```bash
 mkdir phonon relax
 mkdir phonon/nac
 ```
 ---
 
-## Activation
+## 1. Activation
 1. Identify for the module
    ```bash
    module spider phonopy
@@ -24,7 +24,7 @@ mkdir phonon/nac
    ```bash
    mkdir relax phonon
 
-## Relaxation
+## 2. Relaxation
 In **relax** folder:
 1. Create **INCAR_relax** file, example:
    ```bash
@@ -74,7 +74,7 @@ In **relax** folder:
    st 
    ```   
 
-## Phonon
+## 3. Phonon
 In **phonon** folder:
 1. Create **INCAR_phonon** file, example:
    ```bash
@@ -148,7 +148,7 @@ In **phonon** folder:
 
 
 **IMPORTANT: NEXT CALCULATIONS PERFORM IN PHONON FOLDER**
-### Density of states (DOS)
+### 3.1. Density of states (DOS)
 1. Create **mesh.conf** file 
    ```bash
    touch mesh.conf
@@ -170,7 +170,7 @@ In **phonon** folder:
    ```
 4. Check information in **total_dos.dat** file.
 
-### Thermal properties
+### 3.2. Thermal properties
 1. Use the following command for plot the thermal properties
    ```bash
    phonopy -p -s -t  mesh.conf > thermal.dat
@@ -181,7 +181,7 @@ In **phonon** folder:
    ```
 3. Check information in **thermal_properties.yaml** or **thermal.dat** file.
 
-### Partial Density of States (PDOS)
+### 3.3. Partial Density of States (PDOS)
 1. Create **pdos.conf** file
    ```bash
    touch pdos.conf
@@ -204,7 +204,7 @@ In **phonon** folder:
    ```
 4. Check information in **projected_dos.dat** file.
 
-### Band structure
+### 3.4. Band structure
 1. Create **band.conf** file
    ```bash
    touch band.conf
@@ -231,7 +231,7 @@ In **phonon** folder:
    ```    
 5. Check information in **band.yaml** and **band.dat** file.
 
-### Non-analytical term correction (NAC)
+### 3.4. Non-analytical term correction (NAC)
 0. Create a **nac** file
    ```bash
    mkdir nac
@@ -267,7 +267,7 @@ In **phonon** folder:
    phonopy-vasp-born > BORN 
    ```
 
-### Correcting calculations with [NAC](https://phonopy.github.io/phonopy/formulation.html#non-analytical-term-correction-theory)   
+### 3.5. Correcting calculations with [NAC](https://phonopy.github.io/phonopy/formulation.html#non-analytical-term-correction-theory)   
 1. Now copy BORN file to **phonon** folder
    ```bash
    cp BORN ../
@@ -308,7 +308,7 @@ In **phonon** folder:
      evince band_dos.pdf
      ```
 
-### Dielectric constant
+### 3.6. Dielectric constant
 1. Check the **BORN** file (second line is information about the electronic dielectric tensor), here an example:
    ```bash
    # epsilon and Z* of atoms 1 3
