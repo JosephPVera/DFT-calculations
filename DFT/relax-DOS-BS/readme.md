@@ -79,7 +79,7 @@ The first step in performing this analysis is to create different configurations
    ```   
 6. If all calculations are finished, use the following commands for check your outcomes 
    ```bash
-   tot.py */OUTCAR
+   tot.py */vasprun.xml
    forces.py */OUTCAR
    ```
    **tot,py** script allows us to check information about total energy, while **forces.py** script allows us to check information about MxForce, Drift, and pressure.
