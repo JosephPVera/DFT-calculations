@@ -41,9 +41,9 @@ The first step in performing this analysis is to create different configurations
    for i in {200..950..50}; do cp POSCAR_increased "increased/$i/POSCAR"; done
    for i in {200..950..50}; do cp POSCAR_decreased "decreased/$i/POSCAR"; done
    ```
-3. Enter the missing folders   
-   - Introduce the same **jobfile** files in each **{200..900..50}** folder.
-   - In **INCAR** file change the **ENCUT** tag following the name of the folders: **{200..900..50}**
+3. Enter the missing folders in each **{200..900..50}** folder
+   - Create the same **jobfile** file
+   - Create the **INCAR** file and change the **ENCUT** tag following the name of the folders: **{200..900..50}**
    - Create **KPOINTS** files in each folder using the command
      ```bash
      kmesh.py
@@ -88,7 +88,7 @@ The first step in performing this analysis is to create different configurations
    toten */OUTCAR > toten.dat
    vaspout */OUTCAR > vaspout.dat
    ```   
-8. **OPTIONAL**: Once the works are completed, it can be plot straight using [**encut.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/encut.py).
+8. **OPTIONAL**: Once the calculations are completed, it can be plotted straight using [**encut.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/encut.py).
 
 ## Convergence test: K-density
 1. Enter to **k-density** folder
