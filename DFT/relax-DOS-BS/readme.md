@@ -41,9 +41,9 @@ The first step in performing this analysis is to create different configurations
    for i in {200..950..50}; do cp POSCAR_increased "increased/$i/POSCAR"; done
    for i in {200..950..50}; do cp POSCAR_decreased "decreased/$i/POSCAR"; done
    ```
-3. Enter the missing folders in each **{200..900..50}** folder
-   - Create the same **jobfile** file
-   - Create the **INCAR** file and change the **ENCUT** tag following the name of the folders: **{200..900..50}**
+3. Enter the missing folders in each **{200..950..50}** folder
+   - Create the same **jobfile** file in each folder.
+   - Create the **INCAR** file and change the **ENCUT** tag following the name of the folders: **{200..950..50}**
    - Create **KPOINTS** files in each folder using the command
      ```bash
      kmesh.py
@@ -76,7 +76,7 @@ The first step in performing this analysis is to create different configurations
    ```bash
    st
    ```   
-6. If all works are finished, use the following commands for check your outcomes 
+6. If all calculations are finished, use the following commands for check your outcomes 
    ```bash
    toten */OUTCAR
    vaspout */OUTCAR
@@ -90,36 +90,42 @@ The first step in performing this analysis is to create different configurations
    ```   
 8. **OPTIONAL**: Once the calculations are completed, it can be plotted straight using [**encut.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/encut.py).
 
-## Convergence test: K-density
-1. Enter to **k-density** folder
+## k-density
+1. Enter to **kdensity** folder
    ```bash
    cd k-density
    ```
-2. Create different files  
+2. Create different folders in each of the **perfect**, **increased** and **decreased** folders
    ```bash
-   mkdir {2..9..1}
+   mkdir perfect/{2..9..1}
+   mkdir increased/{2..9..1}
+   mkdir decreased/{2..9..1}
    ```
-   - Introduce the same **POSCAR**, **POTCAR** and **jobfile** files in each folder.
-     ```bash
-     cp ../energy-cutoff/POSCAR ../energy-cutoff/POTCAR ../energy-cutoff/jobfile .
-     ```
-   - Use the **INCAR** file with the converged energy cutoff, from Convergence test (Energy Cutoff) section, in each folder.
-   - Create **KPOINTS** file in each folder by changing the tag **k-density** following the name of the files: **{2..9..1}**, use the command
+   and then copy each **POSCAR** into its respective folder
+   ```bash
+   for i in {2..9..1}; do cp POSCAR_perfect "perfect/$i/POSCAR"; done
+   for i in {2..9..1}; do cp POSCAR_increased "increased/$i/POSCAR"; done
+   for i in {2..9..1}; do cp POSCAR_decreased "decreased/$i/POSCAR"; done
+   
+3. Enter the missing folders in each **{2..9..1}** folder
+   - Create the same **POTCAR** and **jobfile** files in each folder or simply copy them from **Convergence test (Energy Cutoff) section**.
+   - Use the **INCAR** file with the converged energy cutoff, from **Convergence test (Energy Cutoff) section**, in each folder.
+   - Create **KPOINTS** file in each folder by changing the **k-density** tag following the name of the files: **{2..9..1}**, use the command
      ```bash
      kmesh.py --d 2
      ```
      change the last number for different k-density. All at once, using:
      ```bash
-     for dir in {2..9}; do cd "$dir"; makekpoints -d "$dir";cd ..;done
+     for dir in {2..9}; do cd "$dir"; kmesh.py -d "$dir";cd ..;done
      ```
      check if it is correct
      ```bash
      grep k-density */KPOINTS
      ```
-3. Run your works.
-4. Check if your works are finished.
-5. Repeat the steps 5 and 6 from Convergence test (Energy Cutoff) section.
-6. **OPTIONAL**: Once the works are completed, it can be plot straight using [**kdensity.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/kdensity.py).
+4. Run your works.
+5. Check if your works are finished.
+6. Repeat the steps 5 and 6 from Convergence test (Energy Cutoff) section.
+7. **OPTIONAL**: Once the calculations are completed, it can be plotted straight using [**kdensity.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/kdensity.py).
 
 ## Relaxation
 1. Enter to **relax** folder
