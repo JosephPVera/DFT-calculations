@@ -91,7 +91,7 @@ The first step in performing this analysis is to create different configurations
    ```   
 8. **OPTIONAL**: Once the calculations are completed, **Relative energies versus Energy cutoff** can be plotted straight using [**encut.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/encut.py).
 
-## k-density
+### k-density
 1. Enter to **kdensity** folder
    ```bash
    cd k-density
