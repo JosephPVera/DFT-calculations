@@ -8,7 +8,7 @@ Useful scripts [**forces.py**](https://github.com/JosephPVera/DFT-calculations/b
 Check **/.../vasp/template/bin**.
 
 ---
-# Creating the tree 
+# 0. Creating the tree 
    ```bash
    mkdir encut kdensity PBE HSE06
    mkdir encut/perfect encut/increased encut/decreased
@@ -19,12 +19,12 @@ Check **/.../vasp/template/bin**.
 ---
 
 ---
-# PBE functional
+# 1. PBE functional
 ---
-## Convergence test
+## 1.1. Convergence test
 The first step in performing this analysis is to create different configurations using a initial configuration. To do this, we first define our perfect configuration (**POSCAR_perfect**) and then create the perturbed configurations by modifying their lattice constants with a variation of **$\Delta a$** (**POSCAR_increased** and **POSCAR_decreased**). This is motivated by the fact that relative energies are more significant than total energies.
 
-### Energy Cutoff
+### 1.1.1. Energy Cutoff
 1. Enter to **encut** folder
    ```bash
    cd encut
@@ -91,7 +91,7 @@ The first step in performing this analysis is to create different configurations
    ```   
 8. **OPTIONAL**: Once the calculations are completed, **Relative energies versus Energy cutoff** can be plotted straight using [**encut.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/encut.py).
 
-### k-density
+### 1.1.2. k-density
 1. Enter to **kdensity** folder
    ```bash
    cd k-density
@@ -128,7 +128,7 @@ The first step in performing this analysis is to create different configurations
 6. Repeat the steps 6 and 7 from **Convergence test (Energy Cutoff) section**.
 7. **OPTIONAL**: Once the calculations are completed, **Relative energies versus k-density** can be plotted straight using [**kdensity.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/kdensity.py).
 
-## Relaxation
+## 1.2. Relaxation
 1. Enter to **relax** folder
    ```bash
    cd PBE/relax
@@ -139,7 +139,7 @@ The first step in performing this analysis is to create different configurations
 5. Run your work.
 6. Check your outcomes.
 
-## Density of states (DOS)
+## 1.3. Density of states (DOS)
 0. This is a self-consistent calculation
 1. Enter to **dos** folder
    ```bash
@@ -174,7 +174,7 @@ The first step in performing this analysis is to create different configurations
    eog total_dos.png
    ```
 
-## Band structure
+## 1.4. Band structure
 0. This is a non-self-consistent calculation
 1. Enter to **bs** folder
    ```bash
@@ -236,10 +236,10 @@ The first step in performing this analysis is to create different configurations
    ```
 
 ---
-# HSE06 functional
+# 2. HSE06 functional
 ---
 
-## Relaxation
+## 2.1. Relaxation
 1. Enter to **relax** folder
    ```bash
    cd HSE06/relax
@@ -258,7 +258,7 @@ The first step in performing this analysis is to create different configurations
 4. Run your work.
 5. Check your outcomes.
 
-## Density of states (DOS)
+## 2.2. Density of states (DOS)
 0. This is a self-consistent calculation.
 1. Enter to **dos** folder
    ```bash
@@ -276,7 +276,7 @@ The first step in performing this analysis is to create different configurations
 5. Run your work.
 6. Use the same steps 6, 7, 8 and 9 from DOS_PBE section.
 
-## Band structure
+## 2.3. Band structure
 0. This is a non-self-consistent calculation
 1. Enter to **bs** folder
    ```bash
