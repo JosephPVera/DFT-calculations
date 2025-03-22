@@ -22,7 +22,8 @@ Check **/.../vasp/template/bin**.
 # PBE pseudopotential
 ---
 ## Convergence test
-The first step in performing this analysis is to create different configurations using a initial configuration. To do this, we first define our perfect configuration (POSCAR_perfect) and then create the perturbed configurations by modifying their lattice constants with a variation of $\Delta a$.
+The first step in performing this analysis is to create different configurations using a initial configuration. To do this, we first define our perfect configuration (POSCAR_perfect) and then create the perturbed configurations by modifying their lattice constants with a variation of $\Delta a$ (POSCAR_increased and POSCAR_decreased). This is motivated by the fact that relative energies are more significant than total energies.
+
 ## Convergence test: Energy Cutoff
 1. Enter to **energy-cutoff** folder
    ```bash
