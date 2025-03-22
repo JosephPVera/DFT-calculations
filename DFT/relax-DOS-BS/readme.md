@@ -19,7 +19,7 @@ Check **/.../vasp/template/bin**.
 ---
 
 ---
-# PBE pseudopotential
+# PBE functional
 ---
 ## Convergence test
 The first step in performing this analysis is to create different configurations using a initial configuration. To do this, we first define our perfect configuration (**POSCAR_perfect**) and then create the perturbed configurations by modifying their lattice constants with a variation of **$\Delta a$** (**POSCAR_increased** and **POSCAR_decreased**). This is motivated by the fact that relative energies are more significant than total energies.
@@ -63,8 +63,9 @@ The first step in performing this analysis is to create different configurations
      or all at once, using:
      ```bash
      for dir in */;do cd $dir; makepot . Pt Si; cd ../;done
-     ```     
-4. Use the following command for run your works
+     ```
+     This is just a concatenation of the pseudopotential files. 
+4. Use the following command for run your calculations
    ```bash
    sub
    ```
@@ -72,23 +73,23 @@ The first step in performing this analysis is to create different configurations
    ```bash
    for dir in */;do cd $dir; sub; cd ../;done 
    ```   
-5. Use the following command for check if your works are finished
+5. Use the following command for check if your calculations are finished
    ```bash
    st
    ```   
 6. If all calculations are finished, use the following commands for check your outcomes 
    ```bash
-   toten */OUTCAR
-   vaspout */OUTCAR
+   tot.py */OUTCAR
+   forces.py */OUTCAR
    ```
-   **toten** script allows us to check information about total energy, while **vaspout** script allows us to check information about MxForce, Drift, pressure and total energy.
+   **tot,py** script allows us to check information about total energy, while **forces.py** script allows us to check information about MxForce, Drift, and pressure.
 7. Save your outcomes in a file with differents extension like .ods, .dat, .xlsx or .txt using the
    commands
    ```bash
-   toten */OUTCAR > toten.dat
-   vaspout */OUTCAR > vaspout.dat
+   tot.py */OUTCAR > toten.dat
+   forces.py */OUTCAR > vaspout.dat
    ```   
-8. **OPTIONAL**: Once the calculations are completed, it can be plotted straight using [**encut.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/encut.py).
+8. **OPTIONAL**: Once the calculations are completed, **Relative energies versus Energy cutoff** can be plotted straight using [**encut.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/encut.py).
 
 ## k-density
 1. Enter to **kdensity** folder
@@ -122,10 +123,10 @@ The first step in performing this analysis is to create different configurations
      ```bash
      grep k-density */KPOINTS
      ```
-4. Run your works.
-5. Check if your works are finished.
-6. Repeat the steps 5 and 6 from Convergence test (Energy Cutoff) section.
-7. **OPTIONAL**: Once the calculations are completed, it can be plotted straight using [**kdensity.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/kdensity.py).
+4. Run your calculations.
+5. Check if your calculations are finished.
+6. Repeat the steps 6 and 7 from **Convergence test (Energy Cutoff) section**.
+7. **OPTIONAL**: Once the calculations are completed, **Relative energies versus k-density** can be plotted straight using [**kdensity.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/kdensity.py).
 
 ## Relaxation
 1. Enter to **relax** folder
