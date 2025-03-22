@@ -20,7 +20,6 @@ def extract_toten(root):
         print(f"e_wo_entrp not found")
         return None
 
-
 def extract_encut(root):
     """
     Extract the ENCUT value from a vasprun.xml file.
@@ -33,7 +32,6 @@ def extract_encut(root):
         print(f"ENCUT not found")
         return None
 
-
 def extract_num_atoms(root):
     """
     Extract the number of atoms from a vasprun.xml file.
@@ -45,7 +43,6 @@ def extract_num_atoms(root):
     else:
         print(f"Number of atoms not found in the file.")
         return None
-
 
 def extract_data(directory):
     encut_values = []
@@ -82,7 +79,6 @@ def save_data_to_file(encut_values, perfect_energies, increased_energies, decrea
             e_rel_dec = relative_energy_decreased[encut_values.index(encut)] if encut in encut_values else 0
             
             file.write(f"{encut:<8} {e_per:<10.3f} {e_inc:<10.3f} {e_dec:<10.3f} {e_rel_inc:<12.3f} {e_rel_dec:<12.3f}\n")
-
 
 def plot_encut_vs_total_energy_per_atom(directory):
     encut = []
@@ -124,7 +120,6 @@ def plot_relative_energies(encut_values, relative_energy_increased, relative_ene
     plt.tight_layout()
     plt.savefig('relative_energies.png', dpi=150)
     plt.show()
-
 
 def main():
     parser = argparse.ArgumentParser(description="Plot ENCUT vs energy data")
