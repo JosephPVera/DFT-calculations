@@ -242,7 +242,7 @@ In **phonon** folder:
    # Electronic relaxation
    ALGO   = Normal        # Algorithm for electronic relaxation
    PREC = Accurate        # Low/Normal/Accurate
-   IBRION = -1            # Algorithm for relaxing atomic positions 
+   IBRION = 8            # Algorithm for relaxing atomic positions 
    NELMIN = 5             # sets the maximum number of electronic self-consistency steps
    ENCUT = 500            # Cut-off energy for plane wave expansion
    EDIFF  = 1E-8          # Accuracy for electronic groundstate
