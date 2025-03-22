@@ -236,7 +236,7 @@ The first step in performing this analysis is to create different configurations
    ```
 
 ---
-# HSE06 pseudopotential
+# HSE06 functional
 ---
 
 ## Relaxation
