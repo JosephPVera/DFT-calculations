@@ -266,7 +266,10 @@ In **phonon** folder:
    ```bash
    phonopy-vasp-born > BORN 
    ```
-
+5. Check the dielectric tensor with [dielectric.py](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/dielectric.py)
+   ```bash
+   dielectric.py 
+   ```
 ### 3.5. Correcting calculations with [NAC](https://phonopy.github.io/phonopy/formulation.html#non-analytical-term-correction-theory)   
 1. Now copy BORN file to **phonon** folder
    ```bash
