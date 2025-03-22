@@ -22,27 +22,35 @@ Check **/.../vasp/template/bin**.
 # PBE pseudopotential
 ---
 ## Convergence test
-The first step in performing this analysis is to create different configurations using a initial configuration. To do this, we first define our perfect configuration (POSCAR_perfect) and then create the perturbed configurations by modifying their lattice constants with a variation of $\Delta a$ (POSCAR_increased and POSCAR_decreased). This is motivated by the fact that relative energies are more significant than total energies.
+The first step in performing this analysis is to create different configurations using a initial configuration. To do this, we first define our perfect configuration (**POSCAR_perfect**) and then create the perturbed configurations by modifying their lattice constants with a variation of **$\Delta a$** (**POSCAR_increased** and **POSCAR_decreased**). This is motivated by the fact that relative energies are more significant than total energies.
 
-## Convergence test: Energy Cutoff
-1. Enter to **energy-cutoff** folder
+### Energy Cutoff
+1. Enter to **encut** folder
    ```bash
-   cd energy-cutoff
+   cd encut
    ```
-2. Create different folders 
+2. Create different folders in each of the **perfect**, **increased** and **decreased** folders
    ```bash
-   mkdir {200..900..50}
+   mkdir perfect/{200..950..50}
+   mkdir increased/{200..950..50}
+   mkdir decreased/{200..950..50}
    ```
-   
-   - Introduce the same **POSCAR** and **jobfile** files in each folder.
-   - In **INCAR** file change the tag "**ENCUT**" following the name of the files: **{200..900..50}**
+   and then copy each **POSCAR** into its respective folder
+   ```bash
+   for i in {200..950..50}; do cp POSCAR_perfect "perfect/$i/POSCAR"; done
+   for i in {200..950..50}; do cp POSCAR_increased "increased/$i/POSCAR"; done
+   for i in {200..950..50}; do cp POSCAR_decreased "decreased/$i/POSCAR"; done
+   ```
+3. Enter the missing folders   
+   - Introduce the same **jobfile** files in each **{200..900..50}** folder.
+   - In **INCAR** file change the **ENCUT** tag following the name of the folders: **{200..900..50}**
    - Create **KPOINTS** files in each folder using the command
      ```bash
      kmesh.py
      ```
      or at once, using:
      ```bash
-     for dir in */;do cd $dir; makekpoints; cd ../;done
+     for dir in */;do cd $dir; kmesh.py; cd ../;done
      ```
    - Create **POTCAR** file using the comand 
      ```bash
@@ -56,7 +64,7 @@ The first step in performing this analysis is to create different configurations
      ```bash
      for dir in */;do cd $dir; makepot . Pt Si; cd ../;done
      ```     
-3. Use the following command for run your works
+4. Use the following command for run your works
    ```bash
    sub
    ```
@@ -64,23 +72,23 @@ The first step in performing this analysis is to create different configurations
    ```bash
    for dir in */;do cd $dir; sub; cd ../;done 
    ```   
-4. Use the following command for check if your works are finished
+5. Use the following command for check if your works are finished
    ```bash
    st
    ```   
-5. If all works are finished, use the following commands for check your outcomes 
+6. If all works are finished, use the following commands for check your outcomes 
    ```bash
    toten */OUTCAR
    vaspout */OUTCAR
    ```
    **toten** script allows us to check information about total energy, while **vaspout** script allows us to check information about MxForce, Drift, pressure and total energy.
-6. Save your outcomes in a file with differents extension like .ods, .dat, .xlsx or .txt using the
+7. Save your outcomes in a file with differents extension like .ods, .dat, .xlsx or .txt using the
    commands
    ```bash
    toten */OUTCAR > toten.dat
    vaspout */OUTCAR > vaspout.dat
    ```   
-7. **OPTIONAL**: Once the works are completed, it can be plot straight using [**encut.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/encut.py).
+8. **OPTIONAL**: Once the works are completed, it can be plot straight using [**encut.py**](https://github.com/JosephPVera/DFT-calculations/blob/main/DFT/scripts/encut.py).
 
 ## Convergence test: K-density
 1. Enter to **k-density** folder
