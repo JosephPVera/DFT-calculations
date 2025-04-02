@@ -77,7 +77,7 @@ with open("kpoints.dat", 'r+') as fopen:
     fopen.truncate()  
 
 # Clean IBZKPT, remove the "Tetrahedra" section
-with open('../../PBE/dos/IBZKPT', 'r') as ibzkpt_file:
+with open('../dos/IBZKPT', 'r') as ibzkpt_file:
     lines = ibzkpt_file.readlines()
 
 # Remove lines starting from "Tetrahedra"
